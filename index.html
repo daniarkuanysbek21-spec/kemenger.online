@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Kemenger Online — Математика мектебі</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #173b7a;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #173b7a, #2d65c8);
+      color: white;
+      padding: 80px 7%;
+    }
+
+    .hero h1 {
+      font-size: 46px;
+      max-width: 700px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      line-height: 1.6;
+      max-width: 650px;
+      margin-bottom: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      background: #ffcf33;
+      color: #172033;
+      padding: 14px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 50px 20px;
+    }
+
+    .container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 32px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 28px;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .card .icon {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    .classes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 15px;
+    }
+
+    .class-box {
+      background: white;
+      padding: 22px;
+      text-align: center;
+      border-radius: 12px;
+      font-size: 20px;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    footer {
+      background: #14284e;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">📐 KEMENGER ONLINE</div>
+
+  <nav>
+    <a href="#courses">Сыныптар</a>
+    <a href="#about">Мүмкіндіктер</a>
+    <a href="#login">Кіру</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Математиканы түсініп үйрен!</h1>
+
+  <p>
+    Видеосабақтар, интерактивті тапсырмалар,
+    тесттер және әр оқушыға арналған жеке кабинет.
+  </p>
+
+  <a class="button" href="#courses">Сабақтарды көру</a>
+</section>
+
+<section id="about" class="container">
+
+  <h2>Платформа мүмкіндіктері</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="icon">🎥</div>
+      <h3>Видеосабақтар</h3>
+      <p>
+        Әр тақырып бойынша түсінікті және жүйелі видеосабақтар.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🧮</div>
+      <h3>Тапсырмалар</h3>
+      <p>
+        Сабақтан кейін есептерді онлайн орындау.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">✅</div>
+      <h3>Автоматты тексеру</h3>
+      <p>
+        Жауаптарды жүйе автоматты түрде тексереді.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📊</div>
+      <h3>Жеке прогресс</h3>
+      <p>
+        Оқушы өзінің нәтижесі мен оқу прогресін көре алады.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<section id="courses" class="container">
+
+  <h2>Математика сыныптары</h2>
+
+  <div class="classes">
+
+    <div class="class-box">5-сынып</div>
+    <div class="class-box">6-сынып</div>
+    <div class="class-box">7-сынып</div>
+    <div class="class-box">8-сынып</div>
+    <div class="class-box">9-сынып</div>
+    <div class="class-box">10-сынып</div>
+    <div class="class-box">11-сынып</div>
+
+  </div>
+
+</section>
+
+<section id="login" class="container">
+
+  <h2>Оқушы кабинеті</h2>
+
+  <div style="text-align:center;">
+    <p style="margin-bottom:20px;">
+      Жеке логин және пароль арқылы сабақтарыңа кір.
+    </p>
+
+    <a class="button" href="#">
+      🔐 Кіру
+    </a>
+  </div>
+
+</section>
+
+<footer>
+  <p>© 2026 KEMENGER ONLINE</p>
+  <p style="margin-top:8px;">Онлайн математика мектебі</p>
+</footer>
+
+</body>
+</html>
