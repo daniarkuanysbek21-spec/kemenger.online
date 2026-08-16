@@ -239,6 +239,15 @@
   <div id="total" style="margin-top:25px;font-size:20px;font-weight:bold;">
     Нәтиже: 0 / 10
   </div>
+    <div id="finalResult" style="
+  margin-top:20px;
+  padding:20px;
+  border-radius:12px;
+  background:#eef4ff;
+  font-size:18px;
+  font-weight:bold;
+  text-align:center;
+"></div>
 </div>
 
   <div class="section">
@@ -296,15 +305,14 @@ function check(number, correctAnswer) {
   const input = document.getElementById("q" + number);
   const result = document.getElementById("r" + number);
 
-  if (answered[number]) {
-    return;
-  }
+  if (answered[number]) return;
 
   const answer = Number(input.value);
 
   if (answer === correctAnswer) {
     result.innerHTML = "✅ Дұрыс!";
     result.style.color = "green";
+
     score++;
     answered[number] = true;
     input.disabled = true;
@@ -315,6 +323,20 @@ function check(number, correctAnswer) {
 
   document.getElementById("total").innerHTML =
     "Нәтиже: " + score + " / 10";
+
+  if (score === 10) {
+    document.getElementById("finalResult").innerHTML =
+      "🏆 Керемет! Барлық 10 тапсырманы дұрыс орындадың!";
+  } else if (score >= 8) {
+    document.getElementById("finalResult").innerHTML =
+      "🌟 Өте жақсы! Нәтижең: " + score + " / 10";
+  } else if (score >= 5) {
+    document.getElementById("finalResult").innerHTML =
+      "👍 Жақсы! Нәтижең: " + score + " / 10";
+  } else {
+    document.getElementById("finalResult").innerHTML =
+      "📚 Сабақты тағы бір рет қайталап көр.";
+  }
 }
 </script>
 
