@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1-сабақ — Натурал сандар | Kemenger Online</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #173b7a;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #173b7a, #2d65c8);
+      color: white;
+      padding: 55px 7%;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 18px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+    .section {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    }
+
+    .section h2 {
+      margin-bottom: 15px;
+    }
+
+    .video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111827;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 55px;
+    }
+
+    .button {
+      display: inline-block;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .task {
+      background: #f7f9fc;
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    input {
+      padding: 11px;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #ccd3df;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    footer {
+      background: #14284e;
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">📐 KEMENGER ONLINE</div>
+  <a class="back" href="5-synyp.html">← 5-сынып</a>
+</header>
+
+<section class="hero">
+  <h1>1-сабақ. Натурал сандар</h1>
+  <p>5-сынып • Математика</p>
+</section>
+
+<div class="container">
+
+  <div class="section">
+    <h2>🎥 Видеосабақ</h2>
+
+    <div class="video">
+      ▶
+    </div>
+
+    <p style="margin-top:15px;">
+      Бұл жерде кейін сенің нақты видеосабағың орналасады.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>📚 Сабақ туралы</h2>
+
+    <p>
+      Бұл сабақта натурал сандардың не екенін,
+      олардың қасиеттерін және қолданылуын үйренеміз.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>📝 Тапсырма</h2>
+
+    <div class="task">
+      <p><b>1-тапсырма.</b> 1-ден кейінгі натурал санды жаз:</p>
+
+      <input id="answer" type="number" placeholder="Жауабың">
+
+      <br>
+
+      <button class="button" onclick="checkAnswer()">
+        Жауапты тексеру
+      </button>
+
+      <div id="result"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>✅ Тест</h2>
+
+    <p>
+      Тест бөлімі келесі кезеңде қосылады.
+    </p>
+
+    <button class="button" onclick="alert('Тест бөлімі жақында ашылады')">
+      Тестті бастау
+    </button>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 KEMENGER ONLINE
+</footer>
+
+<script>
+function checkAnswer() {
+  const answer = document.getElementById("answer").value;
+  const result = document.getElementById("result");
+
+  if (answer === "2") {
+    result.innerHTML = "✅ Дұрыс жауап!";
+    result.style.color = "green";
+  } else {
+    result.innerHTML = "❌ Қате. Қайта ойланып көр.";
+    result.style.color = "red";
+  }
+}
+</script>
+
+</body>
+</html>
