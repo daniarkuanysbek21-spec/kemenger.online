@@ -288,17 +288,33 @@ function check(number, correctAnswer) {
   document.getElementById("total").innerHTML =
     "Нәтиже: " + score + " / 10";
 }
-</script> {
-  const answer = document.getElementById("answer").value;
-  const result = document.getElementById("result");
+<script>
+let score = 0;
+let answered = {};
 
-  if (answer === "2") {
-    result.innerHTML = "✅ Дұрыс жауап!";
+function check(number, correctAnswer) {
+  const input = document.getElementById("q" + number);
+  const result = document.getElementById("r" + number);
+
+  if (answered[number]) {
+    return;
+  }
+
+  const answer = Number(input.value);
+
+  if (answer === correctAnswer) {
+    result.innerHTML = "✅ Дұрыс!";
     result.style.color = "green";
+    score++;
+    answered[number] = true;
+    input.disabled = true;
   } else {
-    result.innerHTML = "❌ Қате. Қайта ойланып көр.";
+    result.innerHTML = "❌ Қате. Қайта байқап көр.";
     result.style.color = "red";
   }
+
+  document.getElementById("total").innerHTML =
+    "Нәтиже: " + score + " / 10";
 }
 </script>
 
