@@ -95,6 +95,10 @@
       margin-top: 15px;
     }
 
+    .button:hover {
+      opacity: 0.9;
+    }
+
     .task {
       background: #f7f9fc;
       padding: 18px;
@@ -109,11 +113,28 @@
       border: 1px solid #ccd3df;
       border-radius: 8px;
       margin-top: 10px;
+      font-size: 16px;
     }
 
-    #result {
-      margin-top: 15px;
+    .result {
+      margin-top: 12px;
       font-weight: bold;
+    }
+
+    #total {
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #finalResult {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #eef4ff;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
     }
 
     footer {
@@ -143,7 +164,7 @@
     <h2>🎥 Видеосабақ</h2>
 
     <div class="video">
-      ▶
+      ▶️
     </div>
 
     <p style="margin-top:15px;">
@@ -161,94 +182,90 @@
   </div>
 
   <div class="section">
-  <h2>📝 10 тапсырма</h2>
-  <p style="margin-bottom:20px;">
-    Әр есептің жауабын енгізіп, «Тексеру» батырмасын бас.
-  </p>
 
-  <div class="task">
-    <b>1. 1-ден кейінгі натурал сан қандай?</b>
-    <input id="q1" type="number" placeholder="Жауабың">
-    <button class="button" onclick="check(1, 2)">Тексеру</button>
-    <div id="r1"></div>
-  </div>
+    <h2>📝 10 тапсырма</h2>
 
-  <div class="task">
-    <b>2. 5-тен кейінгі натурал сан қандай?</b>
-    <input id="q2" type="number" placeholder="Жауабың">
-    <button class="button" onclick="check(2, 6)">Тексеру</button>
-    <div id="r2"></div>
-  </div>
+    <p style="margin-bottom:20px;">
+      Әр есептің жауабын енгізіп, «Тексеру» батырмасын бас.
+    </p>
 
-  <div class="task">
-    <b>3. 10-нан кейінгі натурал сан қандай?</b>
-    <input id="q3" type="number" placeholder="Жауабың">
-    <button class="button" onclick="check(3, 11)">Тексеру</button>
-    <div id="r3"></div>
-  </div>
+    <div class="task">
+      <b>1. 1-ден кейінгі натурал сан қандай?</b>
+      <input id="q1" type="number" placeholder="Жауабың">
+      <button class="button" onclick="check(1, 2)">Тексеру</button>
+      <div id="r1" class="result"></div>
+    </div>
 
-  <div class="task">
-    <b>4. 7 санының алдындағы натурал сан қандай?</b>
-    <input id="q4" type="number" placeholder="Жауабың">
-    <button class="button" onclick="check(4, 6)">Тексеру</button>
-    <div id="r4"></div>
-  </div>
+    <div class="task">
+      <b>2. 5-тен кейінгі натурал сан қандай?</b>
+      <input id="q2" type="number" placeholder="Жауабың">
+      <button class="button" onclick="check(2, 6)">Тексеру</button>
+      <div id="r2" class="result"></div>
+    </div>
 
-  <div class="task">
-    <b>5. 15 санының алдындағы натурал сан қандай?</b>
-    <input id="q5" type="number" placeholder="Жауабың">
-    <button class="button" onclick="check(5, 14)">Тексеру</button>
-    <div id="r5"></div>
-  </div>
+    <div class="task">
+      <b>3. 10-нан кейінгі натурал сан қандай?</b>
+      <input id="q3" type="number" placeholder="Жауабың">
+      <button class="button" onclick="check(3, 11)">Тексеру</button>
+      <div id="r3" class="result"></div>
+    </div>
 
-  <div class="task">
-    <b>6. 3 пен 8-дің арасында неше натурал сан бар?</b>
-    <input id="q6" type="number" placeholder="Жауабың">
-    <button class="button" onclick="check(6, 4)">Тексеру</button>
-    <div id="r6"></div>
-  </div>
+    <div class="task">
+      <b>4. 7 санының алдындағы натурал сан қандай?</b>
+      <input id="q4" type="number" placeholder="Жауабың">
+      <button class="button" onclick="check(4, 6)">Тексеру</button>
+      <div id="r4" class="result"></div>
+    </div>
 
-  <div class="task">
-    <b>7. Ең кіші натурал сан қандай?</b>
-    <input id="q7" type="number" placeholder="Жауабың">
-    <button class="button" onclick="check(7, 1)">Тексеру</button>
-    <div id="r7"></div>
-  </div>
+    <div class="task">
+      <b>5. 15 санының алдындағы натурал сан қандай?</b>
+      <input id="q5" type="number" placeholder="Жауабың">
+      <button class="button" onclick="check(5, 14)">Тексеру</button>
+      <div id="r5" class="result"></div>
+    </div>
 
-  <div class="task">
-    <b>8. 20-дан кейінгі натурал сан қандай?</b>
-    <input id="q8" type="number" placeholder="Жауабың">
-    <button class="button" onclick="check(8, 21)">Тексеру</button>
-    <div id="r8"></div>
-  </div>
+    <div class="task">
+      <b>6. 3 пен 8-дің арасында неше натурал сан бар?</b>
+      <input id="q6" type="number" placeholder="Жауабың">
+      <button class="button" onclick="check(6, 4)">Тексеру</button>
+      <div id="r6" class="result"></div>
+    </div>
 
-  <div class="task">
-    <b>9. 25 санының алдындағы натурал сан қандай?</b>
-    <input id="q9" type="number" placeholder="Жауабың">
-    <button class="button" onclick="check(9, 24)">Тексеру</button>
-    <div id="r9"></div>
-  </div>
+    <div class="task">
+      <b>7. Ең кіші натурал сан қандай?</b>
+      <input id="q7" type="number" placeholder="Жауабың">
+      <button class="button" onclick="check(7, 1)">Тексеру</button>
+      <div id="r7" class="result"></div>
+    </div>
 
-  <div class="task">
-    <b>10. 12 мен 18-дің арасында неше натурал сан бар?</b>
-    <input id="q10" type="number" placeholder="Жауабың">
-    <button class="button" onclick="check(10, 5)">Тексеру</button>
-    <div id="r10"></div>
-  </div>
+    <div class="task">
+      <b>8. 20-дан кейінгі натурал сан қандай?</b>
+      <input id="q8" type="number" placeholder="Жауабың">
+      <button class="button" onclick="check(8, 21)">Тексеру</button>
+      <div id="r8" class="result"></div>
+    </div>
 
-  <div id="total" style="margin-top:25px;font-size:20px;font-weight:bold;">
-    Нәтиже: 0 / 10
+    <div class="task">
+      <b>9. 25 санының алдындағы натурал сан қандай?</b>
+      <input id="q9" type="number" placeholder="Жауабың">
+      <button class="button" onclick="check(9, 24)">Тексеру</button>
+      <div id="r9" class="result"></div>
+    </div>
+
+    <div class="task">
+      <b>10. 12 мен 18-дің арасында неше натурал сан бар?</b>
+      <input id="q10" type="number" placeholder="Жауабың">
+      <button class="button" onclick="check(10, 5)">Тексеру</button>
+      <div id="r10" class="result"></div>
+    </div>
+
+    <div id="total">
+      Нәтиже: 0 / 10
+    </div>
+
+    <div id="finalResult"></div>
+
   </div>
-    <div id="finalResult" style="
-  margin-top:20px;
-  padding:20px;
-  border-radius:12px;
-  background:#eef4ff;
-  font-size:18px;
-  font-weight:bold;
-  text-align:center;
-"></div>
-</div>
 
   <div class="section">
     <h2>✅ Тест</h2>
@@ -265,15 +282,15 @@
 </div>
 
 <footer>
-  © 2026 KEMENGER ONLINE
+  ©️ 2026 KEMENGER ONLINE
 </footer>
 
 <script>
-function <script>
 let score = 0;
 let answered = {};
 
 function check(number, correctAnswer) {
+
   const input = document.getElementById("q" + number);
   const result = document.getElementById("r" + number);
 
@@ -281,61 +298,58 @@ function check(number, correctAnswer) {
     return;
   }
 
-  const answer = Number(input.value);
-
-  if (answer === correctAnswer) {
-    result.innerHTML = "✅ Дұрыс!";
-    result.style.color = "green";
-    score++;
-    answered[number] = true;
-    input.disabled = true;
-  } else {
-    result.innerHTML = "❌ Қате. Қайта байқап көр.";
-    result.style.color = "red";
+  if (input.value === "") {
+    result.innerHTML = "⚠️ Алдымен жауапты енгіз!";
+    result.style.color = "orange";
+    return;
   }
 
-  document.getElementById("total").innerHTML =
-    "Нәтиже: " + score + " / 10";
-}
-<script>
-let score = 0;
-let answered = {};
-
-function check(number, correctAnswer) {
-  const input = document.getElementById("q" + number);
-  const result = document.getElementById("r" + number);
-
-  if (answered[number]) return;
-
   const answer = Number(input.value);
 
   if (answer === correctAnswer) {
+
     result.innerHTML = "✅ Дұрыс!";
     result.style.color = "green";
 
     score++;
     answered[number] = true;
+
     input.disabled = true;
+
   } else {
+
     result.innerHTML = "❌ Қате. Қайта байқап көр.";
     result.style.color = "red";
+
   }
 
   document.getElementById("total").innerHTML =
     "Нәтиже: " + score + " / 10";
 
   if (score === 10) {
+
     document.getElementById("finalResult").innerHTML =
       "🏆 Керемет! Барлық 10 тапсырманы дұрыс орындадың!";
+
   } else if (score >= 8) {
+
     document.getElementById("finalResult").innerHTML =
       "🌟 Өте жақсы! Нәтижең: " + score + " / 10";
+
   } else if (score >= 5) {
+
     document.getElementById("finalResult").innerHTML =
       "👍 Жақсы! Нәтижең: " + score + " / 10";
-  } else {
+
+  } else if (score > 0) {
+
     document.getElementById("finalResult").innerHTML =
-      "📚 Сабақты тағы бір рет қайталап көр.";
+      "📚 Талпынысың жақсы! Сабақты тағы қайталап көр.";
+
+  } else {
+
+    document.getElementById("finalResult").innerHTML = "";
+
   }
 }
 </script>
