@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>2-сабақ — Координаталық сәуле | Kemenger Online</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #173b7a;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #173b7a, #2d65c8);
+      color: white;
+      padding: 55px 7%;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 18px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+    .section {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    }
+
+    .section h2 {
+      margin-bottom: 15px;
+    }
+
+    /* ВИДЕО */
+
+    .video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111827;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 55px;
+    }
+
+    /* КООРДИНАТАЛЫҚ СӘУЕЛ */
+
+    .ray-box {
+      background: #f7f9fc;
+      padding: 25px 10px;
+      border-radius: 14px;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+
+    .ray {
+      position: relative;
+      min-width: 700px;
+      height: 130px;
+    }
+
+    .ray-line {
+      position: absolute;
+      left: 35px;
+      right: 30px;
+      top: 60px;
+      height: 4px;
+      background: #173b7a;
+    }
+
+    .ray-arrow {
+      position: absolute;
+      right: 18px;
+      top: 50px;
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 18px solid #173b7a;
+    }
+
+    .ray-point {
+      position: absolute;
+      top: 52px;
+      width: 16px;
+      height: 16px;
+      background: #173b7a;
+      border-radius: 50%;
+      transform: translateX(-50%);
+    }
+
+    .ray-number {
+      position: absolute;
+      top: 78px;
+      transform: translateX(-50%);
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    .ray-caption {
+      position: absolute;
+      top: 15px;
+      transform: translateX(-50%);
+      font-size: 13px;
+      font-weight: bold;
+      color: #2d65c8;
+    }
+
+    /* БАТЫРМА */
+
+    .button {
+      display: inline-block;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    /* ТАПСЫРМАЛАР */
+
+    .task {
+      background: #f7f9fc;
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    input[type="number"] {
+      padding: 11px;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #ccd3df;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .result {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    #total {
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #finalResult {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #eef4ff;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* ТЕСТТІ БАСТАУ */
+
+    .start-test {
+      margin-top: 30px;
+      background: #eef4ff;
+      border-radius: 14px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .start-test h3 {
+      margin-bottom: 8px;
+    }
+
+    .start-test-button {
+      background: #173b7a;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .start-test-button:hover {
+      background: #2d65c8;
+    }
+
+    /* ТЕСТ */
+
+    #testSection {
+      display: none;
+    }
+
+    .test-question {
+      background: #f7f9fc;
+      padding: 20px;
+      border-radius: 14px;
+      margin-top: 18px;
+    }
+
+    .test-question h3 {
+      font-size: 17px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    .option {
+      display: block;
+      background: white;
+      border: 1px solid #ccd3df;
+      padding: 13px;
+      border-radius: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .option:hover {
+      background: #eef4ff;
+      border-color: #2d65c8;
+    }
+
+    .option input {
+      margin-right: 8px;
+    }
+
+    .test-button {
+      background: #173b7a;
+      color: white;
+      border: none;
+      padding: 14px 25px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 25px;
+    }
+
+    .test-button:hover {
+      background: #2d65c8;
+    }
+
+    #testResult {
+      margin-top: 25px;
+      padding: 22px;
+      background: #eef4ff;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 19px;
+      font-weight: bold;
+      display: none;
+    }
+
+    footer {
+      background: #14284e;
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    📐 KEMENGER ONLINE
+  </div>
+
+  <a class="back" href="5-synyp.html">
+    ← 5-сынып
+  </a>
+
+</header>
+
+
+<section class="hero">
+
+  <h1>2-сабақ. Координаталық сәуле</h1>
+
+  <p>5-сынып • Математика</p>
+
+</section>
+
+
+<div class="container">
+
+
+  <!-- ВИДЕО -->
+
+  <div class="section">
+
+    <h2>🎥 Видеосабақ</h2>
+
+    <div class="video">
+      ▶️
+    </div>
+
+    <p style="margin-top:15px;">
+      Бұл жерде кейін сенің нақты видеосабағың орналасады.
+    </p>
+
+  </div>
+
+
+  <!-- САБАҚ ТҮСІНІГІ -->
+
+  <div class="section">
+
+    <h2>📚 Сабақ туралы</h2>
+
+    <p>
+      Бұл сабақта координаталық сәуле ұғымымен танысамыз.
+      Нөл санын және натурал сандарды координаталық сәуледе
+      кескіндеуді үйренеміз.
+    </p>
+
+    <br>
+
+    <p>
+      Координаталық сәулені салу үшін алдымен бастапқы
+      нүктені белгілейміз. Бұл нүктеге <b>0</b> саны сәйкес
+      келеді.
+    </p>
+
+    <br>
+
+    <p>
+      Одан кейін сәуленің бойынан белгілі бір
+      <b>бірлік кесінді</b> таңдап аламыз.
+      Бірлік кесінділерді бірдей етіп белгілеп,
+      оларға 1, 2, 3, 4, ... натурал сандарын
+      сәйкес қоямыз.
+    </p>
+
+  </div>
+
+
+  <!-- КООРДИНАТАЛЫҚ СӘУЕЛ -->
+
+  <div class="section">
+
+    <h2>📏 Координаталық сәулені қарастыр</h2>
+
+    <p>
+      Бұл сәуледе <b>0</b> — бастапқы нүкте,
+      ал 1, 2, 3, 4, 5, 6 — оған сәйкес
+      координаталар.
+    </p>
+
+
+    <div class="ray-box">
+
+      <div class="ray">
+
+        <div class="ray-line"></div>
+
+        <div class="ray-arrow"></div>
+
+
+        <!-- 0 -->
+
+        <div class="ray-point" style="left:35px;"></div>
+
+        <div class="ray-number" style="left:35px;">
+          0
+        </div>
+
+        <div class="ray-caption" style="left:35px;">
+          басталуы
+        </div>
+
+
+        <!-- 1 -->
+
+        <div class="ray-point" style="left:135px;"></div>
+
+        <div class="ray-number" style="left:135px;">
+          1
+        </div>
+
+
+        <!-- 2 -->
+
+        <div class="ray-point" style="left:235px;"></div>
+
+        <div class="ray-number" style="left:235px;">
+          2
+        </div>
+
+
+        <!-- 3 -->
+
+        <div class="ray-point" style="left:335px;"></div>
+
+        <div class="ray-number" style="left:335px;">
+          3
+        </div>
+
+
+        <!-- 4 -->
+
+        <div class="ray-point" style="left:435px;"></div>
+
+        <div class="ray-number" style="left:435px;">
+          4
+        </div>
+
+
+        <!-- 5 -->
+
+        <div class="ray-point" style="left:535px;"></div>
+
+        <div class="ray-number" style="left:535px;">
+          5
+        </div>
+
+
+        <!-- 6 -->
+
+        <div class="ray-point" style="left:635px;"></div>
+
+        <div class="ray-number" style="left:635px;">
+          6
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <p style="margin-top:20px;">
+
+      <b>Есте сақта:</b>
+      координаталық сәуледе әрбір санның өз орны болады.
+      Сан өскен сайын нүкте сәуле бойымен оңға қарай
+      жылжиды.
+
+    </p>
+
+  </div>
+
+
+  <!-- 10 ТАПСЫРМА -->
+
+  <div class="section">
+
+    <h2>📝 10 тапсырма</h2>
+
+    <p style="margin-bottom:20px;">
+      Жауабыңды енгізіп, «Тексеру» батырмасын бас.
+    </p>
+
+
+    <!-- 1 -->
+
+    <div class="task">
+
+      <b>
+        1. Координаталық сәуледе бастапқы нүктеге
+        қандай сан сәйкес келеді?
+      </b>
+
+      <input id="q1" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(1, 0)">
+        Тексеру
+      </button>
+
+      <div id="r1" class="result"></div>
+
+    </div>
+
+
+    <!-- 2 -->
+
+    <div class="task">
+
+      <b>
+        2. Бірлік кесінді 1 см болса,
+        0 координатасынан 7 координатасына дейінгі
+        қашықтық неше сантиметр?
+      </b>
+
+      <input id="q2" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(2, 7)">
+        Тексеру
+      </button>
+
+      <div id="r2" class="result"></div>
+
+    </div>
+
+
+    <!-- 3 -->
+
+    <div class="task">
+
+      <b>
+        3. Координаталық сәуледе А нүктесі 3
+        координатасында, ал В нүктесі 9
+        координатасында орналасқан.
+        АВ арақашықтығы неше бірлік?
+      </b>
+
+      <input id="q3" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(3, 6)">
+        Тексеру
+      </button>
+
+      <div id="r3" class="result"></div>
+
+    </div>
+
+
+    <!-- 4 -->
+
+    <div class="task">
+
+      <b>
+        4. Координаталық сәуледе 12 санының
+        дәл сол жағында орналасқан ең жақын
+        натурал санды тап.
+      </b>
+
+      <input id="q4" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(4, 11)">
+        Тексеру
+      </button>
+
+      <div id="r4" class="result"></div>
+
+    </div>
+
+
+    <!-- 5 -->
+
+    <div class="task">
+
+      <b>
+        5. Бірлік кесінді 2 см.
+        0 мен 6 координаталарының арасындағы
+        қашықтық неше сантиметр?
+      </b>
+
+      <input id="q5" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(5, 12)">
+        Тексеру
+      </button>
+
+      <div id="r5" class="result"></div>
+
+    </div>
+
+
+    <!-- 6 -->
+
+    <div class="task">
+
+      <b>
+        6. Координаталық сәуледе А(5), В(13).
+        А нүктесінен В нүктесіне дейін
+        неше бірлік кесінді бар?
+      </b>
+
+      <input id="q6" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(6, 8)">
+        Тексеру
+      </button>
+
+      <div id="r6" class="result"></div>
+
+    </div>
+
+
+    <!-- 7 -->
+
+    <div class="task">
+
+      <b>
+        7. Бірлік кесінді 3 см.
+        А нүктесінің координатасы 2,
+        В нүктесінің координатасы 8.
+        АВ кесіндісінің ұзындығы қанша?
+      </b>
+
+      <input id="q7" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(7, 18)">
+        Тексеру
+      </button>
+
+      <div id="r7" class="result"></div>
+
+    </div>
+
+
+    <!-- 8 -->
+
+    <div class="task">
+
+      <b>
+        8. Координаталық сәуледе 4 пен 10
+        сандарының арасында орналасқан
+        натурал сандар саны қанша?
+      </b>
+
+      <input id="q8" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(8, 5)">
+        Тексеру
+      </button>
+
+      <div id="r8" class="result"></div>
+
+    </div>
+
+
+    <!-- 9 -->
+
+    <div class="task">
+
+      <b>
+        9. А нүктесінің координатасы 7.
+        В нүктесі А-дан оңға қарай 5 бірлік
+        орналасқан. В нүктесінің координатасы қандай?
+      </b>
+
+      <input id="q9" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(9, 12)">
+        Тексеру
+      </button>
+
+      <div id="r9" class="result"></div>
+
+    </div>
+
+
+    <!-- 10 -->
+
+    <div class="task">
+
+      <b>
+        10. А нүктесінің координатасы 15.
+        В нүктесі А-дан солға қарай 7 бірлік
+        орналасқан. В нүктесінің координатасы қандай?
+      </b>
+
+      <input id="q10" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(10, 8)">
+        Тексеру
+      </button>
+
+      <div id="r10" class="result"></div>
+
+    </div>
+
+
+    <div id="total">
+      Нәтиже: 0 / 10
+    </div>
+
+    <div id="finalResult"></div>
+
+
+    <!-- ТЕСТТІ БАСТАУ -->
+
+    <div class="start-test">
+
+      <h3>🎯 Тапсырмаларды орындап болдың ба?</h3>
+
+      <p>
+        Енді тақырып бойынша біліміңді тест арқылы тексер.
+      </p>
+
+      <button
+        class="start-test-button"
+        onclick="startTest()">
+
+        📝 Тестті бастау
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       ТЕСТ БӨЛІМІ
+  ========================== -->
+
+  <div class="section" id="testSection">
+
+    <h2>✅ Тест — Координаталық сәуле</h2>
+
+    <p>
+      Әр сұрақта бір ғана дұрыс жауап бар.
+      Барлық 10 сұраққа жауап бер.
+    </p>
+
+
+    <!-- СҰРАҚ 1 -->
+
+    <div class="test-question">
+
+      <h3>
+        1. Координаталық сәуленің бастапқы нүктесіне
+        қай сан сәйкес келеді?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t1" value="A">
+        A) 0
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t1" value="B">
+        B) 1
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t1" value="C">
+        C) 10
+      </label>
+
+    </div>
+
+
+    <!-- СҰРАҚ 2 -->
+
+    <div class="test-question">
+
+      <h3>
+        2. Бірлік кесінді 1 см болса,
+        0 мен 9 координаталарының арақашықтығы
+        неше сантиметр?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t2" value="A">
+        A) 8 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t2" value="B">
+        B) 9 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t2" value="C">
+        C) 10 см
+      </label>
+
+    </div>
+
+
+    <!-- СҰРАҚ 3 -->
+
+    <div class="test-question">
+
+      <h3>
+        3. Координаталық сәуледе А(4), В(11)
+        нүктелері берілген. АВ арақашықтығы неше бірлік?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t3" value="A">
+        A) 6 бірлік
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t3" value="B">
+        B) 7 бірлік
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t3" value="C">
+        C) 8 бірлік
+      </label>
+
+    </div>
+
+
+    <!-- СҰРАҚ 4 -->
+
+    <div class="test-question">
+
+      <h3>
+        4. Координаталық сәуледе 8 санының
+        оң жағындағы ең жақын натурал сан қайсы?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t4" value="A">
+        A) 7
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t4" value="B">
+        B) 9
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t4" value="C">
+        C) 10
+      </label>
+
+    </div>
+
+
+    <!-- СҰРАҚ 5 -->
+
+    <div class="test-question">
+
+      <h3>
+        5. Бірлік кесінді 2 см.
+        3 пен 8 координаталарының арасындағы
+        қашықтық неше сантиметр?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t5" value="A">
+        A) 8 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t5" value="B">
+        B) 10 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t5" value="C">
+        C) 12 см
+      </label>
+
+    </div>
+
+
+    <!-- СҰРАҚ 6 -->
+
+    <div class="test-question">
+
+      <h3>
+        6. А нүктесінің координатасы 6.
+        В нүктесі А нүктесінен оңға қарай
+        4 бірлікке орналасқан.
+        В нүктесінің координатасы қандай?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t6" value="A">
+        A) 2
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t6" value="B">
+        B) 10
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t6" value="C">
+        C) 12
+      </label>
+
+    </div>
+
+
+    <!-- СҰРАҚ 7 -->
+
+    <div class="test-question">
+
+      <h3>
+        7. А нүктесінің координатасы 14.
+        В нүктесі А нүктесінен солға қарай
+        5 бірлікке орналасқан.
+        В нүктесінің координатасы қандай?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t7" value="A">
+        A) 9
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t7" value="B">
+        B) 19
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t7" value="C">
+        C) 10
+      </label>
+
+    </div>
+
+
+    <!-- СҰРАҚ 8 -->
+
+    <div class="test-question">
+
+      <h3>
+        8. Координаталық сәуледе 5 пен 12
+        сандарының арасында неше натурал сан орналасқан?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t8" value="A">
+        A) 6
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t8" value="B">
+        B) 7
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t8" value="C">
+        C) 8
+      </label>
+
+    </div>
+
+
+    <!-- СҰРАҚ 9 -->
+
+    <div class="test-question">
+
+      <h3>
+        9. Бірлік кесінді 3 см.
+        А(2) және В(7) нүктелері берілген.
+        АВ кесіндісінің ұзындығы қанша?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t9" value="A">
+        A) 12 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t9" value="B">
+        B) 15 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t9" value="C">
+        C) 18 см
+      </label>
+
+    </div>
+
+
+    <!-- СҰРАҚ 10 -->
+
+    <div class="test-question">
+
+      <h3>
+        10. Координаталық сәуледе А(3), В(8),
+        С(13) нүктелері орналасқан.
+        А нүктесінен С нүктесіне дейінгі
+        қашықтық неше бірлік?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t10" value="A">
+        A) 8 бірлік
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t10" value="B">
+        B) 10 бірлік
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t10" value="C">
+        C) 12 бірлік
+      </label>
+
+    </div>
+
+
+    <button
+      class="test-button"
+      onclick="finishTest()">
+
+      ✅ Тестті аяқтау
+
+    </button>
+
+
+    <div id="testResult"></div>
+
+  </div>
+
+</div>
+
+
+<footer>
+  ©️ 2026 KEMENGER ONLINE
+</footer>
+
+
+<script>
+
+  /* =========================
+     10 ТАПСЫРМА
+  ========================= */
+
+  let score = 0;
+
+  let answered = {};
+
+
+  function check(number, correctAnswer) {
+
+    const input =
+      document.getElementById("q" + number);
+
+    const result =
+      document.getElementById("r" + number);
+
+
+    if (answered[number]) {
+      return;
+    }
+
+
+    if (input.value === "") {
+
+      result.innerHTML =
+        "⚠️ Алдымен жауапты енгіз!";
+
+      result.style.color =
+        "orange";
+
+      return;
+
+    }
+
+
+    const answer =
+      Number(input.value);
+
+
+    if (answer === correctAnswer) {
+
+      result.innerHTML =
+        "✅ Дұрыс!";
+
+      result.style.color =
+        "green";
+
+
+      score++;
+
+      answered[number] = true;
+
+      input.disabled = true;
+
+    }
+
+    else {
+
+      result.innerHTML =
+        "❌ Қате. Қайта байқап көр.";
+
+      result.style.color =
+        "red";
+
+    }
+
+
+    document.getElementById("total").innerHTML =
+      "Нәтиже: " + score + " / 10";
+
+
+    if (score === 10) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🏆 Керемет! Барлық 10 тапсырманы дұрыс орындадың!";
+
+    }
+
+    else if (score >= 8) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🌟 Өте жақсы! Нәтижең: " +
+        score + " / 10";
+
+    }
+
+    else if (score >= 5) {
+
+      document.getElementById("finalResult").innerHTML =
+        "👍 Жақсы! Нәтижең: " +
+        score + " / 10";
+
+    }
+
+    else if (score > 0) {
+
+      document.getElementById("finalResult").innerHTML =
+        "📚 Сабақты тағы бір рет қайталап көр.";
+
+    }
+
+  }
+
+
+  /* =========================
+     ТЕСТТІ АШУ
+  ========================= */
+
+  function startTest() {
+
+    const test =
+      document.getElementById("testSection");
+
+
+    test.style.display =
+      "block";
+
+
+    test.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =========================
+     ДҰРЫС ЖАУАПТАР
+  ========================= */
+
+  const answers = {
+
+    t1: "A",
+
+    t2: "B",
+
+    t3: "B",
+
+    t4: "B",
+
+    t5: "B",
+
+    t6: "B",
+
+    t7: "A",
+
+    t8: "A",
+
+    t9: "B",
+
+    t10: "B"
+
+  };
+
+
+  /* =========================
+     ТЕСТ НӘТИЖЕСІ
+  ========================= */
+
+  function finishTest() {
+
+    let testScore = 0;
+
+    let answeredCount = 0;
+
+
+    for (let i = 1; i <= 10; i++) {
+
+      const selected =
+        document.querySelector(
+          'input[name="t' + i + '"]:checked'
+        );
+
+
+      if (selected) {
+
+        answeredCount++;
+
+
+        if (
+          selected.value ===
+          answers["t" + i]
+        ) {
+
+          testScore++;
+
+        }
+
+      }
+
+    }
+
+
+    const result =
+      document.getElementById(
+        "testResult"
+      );
+
+
+    if (answeredCount < 10) {
+
+      result.style.display =
+        "block";
+
+      result.innerHTML =
+        "⚠️ Барлық 10 сұраққа жауап бер!<br><br>" +
+        "Жауап берілгені: " +
+        answeredCount +
+        " / 10";
+
+      return;
+
+    }
+
+
+    const percent =
+      testScore * 10;
+
+
+    result.style.display =
+      "block";
+
+
+    if (testScore === 10) {
+
+      result.innerHTML =
+        "🏆 КЕРЕМЕТ!<br><br>" +
+        "Нәтиже: 10 / 10<br>" +
+        "100% — Өте жоғары нәтиже!";
+
+    }
+
+    else if (testScore >= 8) {
+
+      result.innerHTML =
+        "🌟 ӨТЕ ЖАҚСЫ!<br><br>" +
+        "Нәтиже: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тақырыпты жақсы меңгердің!";
+
+    }
+
+    else if (testScore >= 5) {
+
+      result.innerHTML =
+        "👍 ЖАҚСЫ!<br><br>" +
+        "Нәтиже: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тағы да жаттығу қажет.";
+
+    }
+
+    else {
+
+      result.innerHTML =
+        "📚 ҚАЙТА ҚАРАП ШЫҚ!<br><br>" +
+        "Нәтиже: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Сабақ материалын қайталап көр.";
+
+    }
+
+
+    /* ЖАУАПТАРДЫ БЕКІТУ */
+
+    for (let i = 1; i <= 10; i++) {
+
+      const options =
+        document.querySelectorAll(
+          'input[name="t' + i + '"]'
+        );
+
+
+      options.forEach(function(option) {
+
+        option.disabled = true;
+
+      });
+
+    }
+
+
+    document.querySelector(
+      ".test-button"
+    ).disabled = true;
+
+
+    document.querySelector(
+      ".test-button"
+    ).style.opacity = "0.5";
+
+  }
+
+</script>
+
+</body>
+</html>
