@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Админ панель — Kemenger Online</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #173b7a;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h2 {
+      margin: 0;
+    }
+
+    .header-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .header-buttons a,
+    .header-buttons button {
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .home {
+      background: white;
+      color: #173b7a;
+    }
+
+    .logout {
+      background: #e74c3c;
+      color: white;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+
+    .welcome {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    }
+
+    .student {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.07);
+    }
+
+    .student h3 {
+      margin-top: 0;
+    }
+
+    .student p {
+      margin: 7px 0;
+    }
+
+    .access-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .access-btn {
+      border: none;
+      padding: 9px 13px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .closed {
+      background: #e5e7eb;
+      color: #333;
+    }
+
+    .open {
+      background: #22a559;
+      color: white;
+    }
+
+    #status {
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h2>⚙️ Kemenger Online — Админ панель</h2>
+
+  <div class="header-buttons">
+    <a class="home" href="index.html">Басты бет</a>
+    <button class="logout" id="logoutBtn">Шығу</button>
+  </div>
+</header>
+
+<main>
+
+  <div class="welcome">
+    <h2>Оқушыларды басқару</h2>
+    <p>Осы жерден оқушыларға қажетті сыныпқа доступ бере аласыз.</p>
+  </div>
+
+  <div id="status">Оқушылар жүктелуде...</div>
+
+  <div id="students"></div>
+
+</main>
+
+<script type="module">
+
+  import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+  import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+  }
+  from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+  import {
+    getFirestore,
+    collection,
+    getDocs,
+    doc,
+    updateDoc
+  }
+  from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyADJAbETAdQNmwMLzWOZOpZ_6gSmHWVF-0",
+    authDomain: "kemenger-online.firebaseapp.com",
+    projectId: "kemenger-online",
+    storageBucket: "kemenger-online.firebasestorage.app",
+    messagingSenderId: "44270080959",
+    appId: "1:44270080959:web:11378db65528a1a4e0470a",
+    measurementId: "G-FMTYL770EJ"
+  };
+
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const ADMIN_EMAIL = "d.kuanyshbek11@mail.ru";
+
+  const studentsDiv = document.getElementById("students");
+  const status = document.getElementById("status");
+
+
+  onAuthStateChanged(auth, async (user) => {
+
+    if (!user) {
+      window.location.href = "login.html";
+      return;
+    }
+
+    if (user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+      alert("Бұл бөлімге тек администратор кіре алады.");
+      window.location.href = "index.html";
+      return;
+    }
+
+    await loadStudents();
+
+  });
+
+
+  async function loadStudents() {
+
+    try {
+
+      status.textContent = "Оқушылар жүктелуде...";
+
+      const snapshot = await getDocs(collection(db, "users"));
+
+      studentsDiv.innerHTML = "";
+
+      if (snapshot.empty) {
+        status.textContent = "Әзірге оқушылар тіркелмеген.";
+        return;
+      }
+
+      status.textContent = "";
+
+      snapshot.forEach((studentDoc) => {
+
+        const data = studentDoc.data();
+
+        if (data.role === "admin") return;
+
+        const card = document.createElement("div");
+        card.className = "student";
+
+        const name =
+          data.name ||
+          data.email ||
+          "Оқушы";
+
+        card.innerHTML = `
+          <h3>👤 ${escapeHtml(name)}</h3>
+
+          <p>
+            <b>Email:</b>
+            ${escapeHtml(data.email || "Көрсетілмеген")}
+          </p>
+
+          <div class="access-row">
+
+            ${createGradeButton(studentDoc.id, 5, data)}
+
+            ${createGradeButton(studentDoc.id, 6, data)}
+
+            ${createGradeButton(studentDoc.id, 7, data)}
+
+            ${createGradeButton(studentDoc.id, 8, data)}
+
+            ${createGradeButton(studentDoc.id, 9, data)}
+
+            ${createGradeButton(studentDoc.id, 10, data)}
+
+            ${createGradeButton(studentDoc.id, 11, data)}
+
+          </div>
+        `;
+
+        studentsDiv.appendChild(card);
+
+      });
+
+    } catch (error) {
+
+      console.error(error);
+
+      status.textContent =
+        "Оқушыларды жүктеу кезінде қате шықты.";
+
+    }
+
+  }
+
+
+  function createGradeButton(uid, grade, data) {
+
+    const field = "grade" + grade;
+
+    const hasAccess =
+      data[field] === true;
+
+    return `
+      <button
+        class="access-btn ${hasAccess ? "open" : "closed"}"
+        onclick="changeAccess(
+          '${uid}',
+          '${field}',
+          ${!hasAccess}
+        )"
+      >
+        ${grade}-сынып:
+        ${hasAccess ? "АШЫҚ ✓" : "ЖАБЫҚ"}
+      </button>
+    `;
+
+  }
+
+
+  window.changeAccess =
+    async function(uid, field, newValue) {
+
+      try {
+
+        await updateDoc(
+          doc(db, "users", uid),
+          {
+            [field]: newValue
+          }
+        );
+
+        await loadStudents();
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert("Доступты өзгерту кезінде қате шықты.");
+
+      }
+
+    };
+
+
+  document
+    .getElementById("logoutBtn")
+    .addEventListener("click", async () => {
+
+      await signOut(auth);
+
+      window.location.href = "login.html";
+
+    });
+
+
+  function escapeHtml(text) {
+
+    const div =
+      document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+  }
+
+</script>
+
+</body>
+</html>
