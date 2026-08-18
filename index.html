@@ -42,6 +42,26 @@
       font-weight: bold;
     }
 
+    .user-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logout-btn {
+      background: white;
+      color: #173b7a;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      background: #eef4ff;
+    }
+
     .hero {
       color: white;
       padding: 75px 7%;
@@ -304,6 +324,15 @@
       .login-top {
         padding: 9px 12px;
         font-size: 14px;
+      }
+
+      .logout-btn {
+        padding: 9px 10px;
+        font-size: 13px;
+      }
+
+      .user-box {
+        gap: 6px;
       }
 
       .hero {
@@ -621,7 +650,8 @@
 
   import {
     getAuth,
-    onAuthStateChanged
+    onAuthStateChanged,
+    signOut
   } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
   import {
@@ -697,10 +727,46 @@
     }
 
 
-    userArea.innerHTML =
-      '<span class="login-top">👤 ' +
-      name +
-      '</span>';
+    userArea.innerHTML = `
+      <div class="user-box">
+
+        <span class="login-top">
+          👤 ${name}
+        </span>
+
+        <button
+          class="logout-btn"
+          id="logoutBtn"
+        >
+          🚪 Шығу
+        </button>
+
+      </div>
+    `;
+
+
+    document
+      .getElementById("logoutBtn")
+      .addEventListener("click", async () => {
+
+        try {
+
+          await signOut(auth);
+
+          window.location.href =
+            "index.html";
+
+        } catch (error) {
+
+          console.log(error);
+
+          alert(
+            "Аккаунттан шығу кезінде қате шықты."
+          );
+
+        }
+
+      });
 
   });
 
