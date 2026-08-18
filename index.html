@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Kemenger Online — Математика мектебі</title>
+  <title>Kemenger Online — Онлайн математика мектебі</title>
 
   <style>
     * {
@@ -29,217 +29,569 @@
     }
 
     .logo {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: bold;
     }
 
-    nav a {
-      color: white;
+    .login-top {
+      background: #ffcf33;
+      color: #172033;
       text-decoration: none;
-      margin-left: 20px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: bold;
     }
 
     .hero {
       background: linear-gradient(135deg, #173b7a, #2d65c8);
       color: white;
-      padding: 80px 7%;
+      text-align: center;
+      padding: 70px 20px;
     }
 
     .hero h1 {
-      font-size: 46px;
-      max-width: 700px;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 20px;
-      line-height: 1.6;
-      max-width: 650px;
-      margin-bottom: 30px;
-    }
-
-    .button {
-      display: inline-block;
-      background: #ffcf33;
-      color: #172033;
-      padding: 14px 24px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 50px 20px;
-    }
-
-    .container h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 32px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: white;
-      padding: 28px;
-      border-radius: 16px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    }
-
-    .card .icon {
-      font-size: 38px;
+      font-size: 42px;
       margin-bottom: 15px;
     }
 
-    .card h3 {
+    .hero p {
+      font-size: 19px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .title h2 {
+      font-size: 30px;
       margin-bottom: 10px;
     }
 
     .classes {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 15px;
+      gap: 16px;
     }
 
-    .class-box {
+    .class-card {
       background: white;
-      padding: 22px;
+      border-radius: 16px;
+      padding: 28px 15px;
       text-align: center;
-      border-radius: 12px;
-      font-size: 20px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: 0.2s;
+      border: 2px solid transparent;
+    }
+
+    .class-card:hover {
+      transform: translateY(-4px);
+      border-color: #2d65c8;
+    }
+
+    .class-card .icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .class-card h3 {
+      font-size: 19px;
+    }
+
+    .lock-text {
+      margin-top: 8px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    .student-area {
+      margin-top: 45px;
+      background: white;
+      padding: 35px 25px;
+      border-radius: 18px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .student-area h2 {
+      margin-bottom: 12px;
+    }
+
+    .student-area p {
+      margin-bottom: 18px;
+      color: #555;
+    }
+
+    .student-login {
+      display: inline-block;
+      background: #ffcf33;
+      color: #172033;
+      text-decoration: none;
+      padding: 13px 25px;
+      border-radius: 10px;
       font-weight: bold;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .contact-area {
+      margin-top: 30px;
+      background: #eef4ff;
+      padding: 30px 20px;
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    .contact-area h2 {
+      margin-bottom: 10px;
+    }
+
+    .contact-area p {
+      margin-bottom: 18px;
+      color: #555;
+    }
+
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .whatsapp {
+      display: inline-block;
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    .call {
+      display: inline-block;
+      background: #173b7a;
+      color: white;
+      text-decoration: none;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-weight: bold;
     }
 
     footer {
+      margin-top: 40px;
       background: #14284e;
       color: white;
       text-align: center;
+      padding: 25px;
+      line-height: 1.7;
+    }
+
+    /* MODAL */
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: white;
+      max-width: 460px;
+      margin: 10vh auto;
       padding: 30px;
+      border-radius: 18px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+    }
+
+    .close {
+      position: absolute;
+      right: 18px;
+      top: 12px;
+      font-size: 30px;
+      cursor: pointer;
+      color: #777;
+    }
+
+    .modal-lock {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 12px;
+    }
+
+    .modal-content p {
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .modal-buttons a {
+      text-decoration: none;
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    .modal-whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .modal-call {
+      background: #173b7a;
+      color: white;
+    }
+
+    .modal-login {
+      background: #ffcf33;
+      color: #172033;
     }
 
     @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 34px;
+
+      header {
+        padding: 15px;
       }
 
-      nav {
-        display: none;
+      .logo {
+        font-size: 17px;
+      }
+
+      .login-top {
+        padding: 9px 12px;
+        font-size: 14px;
+      }
+
+      .hero {
+        padding: 50px 18px;
+      }
+
+      .hero h1 {
+        font-size: 31px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .container {
+        padding: 30px 15px;
+      }
+
+      .classes {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .class-card {
+        padding: 22px 10px;
       }
     }
+
   </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">📐 KEMENGER ONLINE</div>
 
-  <nav>
-    <a href="#courses">Сыныптар</a>
-    <a href="#about">Мүмкіндіктер</a>
-    <a href="#login">Кіру</a>
-  </nav>
+  <div class="logo">
+    📐 KEMENGER ONLINE
+  </div>
+
+  <a class="login-top" href="login.html">
+    🔐 Кіру
+  </a>
+
 </header>
 
+
 <section class="hero">
-  <h1>Математиканы түсініп үйрен!</h1>
+
+  <h1>KEMENGER ONLINE</h1>
 
   <p>
-    Видеосабақтар, интерактивті тапсырмалар,
-    тесттер және әр оқушыға арналған жеке кабинет.
+    5–11 сыныптарға арналған онлайн математика мектебі
   </p>
 
-  <a class="button" href="#courses">Сабақтарды көру</a>
+  <p>
+    Видеосабақ • Тапсырмалар • Тесттер
+  </p>
+
 </section>
 
-<section id="about" class="container">
 
-  <h2>Платформа мүмкіндіктері</h2>
+<div class="container">
 
-  <div class="cards">
+  <div class="title">
 
-    <div class="card">
-      <div class="icon">🎥</div>
-      <h3>Видеосабақтар</h3>
-      <p>
-        Әр тақырып бойынша түсінікті және жүйелі видеосабақтар.
-      </p>
-    </div>
+    <h2>📚 Математика сыныптары</h2>
 
-    <div class="card">
-      <div class="icon">🧮</div>
-      <h3>Тапсырмалар</h3>
-      <p>
-        Сабақтан кейін есептерді онлайн орындау.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">✅</div>
-      <h3>Автоматты тексеру</h3>
-      <p>
-        Жауаптарды жүйе автоматты түрде тексереді.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">📊</div>
-      <h3>Жеке прогресс</h3>
-      <p>
-        Оқушы өзінің нәтижесі мен оқу прогресін көре алады.
-      </p>
-    </div>
+    <p>
+      Қажетті сыныпты таңдаңыз
+    </p>
 
   </div>
 
-</section>
-
-<section id="courses" class="container">
-
-  <h2>Математика сыныптары</h2>
 
   <div class="classes">
 
-    <a href="5-synyp.html" class="class-box">5-сынып</a>
-    <div class="class-box">6-сынып</div>
-    <div class="class-box">7-сынып</div>
-    <div class="class-box">8-сынып</div>
-    <div class="class-box">9-сынып</div>
-    <div class="class-box">10-сынып</div>
-    <div class="class-box">11-сынып</div>
+    <div class="class-card" onclick="showAccess('5-сынып')">
+      <div class="icon">📘</div>
+      <h3>5-сынып</h3>
+      <div class="lock-text">🔒 Қолжетімділік қажет</div>
+    </div>
+
+    <div class="class-card" onclick="showAccess('6-сынып')">
+      <div class="icon">📗</div>
+      <h3>6-сынып</h3>
+      <div class="lock-text">🔒 Қолжетімділік қажет</div>
+    </div>
+
+    <div class="class-card" onclick="showAccess('7-сынып')">
+      <div class="icon">📙</div>
+      <h3>7-сынып</h3>
+      <div class="lock-text">🔒 Қолжетімділік қажет</div>
+    </div>
+
+    <div class="class-card" onclick="showAccess('8-сынып')">
+      <div class="icon">📕</div>
+      <h3>8-сынып</h3>
+      <div class="lock-text">🔒 Қолжетімділік қажет</div>
+    </div>
+
+    <div class="class-card" onclick="showAccess('9-сынып')">
+      <div class="icon">📘</div>
+      <h3>9-сынып</h3>
+      <div class="lock-text">🔒 Қолжетімділік қажет</div>
+    </div>
+
+    <div class="class-card" onclick="showAccess('10-сынып')">
+      <div class="icon">📗</div>
+      <h3>10-сынып</h3>
+      <div class="lock-text">🔒 Қолжетімділік қажет</div>
+    </div>
+
+    <div class="class-card" onclick="showAccess('11-сынып')">
+      <div class="icon">📙</div>
+      <h3>11-сынып</h3>
+      <div class="lock-text">🔒 Қолжетімділік қажет</div>
+    </div>
 
   </div>
 
-</section>
 
-<section id="login" class="container">
+  <!-- ОҚУШЫ КАБИНЕТІ -->
 
-  <h2>Оқушы кабинеті</h2>
+  <div class="student-area">
 
-  <div style="text-align:center;">
-    <p style="margin-bottom:20px;">
-      Жеке логин және пароль арқылы сабақтарыңа кір.
+    <h2>👨‍🎓 Оқушы кабинеті</h2>
+
+    <p>
+      Егер сізде логин мен құпиясөз бар болса, сабақтарға кіріңіз.
     </p>
 
-    <a class="button" href="#">
+    <a class="student-login" href="login.html">
       🔐 Кіру
     </a>
+
   </div>
 
-</section>
+
+  <!-- БАЙЛАНЫС -->
+
+  <div class="contact-area">
+
+    <h2>📞 Сабақтарды сатып алу</h2>
+
+    <p>
+      Қолжетімділік алу үшін бізге хабарласыңыз.
+    </p>
+
+    <div class="contact-buttons">
+
+      <a
+        class="whatsapp"
+        href="https://wa.me/77479376940?text=Сәлеметсіз%20бе!%20Kemenger%20Online%20сабағына%20қолжетімділік%20алғым%20келеді."
+        target="_blank">
+
+        💬 WhatsApp
+
+      </a>
+
+      <a
+        class="call"
+        href="tel:+77479376940">
+
+        📞 Қоңырау шалу
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ҚОЛЖЕТІМДІЛІК ТЕРЕЗЕСІ -->
+
+<div class="modal" id="accessModal">
+
+  <div class="modal-content">
+
+    <span class="close" onclick="closeModal()">
+      &times;
+    </span>
+
+    <div class="modal-lock">
+      🔒
+    </div>
+
+    <h2 id="modalTitle">
+      Қолжетімділік қажет
+    </h2>
+
+    <p id="modalText">
+      Бұл сыныптың сабақтарын көру үшін қолжетімділік сатып алу қажет.
+    </p>
+
+    <div class="modal-buttons">
+
+      <a
+        id="modalWhatsapp"
+        class="modal-whatsapp"
+        href="#"
+        target="_blank">
+
+        💬 WhatsApp арқылы жазу
+
+      </a>
+
+      <a
+        class="modal-call"
+        href="tel:+77479376940">
+
+        📞 +7 747 937 69 40
+
+      </a>
+
+      <a
+        class="modal-login"
+        href="login.html">
+
+        🔐 Логинмен кіру
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
 
 <footer>
-  <p>© 2026 KEMENGER ONLINE</p>
-  <p style="margin-top:8px;">Онлайн математика мектебі</p>
+
+  © 2026 KEMENGER ONLINE
+
+  <br>
+
+  Онлайн математика мектебі
+
 </footer>
+
+
+<script>
+
+  function showAccess(className) {
+
+    const modal =
+      document.getElementById("accessModal");
+
+    const title =
+      document.getElementById("modalTitle");
+
+    const text =
+      document.getElementById("modalText");
+
+    const whatsapp =
+      document.getElementById("modalWhatsapp");
+
+
+    title.innerHTML =
+      "🔒 " + className + " жабық";
+
+
+    text.innerHTML =
+      className +
+      " сабақтарына қолжетімділік алу үшін сатып алу қажет. " +
+      "Төлем және логин алу үшін бізге WhatsApp арқылы хабарласыңыз.";
+
+
+    const message =
+      "Сәлеметсіз бе! Kemenger Online " +
+      className +
+      " сабақтарына қолжетімділік алғым келеді.";
+
+
+    whatsapp.href =
+      "https://wa.me/77479376940?text=" +
+      encodeURIComponent(message);
+
+
+    modal.style.display =
+      "block";
+
+  }
+
+
+  function closeModal() {
+
+    document.getElementById(
+      "accessModal"
+    ).style.display = "none";
+
+  }
+
+
+  window.onclick = function(event) {
+
+    const modal =
+      document.getElementById("accessModal");
+
+    if (event.target === modal) {
+
+      modal.style.display =
+        "none";
+
+    }
+
+  };
+
+</script>
 
 </body>
 </html>
