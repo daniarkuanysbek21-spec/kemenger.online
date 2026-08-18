@@ -681,6 +681,9 @@
   const userArea =
     document.getElementById("userArea");
 
+  const ADMIN_EMAIL =
+    "d.kuanyshbek11@mail.ru";
+
 
   onAuthStateChanged(auth, async (user) => {
 
@@ -727,6 +730,28 @@
     }
 
 
+    let adminButton = "";
+
+
+    if (
+      user.email &&
+      user.email.toLowerCase() ===
+      ADMIN_EMAIL.toLowerCase()
+    ) {
+
+      adminButton = `
+        <a
+          class="logout-btn"
+          href="admin.html"
+          style="text-decoration:none;"
+        >
+          ⚙️ Админ панель
+        </a>
+      `;
+
+    }
+
+
     userArea.innerHTML = `
       <div class="user-box">
 
@@ -734,11 +759,13 @@
           👤 ${name}
         </span>
 
+        ${adminButton}
+
         <button
           class="logout-btn"
           id="logoutBtn"
         >
-          🚪 Шығу
+          Шығу
         </button>
 
       </div>
