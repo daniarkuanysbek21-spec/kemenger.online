@@ -43,10 +43,42 @@
     }
 
     .hero {
-      background: linear-gradient(135deg, #173b7a, #2d65c8);
-      color: white;
-      text-align: center;
-      padding: 70px 20px;
+  color: white;
+  padding: 75px 7%;
+  min-height: 480px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(23, 59, 122, 1) 0%,
+      rgba(23, 59, 122, 0.95) 35%,
+      rgba(23, 59, 122, 0.55) 58%,
+      rgba(23, 59, 122, 0.08) 78%
+    ),
+    url("kemenger suret.png");
+
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.hero h1 {
+  max-width: 550px;
+  font-size: 44px;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  max-width: 540px;
+  font-size: 18px;
+  line-height: 1.6;
+}
     }
 
     .hero h1 {
