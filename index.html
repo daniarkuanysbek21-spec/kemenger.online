@@ -353,9 +353,9 @@
     📐 KEMENGER ONLINE
   </div>
 
-  <a class="login-top" href="login.html">
-    🔐 Кіру
-  </a>
+  <div id="userArea">
+  <a class="login-top" href="login.html">🔒 Кіру</a>
+</div>
 
 </header>
 
@@ -646,6 +646,54 @@
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+</script>
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+
+  const firebaseConfig2 = {
+    apiKey: "AIzaSyADJAbETAdQNmwMLzWOZOpZ_6gSmHWVF-0",
+    authDomain: "kemenger-online.firebaseapp.com",
+    projectId: "kemenger-online",
+    storageBucket: "kemenger-online.firebasestorage.app",
+    messagingSenderId: "44270080959",
+    appId: "1:44270080959:web:11378db65528a1a4e0470a",
+    measurementId: "G-FMTYL770EJ"
+  };
+
+  const app2 = initializeApp(firebaseConfig2, "userApp");
+  const auth = getAuth(app2);
+  const db = getFirestore(app2);
+
+  const userArea = document.getElementById("userArea");
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      userArea.innerHTML =
+        '<a class="login-top" href="login.html">🔒 Кіру</a>';
+      return;
+    }
+
+    let name = user.displayName || user.email;
+
+    try {
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+
+      if (userDoc.exists()) {
+        const data = userDoc.data();
+
+        if (data.name) {
+          name = data.name;
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    userArea.innerHTML =
+      '<span class="login-top">👤 ' + name + '</span>';
+  });
 </script>
 </body>
 </html>
