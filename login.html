@@ -26,7 +26,7 @@
     .login-box {
       background: white;
       width: 100%;
-      max-width: 420px;
+      max-width: 450px;
       padding: 35px;
       border-radius: 18px;
       box-shadow: 0 15px 40px rgba(0,0,0,0.2);
@@ -43,7 +43,30 @@
     .subtitle {
       text-align: center;
       color: #666;
-      margin-bottom: 28px;
+      margin-bottom: 25px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 9px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #e9eef7;
+      color: #173b7a;
+    }
+
+    .tab-btn.active {
+      background: #173b7a;
+      color: white;
     }
 
     label {
@@ -53,7 +76,8 @@
       color: #172033;
     }
 
-    input {
+    input,
+    select {
       width: 100%;
       padding: 13px;
       margin-bottom: 18px;
@@ -61,13 +85,15 @@
       border-radius: 9px;
       font-size: 16px;
       outline: none;
+      background: white;
     }
 
-    input:focus {
+    input:focus,
+    select:focus {
       border-color: #2d65c8;
     }
 
-    button {
+    .submit-btn {
       width: 100%;
       padding: 14px;
       border: none;
@@ -79,14 +105,19 @@
       cursor: pointer;
     }
 
-    button:hover {
+    .submit-btn:hover {
       background: #2d65c8;
     }
 
-    #message {
+    #registerForm {
+      display: none;
+    }
+
+    .message {
       margin-top: 18px;
       text-align: center;
       font-size: 14px;
+      line-height: 1.5;
     }
 
     .back {
@@ -96,6 +127,16 @@
       color: #173b7a;
       text-decoration: none;
     }
+
+    .info {
+      background: #f3f6fb;
+      padding: 12px;
+      border-radius: 9px;
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
   </style>
 </head>
 
@@ -104,103 +145,586 @@
   <div class="login-box">
 
     <div class="logo">Kemenger Online</div>
-    <div class="subtitle">Жеке кабинетке кіру</div>
+    <div class="subtitle">Жеке кабинет</div>
+
+    <div class="tabs">
+      <button
+        type="button"
+        class="tab-btn active"
+        id="loginTab"
+      >
+        Кіру
+      </button>
+
+      <button
+        type="button"
+        class="tab-btn"
+        id="registerTab"
+      >
+        Тіркелу
+      </button>
+    </div>
+
+
+    <!-- КІРУ -->
 
     <form id="loginForm">
 
-      <label for="email">Email</label>
+      <label for="loginEmail">Email</label>
+
       <input
         type="email"
-        id="email"
+        id="loginEmail"
         placeholder="Email енгізіңіз"
         required
       >
 
-      <label for="password">Құпия сөз</label>
+
+      <label for="loginPassword">Құпия сөз</label>
+
       <input
         type="password"
-        id="password"
+        id="loginPassword"
         placeholder="Құпия сөзді енгізіңіз"
         required
       >
 
-      <button type="submit">Кіру</button>
+
+      <button
+        type="submit"
+        class="submit-btn"
+      >
+        Кіру
+      </button>
+
+      <div
+        id="loginMessage"
+        class="message"
+      ></div>
 
     </form>
 
-    <div id="message"></div>
 
-    <a class="back" href="index.html">← Басты бетке қайту</a>
+
+    <!-- ТІРКЕЛУ -->
+
+    <form id="registerForm">
+
+      <div class="info">
+        Тіркелгеннен кейін әкімші сіздің сұранысыңызды көреді.
+        Төлем расталған соң қажетті сыныпқа доступ беріледі.
+      </div>
+
+
+      <label for="fullName">Аты-жөніңіз</label>
+
+      <input
+        type="text"
+        id="fullName"
+        placeholder="Мысалы: Айбек Нұрланұлы"
+        required
+      >
+
+
+      <label for="phone">Телефон нөмірі</label>
+
+      <input
+        type="tel"
+        id="phone"
+        placeholder="+7 777 123 45 67"
+        required
+      >
+
+
+      <label for="requestedClass">
+        Қай сыныпқа доступ керек?
+      </label>
+
+      <select
+        id="requestedClass"
+        required
+      >
+
+        <option value="">
+          Сыныпты таңдаңыз
+        </option>
+
+        <option value="5">5-сынып</option>
+        <option value="6">6-сынып</option>
+        <option value="7">7-сынып</option>
+        <option value="8">8-сынып</option>
+        <option value="9">9-сынып</option>
+        <option value="10">10-сынып</option>
+        <option value="11">11-сынып</option>
+
+      </select>
+
+
+      <label for="registerEmail">Email</label>
+
+      <input
+        type="email"
+        id="registerEmail"
+        placeholder="Email енгізіңіз"
+        required
+      >
+
+
+      <label for="registerPassword">Құпия сөз</label>
+
+      <input
+        type="password"
+        id="registerPassword"
+        placeholder="Кемінде 6 таңба"
+        minlength="6"
+        required
+      >
+
+
+      <label for="confirmPassword">
+        Құпия сөзді қайталаңыз
+      </label>
+
+      <input
+        type="password"
+        id="confirmPassword"
+        placeholder="Құпия сөзді қайта енгізіңіз"
+        minlength="6"
+        required
+      >
+
+
+      <button
+        type="submit"
+        class="submit-btn"
+      >
+        Тіркелу
+      </button>
+
+      <div
+        id="registerMessage"
+        class="message"
+      ></div>
+
+    </form>
+
+
+    <a
+      class="back"
+      href="index.html"
+    >
+      ← Басты бетке қайту
+    </a>
 
   </div>
 
 
+
   <script type="module">
 
-    import { initializeApp }
+    import {
+      initializeApp
+    }
     from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
 
     import {
       getAuth,
-      signInWithEmailAndPassword
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword
     }
     from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
 
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      serverTimestamp
+    }
+    from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+
     const firebaseConfig = {
-      apiKey: "AIzaSyADJAbETAdQNmwMLzWOZOpZ_6gSmHWVF-0",
-      authDomain: "kemenger-online.firebaseapp.com",
-      projectId: "kemenger-online",
-      storageBucket: "kemenger-online.firebasestorage.app",
-      messagingSenderId: "44270080959",
-      appId: "1:44270080959:web:11378db65528a1a4e0470a",
-      measurementId: "G-FMTYL770EJ"
+
+      apiKey:
+      "AIzaSyADJAbETAdQNmwMLzWOZOpZ_6gSmHWVF-0",
+
+      authDomain:
+      "kemenger-online.firebaseapp.com",
+
+      projectId:
+      "kemenger-online",
+
+      storageBucket:
+      "kemenger-online.firebasestorage.app",
+
+      messagingSenderId:
+      "44270080959",
+
+      appId:
+      "1:44270080959:web:11378db65528a1a4e0470a",
+
+      measurementId:
+      "G-FMTYL770EJ"
+
     };
 
 
     const app = initializeApp(firebaseConfig);
+
     const auth = getAuth(app);
 
-    const loginForm = document.getElementById("loginForm");
-    const message = document.getElementById("message");
+    const db = getFirestore(app);
 
 
-    loginForm.addEventListener("submit", async (event) => {
 
-      event.preventDefault();
+    const loginTab =
+      document.getElementById("loginTab");
 
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+    const registerTab =
+      document.getElementById("registerTab");
 
-      message.style.color = "#555";
-      message.textContent = "Кіру орындалуда...";
+    const loginForm =
+      document.getElementById("loginForm");
 
-      try {
+    const registerForm =
+      document.getElementById("registerForm");
 
-        await signInWithEmailAndPassword(auth, email, password);
+    const loginMessage =
+      document.getElementById("loginMessage");
 
-        message.style.color = "green";
-        message.textContent = "Сәтті кірдіңіз!";
+    const registerMessage =
+      document.getElementById("registerMessage");
 
-        setTimeout(() => {
-          window.location.href = "index.html";
-        }, 700);
 
-      } catch (error) {
 
-        message.style.color = "red";
+    loginTab.addEventListener("click", () => {
 
-        if (error.code === "auth/invalid-credential") {
-          message.textContent = "Email немесе құпия сөз қате.";
-        } else if (error.code === "auth/invalid-email") {
-          message.textContent = "Email дұрыс жазылмаған.";
-        } else {
-          message.textContent = "Кіру кезінде қате шықты.";
+      loginTab.classList.add("active");
+
+      registerTab.classList.remove("active");
+
+      loginForm.style.display = "block";
+
+      registerForm.style.display = "none";
+
+      loginMessage.textContent = "";
+
+      registerMessage.textContent = "";
+
+    });
+
+
+
+    registerTab.addEventListener("click", () => {
+
+      registerTab.classList.add("active");
+
+      loginTab.classList.remove("active");
+
+      registerForm.style.display = "block";
+
+      loginForm.style.display = "none";
+
+      loginMessage.textContent = "";
+
+      registerMessage.textContent = "";
+
+    });
+
+
+
+    /* КІРУ */
+
+    loginForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+
+        const email =
+          document
+          .getElementById("loginEmail")
+          .value
+          .trim();
+
+
+        const password =
+          document
+          .getElementById("loginPassword")
+          .value;
+
+
+        loginMessage.style.color = "#555";
+
+        loginMessage.textContent =
+          "Кіру орындалуда...";
+
+
+        try {
+
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+          loginMessage.style.color = "green";
+
+          loginMessage.textContent =
+            "Сәтті кірдіңіз!";
+
+
+          setTimeout(() => {
+
+            window.location.href =
+              "index.html";
+
+          }, 700);
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          loginMessage.style.color = "red";
+
+
+          if (
+            error.code ===
+            "auth/invalid-credential"
+          ) {
+
+            loginMessage.textContent =
+              "Email немесе құпия сөз қате.";
+
+          }
+
+          else if (
+            error.code ===
+            "auth/invalid-email"
+          ) {
+
+            loginMessage.textContent =
+              "Email дұрыс жазылмаған.";
+
+          }
+
+          else {
+
+            loginMessage.textContent =
+              "Кіру кезінде қате шықты.";
+
+          }
+
         }
 
       }
+    );
 
-    });
+
+
+    /* ТІРКЕЛУ */
+
+    registerForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+
+        const fullName =
+          document
+          .getElementById("fullName")
+          .value
+          .trim();
+
+
+        const phone =
+          document
+          .getElementById("phone")
+          .value
+          .trim();
+
+
+        const requestedClass =
+          document
+          .getElementById("requestedClass")
+          .value;
+
+
+        const email =
+          document
+          .getElementById("registerEmail")
+          .value
+          .trim();
+
+
+        const password =
+          document
+          .getElementById("registerPassword")
+          .value;
+
+
+        const confirmPassword =
+          document
+          .getElementById("confirmPassword")
+          .value;
+
+
+
+        if (
+          password !== confirmPassword
+        ) {
+
+          registerMessage.style.color =
+            "red";
+
+          registerMessage.textContent =
+            "Құпия сөздер бірдей емес.";
+
+          return;
+
+        }
+
+
+
+        if (
+          password.length < 6
+        ) {
+
+          registerMessage.style.color =
+            "red";
+
+          registerMessage.textContent =
+            "Құпия сөз кемінде 6 таңбадан тұруы керек.";
+
+          return;
+
+        }
+
+
+
+        registerMessage.style.color =
+          "#555";
+
+        registerMessage.textContent =
+          "Тіркелу орындалуда...";
+
+
+        try {
+
+          const userCredential =
+            await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+
+
+          const user =
+            userCredential.user;
+
+
+
+          await setDoc(
+            doc(
+              db,
+              "users",
+              user.uid
+            ),
+            {
+
+              uid: user.uid,
+
+              fullName: fullName,
+
+              phone: phone,
+
+              email: email,
+
+              requestedClass:
+                requestedClass,
+
+              access: false,
+
+              allowedGrades: [],
+
+              createdAt:
+                serverTimestamp()
+
+            }
+          );
+
+
+          registerMessage.style.color =
+            "green";
+
+          registerMessage.innerHTML =
+            "Сәтті тіркелдіңіз!<br>Сұранысыңыз әкімшіге жіберілді.";
+
+
+          setTimeout(() => {
+
+            window.location.href =
+              "index.html";
+
+          }, 1500);
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          registerMessage.style.color =
+            "red";
+
+
+          if (
+            error.code ===
+            "auth/email-already-in-use"
+          ) {
+
+            registerMessage.textContent =
+              "Бұл Email бұрын тіркелген.";
+
+          }
+
+          else if (
+            error.code ===
+            "auth/invalid-email"
+          ) {
+
+            registerMessage.textContent =
+              "Email дұрыс жазылмаған.";
+
+          }
+
+          else if (
+            error.code ===
+            "auth/weak-password"
+          ) {
+
+            registerMessage.textContent =
+              "Құпия сөз тым әлсіз.";
+
+          }
+
+          else {
+
+            registerMessage.textContent =
+              "Тіркелу кезінде қате шықты.";
+
+          }
+
+        }
+
+      }
+    );
 
   </script>
 
