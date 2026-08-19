@@ -245,6 +245,8 @@
       line-height: 1.7;
     }
 
+    /* MODAL */
+
     .modal {
       display: none;
       position: fixed;
@@ -321,6 +323,7 @@
     }
 
     @media (max-width: 600px) {
+
       header {
         padding: 15px;
       }
@@ -347,7 +350,6 @@
 
       .hero {
         padding: 50px 18px;
-        min-height: 380px;
       }
 
       .hero h1 {
@@ -370,6 +372,7 @@
         padding: 22px 10px;
       }
     }
+
   </style>
 </head>
 
@@ -463,6 +466,8 @@
   </div>
 
 
+  <!-- ОҚУШЫ КАБИНЕТІ -->
+
   <div class="student-area">
 
     <h2>👨‍🎓 Оқушы кабинеті</h2>
@@ -478,6 +483,8 @@
   </div>
 
 
+  <!-- БАЙЛАНЫС -->
+
   <div class="contact-area">
 
     <h2>📞 Сабақтарды сатып алу</h2>
@@ -491,16 +498,18 @@
       <a
         class="whatsapp"
         href="https://wa.me/77479376940?text=Сәлеметсіз%20бе!%20Kemenger%20Online%20сабағына%20қолжетімділік%20алғым%20келеді."
-        target="_blank"
-      >
+        target="_blank">
+
         💬 WhatsApp
+
       </a>
 
       <a
         class="call"
-        href="tel:+77479376940"
-      >
+        href="tel:+77479376940">
+
         📞 Қоңырау шалу
+
       </a>
 
     </div>
@@ -509,6 +518,8 @@
 
 </div>
 
+
+<!-- ҚОЛЖЕТІМДІЛІК ТЕРЕЗЕСІ -->
 
 <div class="modal" id="accessModal">
 
@@ -536,23 +547,26 @@
         id="modalWhatsapp"
         class="modal-whatsapp"
         href="#"
-        target="_blank"
-      >
+        target="_blank">
+
         💬 WhatsApp арқылы жазу
+
       </a>
 
       <a
         class="modal-call"
-        href="tel:+77479376940"
-      >
+        href="tel:+77479376940">
+
         📞 +7 747 937 69 40
+
       </a>
 
       <a
         class="modal-login"
-        href="login.html"
-      >
+        href="login.html">
+
         🔐 Логинмен кіру
+
       </a>
 
     </div>
@@ -584,8 +598,28 @@
 
     if (allowedClasses.includes(classNumber)) {
 
-      window.location.href =
-        classNumber + "class.html";
+      /*
+        ҚАЗІР 5-СЫНЫП ФАЙЛЫ БАР.
+        Оның нақты аты: 5-synyp.html
+      */
+
+      if (classNumber === 5) {
+
+        window.location.href = "5-synyp.html";
+
+        return;
+      }
+
+
+      /*
+        6–11 сынып файлдарын кейін жасаған кезде
+        осы жерге олардың сілтемелерін қосамыз.
+      */
+
+      alert(
+        classNumber +
+        "-сыныптың сабақтары әзірге сайтқа қосылмаған."
+      );
 
       return;
     }
@@ -675,7 +709,9 @@
 
 
     if (card) {
+
       card.classList.add("open");
+
     }
 
 
@@ -715,7 +751,9 @@
 
 
       if (card) {
+
         card.classList.remove("open");
+
       }
 
 
@@ -831,7 +869,9 @@
 
       if (!user) {
 
-        currentUserLoggedIn = false;
+        currentUserLoggedIn =
+          false;
+
 
         userArea.innerHTML =
           '<a class="login-top" href="login.html">🔒 Кіру</a>';
@@ -841,7 +881,8 @@
       }
 
 
-      currentUserLoggedIn = true;
+      currentUserLoggedIn =
+        true;
 
 
       let name =
@@ -895,6 +936,10 @@
         ADMIN_EMAIL.toLowerCase();
 
 
+      /*
+        АДМИНГЕ БАРЛЫҚ СЫНЫП АШЫҚ
+      */
+
       if (isAdmin) {
 
         allowedClasses = [
@@ -920,21 +965,18 @@
 
       } else {
 
-        /*
-          Оқушының Firestore құжатында
-          access деген массив болуы керек.
 
-          Мысалы:
+        /*
+          ОҚУШЫҒА ТЕК АДМИН БЕРГЕН
+          СЫНЫПТАР ҒАНА АШЫЛАДЫ.
+
+          Firestore мысалы:
 
           access: [5]
 
           немесе:
 
           access: [5, 6]
-
-          немесе:
-
-          access: [7, 8, 9]
         */
 
 
