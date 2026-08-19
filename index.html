@@ -967,33 +967,37 @@
 
 
         /*
-          ОҚУШЫҒА ТЕК АДМИН БЕРГЕН
+          ОҚУШЫҒА ТЕК АДМИН АШҚАН
           СЫНЫПТАР ҒАНА АШЫЛАДЫ.
 
-          Firestore мысалы:
+          Firestore жүйесі:
 
-          access: [5]
+          grade5: true
+          grade6: false
+          grade7: false
+          ...
+      */
 
-          немесе:
 
-          access: [5, 6]
-        */
-
-
-        if (
-          Array.isArray(
-            userData.access
-          )
+        for (
+          let classNumber = 5;
+          classNumber <= 11;
+          classNumber++
         ) {
 
-          allowedClasses =
-            userData.access
-              .map(Number)
-              .filter(
-                number =>
-                  number >= 5 &&
-                  number <= 11
-              );
+          const field =
+            "grade" + classNumber;
+
+
+          if (
+            userData[field] === true
+          ) {
+
+            allowedClasses.push(
+              classNumber
+            );
+
+          }
 
         }
 
