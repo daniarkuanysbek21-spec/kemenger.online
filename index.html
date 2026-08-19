@@ -48,6 +48,16 @@
       gap: 10px;
     }
 
+    .admin-badge {
+      background: #e53935;
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 4px 7px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+
     .logout-btn {
       background: white;
       color: #173b7a;
@@ -385,7 +395,7 @@
   </div>
 
   <div id="userArea">
-    <a class="login-top" href="login.html">🔒 Кіру</a>
+    <span class="login-top">⏳ Тексерілуде...</span>
   </div>
 
 </header>
@@ -801,7 +811,9 @@
   import {
     getAuth,
     onAuthStateChanged,
-    signOut
+    signOut,
+    setPersistence,
+    browserLocalPersistence
   } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 
@@ -858,6 +870,23 @@
 
   const ADMIN_EMAIL =
     "d.kuanyshbek11@mail.ru";
+
+
+  try {
+
+    await setPersistence(
+      auth,
+      browserLocalPersistence
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Авторизацияны сақтау қатесі:",
+      error
+    );
+
+  }
 
 
   onAuthStateChanged(
@@ -1033,12 +1062,20 @@
       }
 
 
+      const adminBadge =
+        isAdmin
+          ? '<span class="admin-badge">АДМИН</span>'
+          : '';
+
+
       userArea.innerHTML = `
         <div class="user-box">
 
           <span class="login-top">
             👤 ${name}
           </span>
+
+          ${adminBadge}
 
           ${adminButton}
 
