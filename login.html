@@ -212,7 +212,7 @@
 
       <div class="info">
         Тіркелгеннен кейін әкімші сіздің сұранысыңызды көреді.
-        Төлем жасау үшін сіз көрсеткен нөмірге хабарлама жіберіледі (дұрыс нөмірді енгізуді сұраймыз). 
+        Төлем жасау үшін сіз көрсеткен нөмірге хабарлама жіберіледі (дұрыс нөмірді енгізуді сұраймыз).
         Төлем расталған соң қажетті сыныпқа доступ беріледі.
       </div>
 
@@ -642,18 +642,32 @@
 
               uid: user.uid,
 
+              name: fullName,
+
               fullName: fullName,
 
               phone: phone,
 
               email: email,
 
+              role: "student",
+
               requestedClass:
                 requestedClass,
 
-              access: false,
+              grade5: false,
 
-              allowedGrades: [],
+              grade6: false,
+
+              grade7: false,
+
+              grade8: false,
+
+              grade9: false,
+
+              grade10: false,
+
+              grade11: false,
 
               createdAt:
                 serverTimestamp()
@@ -715,10 +729,23 @@
 
           }
 
+          else if (
+            error.code ===
+            "permission-denied" ||
+            error.code ===
+            "firestore/permission-denied"
+          ) {
+
+            registerMessage.textContent =
+              "Тіркелу жасалды, бірақ оқушы мәліметін сақтауға рұқсат жоқ.";
+
+          }
+
           else {
 
             registerMessage.textContent =
-              "Тіркелу кезінде қате шықты.";
+              "Тіркелу кезінде қате шықты: " +
+              (error.code || "Белгісіз қате");
 
           }
 
