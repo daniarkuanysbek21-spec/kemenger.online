@@ -79,40 +79,69 @@
 
     .student h3 {
       margin-top: 0;
+      margin-bottom: 15px;
     }
 
     .student p {
-      margin: 7px 0;
+      margin: 8px 0;
     }
 
     .access-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 15px;
+      margin-top: 16px;
     }
 
     .access-btn {
       border: none;
-      padding: 9px 13px;
-      border-radius: 7px;
+      padding: 11px 17px;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      font-size: 14px;
     }
 
     .closed {
-      background: #e5e7eb;
-      color: #333;
+      background: #173b7a;
+      color: white;
     }
 
     .open {
-      background: #22a559;
+      background: #e74c3c;
       color: white;
+    }
+
+    .access-status {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .status-open {
+      color: #159447;
+    }
+
+    .status-closed {
+      color: #777;
     }
 
     #status {
       padding: 20px;
       text-align: center;
+    }
+
+    @media (max-width: 650px) {
+      header {
+        padding: 15px;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      header h2 {
+        font-size: 18px;
+      }
+
+      main {
+        padding: 0 15px;
+      }
     }
   </style>
 </head>
@@ -120,31 +149,52 @@
 <body>
 
 <header>
+
   <h2>⚙️ Kemenger Online — Админ панель</h2>
 
   <div class="header-buttons">
-    <a class="home" href="index.html">Басты бет</a>
-    <button class="logout" id="logoutBtn">Шығу</button>
+
+    <a class="home" href="index.html">
+      Басты бет
+    </a>
+
+    <button class="logout" id="logoutBtn">
+      Шығу
+    </button>
+
   </div>
+
 </header>
+
 
 <main>
 
   <div class="welcome">
+
     <h2>Оқушыларды басқару</h2>
-    <p>Осы жерден оқушыларға қажетті сыныпқа доступ бере аласыз.</p>
+
+    <p>
+      Оқушы сұраған сыныпқа доступты осы жерден ашып немесе жаба аласыз.
+    </p>
+
   </div>
 
-  <div id="status">Оқушылар жүктелуде...</div>
+  <div id="status">
+    Оқушылар жүктелуде...
+  </div>
 
   <div id="students"></div>
 
 </main>
 
+
 <script type="module">
 
-  import { initializeApp }
+  import {
+    initializeApp
+  }
   from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
 
   import {
     getAuth,
@@ -152,6 +202,7 @@
     signOut
   }
   from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
 
   import {
     getFirestore,
@@ -164,105 +215,287 @@
 
 
   const firebaseConfig = {
-    apiKey: "AIzaSyADJAbETAdQNmwMLzWOZOpZ_6gSmHWVF-0",
-    authDomain: "kemenger-online.firebaseapp.com",
-    projectId: "kemenger-online",
-    storageBucket: "kemenger-online.firebasestorage.app",
-    messagingSenderId: "44270080959",
-    appId: "1:44270080959:web:11378db65528a1a4e0470a",
-    measurementId: "G-FMTYL770EJ"
+
+    apiKey:
+      "AIzaSyADJAbETAdQNmwMLzWOZOpZ_6gSmHWVF-0",
+
+    authDomain:
+      "kemenger-online.firebaseapp.com",
+
+    projectId:
+      "kemenger-online",
+
+    storageBucket:
+      "kemenger-online.firebasestorage.app",
+
+    messagingSenderId:
+      "44270080959",
+
+    appId:
+      "1:44270080959:web:11378db65528a1a4e0470a",
+
+    measurementId:
+      "G-FMTYL770EJ"
+
   };
 
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+  const app =
+    initializeApp(firebaseConfig);
 
-  const ADMIN_EMAIL = "d.kuanyshbek11@mail.ru";
+  const auth =
+    getAuth(app);
 
-  const studentsDiv = document.getElementById("students");
-  const status = document.getElementById("status");
+  const db =
+    getFirestore(app);
 
 
-  onAuthStateChanged(auth, async (user) => {
+  const ADMIN_EMAIL =
+    "d.kuanyshbek11@mail.ru";
 
-    if (!user) {
-      window.location.href = "login.html";
-      return;
+
+  const studentsDiv =
+    document.getElementById("students");
+
+  const status =
+    document.getElementById("status");
+
+
+  onAuthStateChanged(
+    auth,
+    async (user) => {
+
+      if (!user) {
+
+        window.location.href =
+          "login.html";
+
+        return;
+      }
+
+
+      if (
+        !user.email ||
+        user.email.toLowerCase() !==
+        ADMIN_EMAIL.toLowerCase()
+      ) {
+
+        alert(
+          "Бұл бөлімге тек администратор кіре алады."
+        );
+
+        window.location.href =
+          "index.html";
+
+        return;
+      }
+
+
+      await loadStudents();
+
     }
-
-    if (user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
-      alert("Бұл бөлімге тек администратор кіре алады.");
-      window.location.href = "index.html";
-      return;
-    }
-
-    await loadStudents();
-
-  });
+  );
 
 
   async function loadStudents() {
 
     try {
 
-      status.textContent = "Оқушылар жүктелуде...";
+      status.textContent =
+        "Оқушылар жүктелуде...";
 
-      const snapshot = await getDocs(collection(db, "users"));
+
+      const snapshot =
+        await getDocs(
+          collection(db, "users")
+        );
+
 
       studentsDiv.innerHTML = "";
 
+
       if (snapshot.empty) {
-        status.textContent = "Әзірге оқушылар тіркелмеген.";
+
+        status.textContent =
+          "Әзірге оқушылар тіркелмеген.";
+
         return;
       }
 
+
       status.textContent = "";
 
-      snapshot.forEach((studentDoc) => {
 
-        const data = studentDoc.data();
+      let studentCount = 0;
 
-        if (data.role === "admin") return;
 
-        const card = document.createElement("div");
-        card.className = "student";
+      snapshot.forEach(
+        (studentDoc) => {
 
-        const name =
-          data.name ||
-          data.email ||
-          "Оқушы";
+          const data =
+            studentDoc.data();
 
-        card.innerHTML = `
-          <h3>👤 ${escapeHtml(name)}</h3>
 
-          <p>
-            <b>Email:</b>
-            ${escapeHtml(data.email || "Көрсетілмеген")}
-          </p>
+          if (
+            data.role === "admin" ||
+            (
+              data.email &&
+              data.email.toLowerCase() ===
+              ADMIN_EMAIL.toLowerCase()
+            )
+          ) {
 
-          <div class="access-row">
+            return;
+          }
 
-            ${createGradeButton(studentDoc.id, 5, data)}
 
-            ${createGradeButton(studentDoc.id, 6, data)}
+          studentCount++;
 
-            ${createGradeButton(studentDoc.id, 7, data)}
 
-            ${createGradeButton(studentDoc.id, 8, data)}
+          const card =
+            document.createElement("div");
 
-            ${createGradeButton(studentDoc.id, 9, data)}
+          card.className =
+            "student";
 
-            ${createGradeButton(studentDoc.id, 10, data)}
 
-            ${createGradeButton(studentDoc.id, 11, data)}
+          const name =
+            data.name ||
+            data.fullName ||
+            "Оқушы";
 
-          </div>
-        `;
 
-        studentsDiv.appendChild(card);
+          const email =
+            data.email ||
+            "Көрсетілмеген";
 
-      });
+
+          const phone =
+            data.phone ||
+            "Көрсетілмеген";
+
+
+          const requestedClass =
+            data.requestedClass
+              ? String(data.requestedClass)
+              : "";
+
+
+          let accessHtml = "";
+
+
+          if (requestedClass) {
+
+            const field =
+              "grade" + requestedClass;
+
+
+            const hasAccess =
+              data[field] === true;
+
+
+            accessHtml = `
+
+              <p>
+                <b>Доступ сұраған сынып:</b>
+                ${escapeHtml(requestedClass)}-сынып
+              </p>
+
+
+              <div class="access-status ${
+                hasAccess
+                  ? "status-open"
+                  : "status-closed"
+              }">
+
+                ${
+                  hasAccess
+                    ? "✅ Доступ ашық"
+                    : "🔒 Доступ жабық"
+                }
+
+              </div>
+
+
+              <div class="access-row">
+
+                <button
+                  class="access-btn ${
+                    hasAccess
+                      ? "open"
+                      : "closed"
+                  }"
+                  onclick="changeAccess(
+                    '${studentDoc.id}',
+                    '${field}',
+                    ${!hasAccess}
+                  )"
+                >
+
+                  ${
+                    hasAccess
+                      ? "🔒 Доступты ЖАБУ"
+                      : "✅ Доступты АШУ"
+                  }
+
+                </button>
+
+              </div>
+
+            `;
+
+          } else {
+
+            accessHtml = `
+
+              <p>
+                <b>Доступ сұраған сынып:</b>
+                Көрсетілмеген
+              </p>
+
+            `;
+
+          }
+
+
+          card.innerHTML = `
+
+            <h3>
+              👤 ${escapeHtml(name)}
+            </h3>
+
+
+            <p>
+              <b>Email:</b>
+              ${escapeHtml(email)}
+            </p>
+
+
+            <p>
+              <b>Телефон:</b>
+              ${escapeHtml(phone)}
+            </p>
+
+
+            ${accessHtml}
+
+          `;
+
+
+          studentsDiv.appendChild(
+            card
+          );
+
+        }
+      );
+
+
+      if (studentCount === 0) {
+
+        status.textContent =
+          "Әзірге оқушылар тіркелмеген.";
+
+      }
 
     } catch (error) {
 
@@ -276,49 +509,37 @@
   }
 
 
-  function createGradeButton(uid, grade, data) {
-
-    const field = "grade" + grade;
-
-    const hasAccess =
-      data[field] === true;
-
-    return `
-      <button
-        class="access-btn ${hasAccess ? "open" : "closed"}"
-        onclick="changeAccess(
-          '${uid}',
-          '${field}',
-          ${!hasAccess}
-        )"
-      >
-        ${grade}-сынып:
-        ${hasAccess ? "АШЫҚ ✓" : "ЖАБЫҚ"}
-      </button>
-    `;
-
-  }
-
-
   window.changeAccess =
-    async function(uid, field, newValue) {
+    async function(
+      uid,
+      field,
+      newValue
+    ) {
 
       try {
 
         await updateDoc(
-          doc(db, "users", uid),
+          doc(
+            db,
+            "users",
+            uid
+          ),
           {
             [field]: newValue
           }
         );
 
+
         await loadStudents();
+
 
       } catch (error) {
 
         console.error(error);
 
-        alert("Доступты өзгерту кезінде қате шықты.");
+        alert(
+          "Доступты өзгерту кезінде қате шықты."
+        );
 
       }
 
@@ -327,13 +548,17 @@
 
   document
     .getElementById("logoutBtn")
-    .addEventListener("click", async () => {
+    .addEventListener(
+      "click",
+      async () => {
 
-      await signOut(auth);
+        await signOut(auth);
 
-      window.location.href = "login.html";
+        window.location.href =
+          "login.html";
 
-    });
+      }
+    );
 
 
   function escapeHtml(text) {
@@ -341,7 +566,8 @@
     const div =
       document.createElement("div");
 
-    div.textContent = text;
+    div.textContent =
+      String(text);
 
     return div.innerHTML;
 
