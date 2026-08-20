@@ -15,6 +15,11 @@
 
   <link rel="canonical" href="https://kemengeronline.kz/">
 
+  <!-- САЙТ БЕЛГІШЕСІ -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+
   <meta property="og:title" content="Kemenger Online — Онлайн математика мектебі">
   <meta property="og:description" content="5–11 сыныптарға арналған видеосабақтар, математикалық тапсырмалар және тесттер.">
   <meta property="og:url" content="https://kemengeronline.kz/">
@@ -492,7 +497,7 @@
 
   </div>
 
-  <div class="student-area">
+  <div class="student-area" id="studentArea">
     <h2>👨‍🎓 Оқушы кабинеті</h2>
 
     <p>
@@ -566,6 +571,7 @@
       </a>
 
       <a
+        id="modalLogin"
         class="modal-login"
         href="login.html">
         🔐 Логинмен кіру
@@ -622,6 +628,9 @@
     const whatsapp =
       document.getElementById("modalWhatsapp");
 
+    const modalLogin =
+      document.getElementById("modalLogin");
+
     title.innerHTML =
       "🔒 " + className + " жабық";
 
@@ -632,6 +641,10 @@
         " сабақтарын көру үшін алдымен жүйеге кіріңіз. " +
         "Егер қолжетімділік сатып алмаған болсаңыз, WhatsApp арқылы хабарласыңыз.";
 
+      if (modalLogin) {
+        modalLogin.style.display = "block";
+      }
+
     } else {
 
       text.innerHTML =
@@ -639,6 +652,10 @@
         className +
         " сабақтарына қолжетімділік берілмеген. " +
         "Қолжетімділік алу үшін WhatsApp арқылы хабарласыңыз.";
+
+      if (modalLogin) {
+        modalLogin.style.display = "none";
+      }
     }
 
     const message =
@@ -716,6 +733,75 @@
         status.innerHTML =
           "🔒 Қолжетімділік қажет";
       }
+    }
+  }
+
+  function showStudentLoginArea() {
+
+    const studentArea =
+      document.getElementById(
+        "studentArea"
+      );
+
+    studentArea.innerHTML = `
+      <h2>👨‍🎓 Оқушы кабинеті</h2>
+
+      <p>
+        Егер сізде логин мен құпиясөз бар болса, сабақтарға кіріңіз.
+      </p>
+
+      <a class="student-login" href="login.html">
+        🔐 Кіру
+      </a>
+    `;
+  }
+
+  function showMyStudyArea() {
+
+    const studentArea =
+      document.getElementById(
+        "studentArea"
+      );
+
+    const count =
+      allowedClasses.length;
+
+    let openedText = "";
+
+    if (count > 0) {
+
+      openedText =
+        allowedClasses
+          .map(classNumber => classNumber + "-сынып")
+          .join(", ");
+
+      studentArea.innerHTML = `
+        <h2>📚 Менің оқу аймағым</h2>
+
+        <p>
+          Сізге ашылған сыныптар:
+          <strong>${openedText}</strong>
+        </p>
+
+        <p>
+          Жоғарыдағы жасыл белгімен көрсетілген сыныпты таңдап,
+          сабақтарыңызды жалғастыра аласыз.
+        </p>
+      `;
+
+    } else {
+
+      studentArea.innerHTML = `
+        <h2>📚 Менің оқу аймағым</h2>
+
+        <p>
+          Қазіргі уақытта аккаунтыңызға ешбір сынып ашылмаған.
+        </p>
+
+        <p>
+          Қолжетімділік алғаннан кейін сізге ашылған сынып осы жерде көрсетіледі.
+        </p>
+      `;
     }
   }
 
@@ -824,6 +910,8 @@
         userArea.innerHTML =
           '<a class="login-top" href="login.html">🔒 Кіру</a>';
 
+        showStudentLoginArea();
+
         return;
       }
 
@@ -924,6 +1012,8 @@
           }
         );
       }
+
+      showMyStudyArea();
 
       let adminButton = "";
 
