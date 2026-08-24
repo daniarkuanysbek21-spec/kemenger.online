@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>3-сабақ — Натурал сандарды салыстыру. Қос теңсіздік | Kemenger Online</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #173b7a;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #173b7a, #2d65c8);
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      opacity: 0.95;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 30px auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      color: #173b7a;
+      margin-bottom: 15px;
+    }
+
+    .video-box {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 15px;
+      background: #111;
+    }
+
+    .video-box iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    #videoWarning {
+      color: red;
+      font-weight: bold;
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .info {
+      background: #eef5ff;
+      border-left: 5px solid #2d65c8;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 15px 0;
+    }
+
+    .example {
+      background: #fff8dc;
+      border-left: 5px solid #ffcf33;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 15px 0;
+    }
+
+    .question {
+      padding: 22px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .question:last-child {
+      border-bottom: none;
+    }
+
+    .question p {
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      max-width: 430px;
+      padding: 12px;
+      border: 1px solid #ccd4e0;
+      border-radius: 9px;
+      font-size: 16px;
+      background: white;
+    }
+
+    button {
+      background: #ffcf33;
+      color: #172033;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 12px;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: #f2bc00;
+    }
+
+    .result {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .correct {
+      color: #198754;
+    }
+
+    .wrong {
+      color: #dc3545;
+    }
+
+    .test-option {
+      display: block;
+      background: #f7f9fc;
+      border: 1px solid #e1e6ef;
+      border-radius: 10px;
+      padding: 12px;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+
+    .test-option:hover {
+      background: #eef4ff;
+    }
+
+    .test-option input {
+      width: auto;
+      margin-right: 10px;
+    }
+
+    .test-button {
+      width: 100%;
+      background: #173b7a;
+      color: white;
+      font-size: 17px;
+      padding: 15px;
+      margin-top: 25px;
+    }
+
+    .test-button:hover {
+      background: #102d60;
+    }
+
+    #testResult {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      display: none;
+    }
+
+    footer {
+      background: #173b7a;
+      color: white;
+      text-align: center;
+      padding: 22px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 650px) {
+
+      header {
+        padding: 15px 4%;
+      }
+
+      .logo {
+        font-size: 17px;
+      }
+
+      .hero {
+        padding: 35px 15px;
+      }
+
+      .hero h1 {
+        font-size: 25px;
+      }
+
+      .container {
+        width: 94%;
+      }
+
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    📐 KEMENGER ONLINE
+  </div>
+
+  <a class="back" href="5-synyp.html">
+    ← 5-сыныпқа қайту
+  </a>
+
+</header>
+
+
+<section class="hero">
+
+  <h1>📘 3-сабақ</h1>
+
+  <p>
+    Натурал сандарды салыстыру. Қос теңсіздік
+  </p>
+
+</section>
+
+
+<div class="container">
+
+
+  <!-- ===================================================== -->
+  <!-- ВИДЕОСАБАҚ -->
+  <!-- ===================================================== -->
+
+  <div class="card">
+
+    <h2>🎥 Видеосабақ</h2>
+
+    <div id="videoWarning">
+      🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР
+    </div>
+
+    <div class="video-box">
+
+      <iframe
+        id="lessonVideo"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- ҚЫСҚАША АНЫҚТАМА -->
+  <!-- ===================================================== -->
+
+  <div class="card">
+
+    <h2>📖 Қысқаша анықтама</h2>
+
+    <div class="info">
+      Екі натурал санды салыстырғанда
+      <b>&gt;</b>, <b>&lt;</b> және <b>=</b>
+      белгілері қолданылады.
+    </div>
+
+    <div class="example">
+      <b>Мысал:</b><br>
+      9 &lt; 10<br>
+      15 &gt; 7<br>
+      25 = 25
+    </div>
+
+    <div class="info">
+      Координаталық сәуледе кіші сан үлкен санның
+      <b>сол жағында</b>, ал үлкен сан кіші санның
+      <b>оң жағында</b> орналасады.
+    </div>
+
+    <div class="example">
+      Мысалы:<br>
+      3 &lt; 8
+    </div>
+
+    <div class="info">
+      Егер екі натурал санның разрядтар саны әртүрлі болса,
+      разрядтар саны көп сан үлкен болады.
+    </div>
+
+    <div class="example">
+      4576 &gt; 987
+    </div>
+
+    <div class="info">
+      Егер разрядтар саны бірдей болса,
+      сандар ең жоғары разрядтан бастап
+      разрядтары бойынша салыстырылады.
+    </div>
+
+    <div class="example">
+      3524 &lt; 3576
+    </div>
+
+    <div class="info">
+      Үш санды бір уақытта салыстырып жазу
+      <b>қос теңсіздік</b> деп аталады.
+    </div>
+
+    <div class="example">
+      18 &lt; 25 &lt; 40
+    </div>
+
+    <div class="info">
+      <b>1 — ең кіші натурал сан.</b><br>
+      Ең үлкен натурал сан болмайды.
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- 10 ТАПСЫРМА -->
+  <!-- ===================================================== -->
+
+  <div class="card">
+
+    <h2>📝 10 тапсырма</h2>
+
+    <p style="margin-bottom:20px;">
+      Жауабыңды енгізіп, әр тапсырмадан кейін
+      «Тексеру» батырмасын бас.
+    </p>
+
+
+    <!-- 1 -->
+
+    <div class="question">
+
+      <p>
+        1. 36 және 117 сандарын салыстыр.
+        Қай белгі дұрыс?
+      </p>
+
+      <select id="q1">
+
+        <option value="">
+          Жауабын таңда
+        </option>
+
+        <option value="<">
+          36 &lt; 117
+        </option>
+
+        <option value=">">
+          36 &gt; 117
+        </option>
+
+        <option value="=">
+          36 = 117
+        </option>
+
+      </select>
+
+      <br>
+
+      <button onclick="checkSelect('q1','<','r1')">
+        Тексеру
+      </button>
+
+      <div id="r1" class="result"></div>
+
+    </div>
+
+
+    <!-- 2 -->
+
+    <div class="question">
+
+      <p>
+        2. 9513 және 951 сандарын салыстыр.
+      </p>
+
+      <select id="q2">
+
+        <option value="">
+          Жауабын таңда
+        </option>
+
+        <option value="<">
+          9513 &lt; 951
+        </option>
+
+        <option value=">">
+          9513 &gt; 951
+        </option>
+
+        <option value="=">
+          9513 = 951
+        </option>
+
+      </select>
+
+      <br>
+
+      <button onclick="checkSelect('q2','>','r2')">
+        Тексеру
+      </button>
+
+      <div id="r2" class="result"></div>
+
+    </div>
+
+
+    <!-- 3 -->
+
+    <div class="question">
+
+      <p>
+        3. 23 758 және 8 648 сандарын салыстыр.
+      </p>
+
+      <select id="q3">
+
+        <option value="">
+          Жауабын таңда
+        </option>
+
+        <option value="<">
+          23 758 &lt; 8 648
+        </option>
+
+        <option value=">">
+          23 758 &gt; 8 648
+        </option>
+
+        <option value="=">
+          23 758 = 8 648
+        </option>
+
+      </select>
+
+      <br>
+
+      <button onclick="checkSelect('q3','>','r3')">
+        Тексеру
+      </button>
+
+      <div id="r3" class="result"></div>
+
+    </div>
+
+
+    <!-- 4 -->
+
+    <div class="question">
+
+      <p>
+        4. 8463 және 8436 сандарын салыстыр.
+      </p>
+
+      <select id="q4">
+
+        <option value="">
+          Жауабын таңда
+        </option>
+
+        <option value="<">
+          8463 &lt; 8436
+        </option>
+
+        <option value=">">
+          8463 &gt; 8436
+        </option>
+
+        <option value="=">
+          8463 = 8436
+        </option>
+
+      </select>
+
+      <br>
+
+      <button onclick="checkSelect('q4','>','r4')">
+        Тексеру
+      </button>
+
+      <div id="r4" class="result"></div>
+
+    </div>
+
+
+    <!-- 5 -->
+
+    <div class="question">
+
+      <p>
+        5. 64 816 және 64 891 сандарын салыстыр.
+      </p>
+
+      <select id="q5">
+
+        <option value="">
+          Жауабын таңда
+        </option>
+
+        <option value="<">
+          64 816 &lt; 64 891
+        </option>
+
+        <option value=">">
+          64 816 &gt; 64 891
+        </option>
+
+        <option value="=">
+          64 816 = 64 891
+        </option>
+
+      </select>
+
+      <br>
+
+      <button onclick="checkSelect('q5','<','r5')">
+        Тексеру
+      </button>
+
+      <div id="r5" class="result"></div>
+
+    </div>
+
+
+    <!-- 6 -->
+
+    <div class="question">
+
+      <p>
+        6. 157 және 57 сандарын салыстыр.
+      </p>
+
+      <select id="q6">
+
+        <option value="">
+          Жауабын таңда
+        </option>
+
+        <option value="<">
+          157 &lt; 57
+        </option>
+
+        <option value=">">
+          157 &gt; 57
+        </option>
+
+        <option value="=">
+          157 = 57
+        </option>
+
+      </select>
+
+      <br>
+
+      <button onclick="checkSelect('q6','>','r6')">
+        Тексеру
+      </button>
+
+      <div id="r6" class="result"></div>
+
+    </div>
+
+
+    <!-- 7 -->
+
+    <div class="question">
+
+      <p>
+        7. 3993 және 3939 сандарын салыстыр.
+      </p>
+
+      <select id="q7">
+
+        <option value="">
+          Жауабын таңда
+        </option>
+
+        <option value="<">
+          3993 &lt; 3939
+        </option>
+
+        <option value=">">
+          3993 &gt; 3939
+        </option>
+
+        <option value="=">
+          3993 = 3939
+        </option>
+
+      </select>
+
+      <br>
+
+      <button onclick="checkSelect('q7','>','r7')">
+        Тексеру
+      </button>
+
+      <div id="r7" class="result"></div>
+
+    </div>
+
+
+    <!-- 8 -->
+
+    <div class="question">
+
+      <p>
+        8. 205 205 және 202 505 сандарын салыстыр.
+      </p>
+
+      <select id="q8">
+
+        <option value="">
+          Жауабын таңда
+        </option>
+
+        <option value="<">
+          205 205 &lt; 202 505
+        </option>
+
+        <option value=">">
+          205 205 &gt; 202 505
+        </option>
+
+        <option value="=">
+          205 205 = 202 505
+        </option>
+
+      </select>
+
+      <br>
+
+      <button onclick="checkSelect('q8','>','r8')">
+        Тексеру
+      </button>
+
+      <div id="r8" class="result"></div>
+
+    </div>
+
+
+    <!-- 9 -->
+
+    <div class="question">
+
+      <p>
+        9. 7 саны 5-тен үлкен және 10-нан кіші.
+        Дұрыс қос теңсіздікті таңда.
+      </p>
+
+      <select id="q9">
+
+        <option value="">
+          Жауабын таңда
+        </option>
+
+        <option value="5<7<10">
+          5 &lt; 7 &lt; 10
+        </option>
+
+        <option value="7<5<10">
+          7 &lt; 5 &lt; 10
+        </option>
+
+        <option value="10<7<5">
+          10 &lt; 7 &lt; 5
+        </option>
+
+      </select>
+
+      <br>
+
+      <button onclick="checkSelect('q9','5<7<10','r9')">
+        Тексеру
+      </button>
+
+      <div id="r9" class="result"></div>
+
+    </div>
+
+
+    <!-- 10 -->
+
+    <div class="question">
+
+      <p>
+        10. 21 саны 19-дан үлкен және 35-тен кіші.
+        Дұрыс қос теңсіздікті таңда.
+      </p>
+
+      <select id="q10">
+
+        <option value="">
+          Жауабын таңда
+        </option>
+
+        <option value="19<21<35">
+          19 &lt; 21 &lt; 35
+        </option>
+
+        <option value="21<19<35">
+          21 &lt; 19 &lt; 35
+        </option>
+
+        <option value="35<21<19">
+          35 &lt; 21 &lt; 19
+        </option>
+
+      </select>
+
+      <br>
+
+      <button onclick="checkSelect('q10','19<21<35','r10')">
+        Тексеру
+      </button>
+
+      <div id="r10" class="result"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- ТЕСТ -->
+  <!-- ===================================================== -->
+
+  <div class="card">
+
+    <h2>✅ Сабақ бойынша тест</h2>
+
+    <p style="margin-bottom:20px;">
+      Әр сұрақтан бір дұрыс жауапты таңда.
+    </p>
+
+
+    <!-- TEST 1 -->
+
+    <div class="question">
+
+      <p>
+        1. 9 және 10 сандарын дұрыс салыстыр.
+      </p>
+
+      <label class="test-option">
+        <input type="radio" name="t1" value="a">
+        9 &gt; 10
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t1" value="b">
+        9 &lt; 10
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t1" value="c">
+        9 = 10
+      </label>
+
+    </div>
+
+
+    <!-- TEST 2 -->
+
+    <div class="question">
+
+      <p>
+        2. 15 және 7 сандарын дұрыс салыстыр.
+      </p>
+
+      <label class="test-option">
+        <input type="radio" name="t2" value="a">
+        15 &lt; 7
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t2" value="b">
+        15 = 7
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t2" value="c">
+        15 &gt; 7
+      </label>
+
+    </div>
+
+
+    <!-- TEST 3 -->
+
+    <div class="question">
+
+      <p>
+        3. Координаталық сәуледе кіші сан үлкен санның
+        қай жағында орналасады?
+      </p>
+
+      <label class="test-option">
+        <input type="radio" name="t3" value="a">
+        Сол жағында
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t3" value="b">
+        Оң жағында
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t3" value="c">
+        Бір нүктеде
+      </label>
+
+    </div>
+
+
+    <!-- TEST 4 -->
+
+    <div class="question">
+
+      <p>
+        4. Қай салыстыру дұрыс?
+      </p>
+
+      <label class="test-option">
+        <input type="radio" name="t4" value="a">
+        4576 &lt; 987
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t4" value="b">
+        4576 &gt; 987
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t4" value="c">
+        4576 = 987
+      </label>
+
+    </div>
+
+
+    <!-- TEST 5 -->
+
+    <div class="question">
+
+      <p>
+        5. 3524 және 3576 сандарын салыстыр.
+      </p>
+
+      <label class="test-option">
+        <input type="radio" name="t5" value="a">
+        3524 &gt; 3576
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t5" value="b">
+        3524 = 3576
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t5" value="c">
+        3524 &lt; 3576
+      </label>
+
+    </div>
+
+
+    <!-- TEST 6 -->
+
+    <div class="question">
+
+      <p>
+        6. Қайсысы ең кіші натурал сан?
+      </p>
+
+      <label class="test-option">
+        <input type="radio" name="t6" value="a">
+        0
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t6" value="b">
+        1
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t6" value="c">
+        10
+      </label>
+
+    </div>
+
+
+    <!-- TEST 7 -->
+
+    <div class="question">
+
+      <p>
+        7. Ең үлкен натурал сан бар ма?
+      </p>
+
+      <label class="test-option">
+        <input type="radio" name="t7" value="a">
+        Иә, бар
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t7" value="b">
+        Жоқ, болмайды
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t7" value="c">
+        1 000 000
+      </label>
+
+    </div>
+
+
+    <!-- TEST 8 -->
+
+    <div class="question">
+
+      <p>
+        8. 18, 25 және 40 сандарының дұрыс қос теңсіздігін таңда.
+      </p>
+
+      <label class="test-option">
+        <input type="radio" name="t8" value="a">
+        18 &lt; 25 &lt; 40
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t8" value="b">
+        40 &lt; 25 &lt; 18
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t8" value="c">
+        25 &lt; 18 &lt; 40
+      </label>
+
+    </div>
+
+
+    <!-- TEST 9 -->
+
+    <div class="question">
+
+      <p>
+        9. 7816 және 7846 сандарын салыстыр.
+      </p>
+
+      <label class="test-option">
+        <input type="radio" name="t9" value="a">
+        7816 &gt; 7846
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t9" value="b">
+        7816 &lt; 7846
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t9" value="c">
+        7816 = 7846
+      </label>
+
+    </div>
+
+
+    <!-- TEST 10 -->
+
+    <div class="question">
+
+      <p>
+        10. 3452 және 3721 сандарын салыстыр.
+      </p>
+
+      <label class="test-option">
+        <input type="radio" name="t10" value="a">
+        3452 &gt; 3721
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t10" value="b">
+        3452 = 3721
+      </label>
+
+      <label class="test-option">
+        <input type="radio" name="t10" value="c">
+        3452 &lt; 3721
+      </label>
+
+    </div>
+
+
+    <button
+      class="test-button"
+      onclick="checkTest()">
+
+      Тестті аяқтау
+
+    </button>
+
+
+    <div id="testResult"></div>
+
+  </div>
+
+</div>
+
+
+<footer>
+  © Kemenger Online
+</footer>
+
+
+<script>
+
+/* =========================================================
+   YOUTUBE СІЛТЕМЕСІ
+
+   ТӨМЕНДЕГІ ҚЫЗЫЛ ЖАЗУДЫ ӨШІРІП,
+   ОРНЫНА YOUTUBE ВИДЕОСЫНЫҢ СІЛТЕМЕСІН ҚОЯСЫҢ.
+
+   МЫСАЛЫ:
+
+   const youtubeLink =
+   "https://youtu.be/abcdefghijk";
+
+========================================================= */
+
+const youtubeLink = "СІЛТЕМЕ ҚОЯТЫН ЖЕР";
+
+
+function getYoutubeId(url) {
+
+  if (!url || url === "СІЛТЕМЕ ҚОЯТЫН ЖЕР") {
+    return "";
+  }
+
+
+  let videoId = "";
+
+
+  if (url.includes("youtu.be/")) {
+
+    videoId = url
+      .split("youtu.be/")[1]
+      .split("?")[0];
+
+  }
+
+  else if (url.includes("youtube.com/watch?v=")) {
+
+    videoId = url
+      .split("v=")[1]
+      .split("&")[0];
+
+  }
+
+  else if (url.includes("youtube.com/shorts/")) {
+
+    videoId = url
+      .split("shorts/")[1]
+      .split("?")[0];
+
+  }
+
+  else if (url.includes("youtube.com/embed/")) {
+
+    videoId = url
+      .split("embed/")[1]
+      .split("?")[0];
+
+  }
+
+
+  return videoId;
+
+}
+
+
+const videoId = getYoutubeId(youtubeLink);
+
+
+if (videoId) {
+
+  document.getElementById("lessonVideo").src =
+    "https://www.youtube.com/embed/" + videoId;
+
+  document.getElementById("videoWarning").style.display =
+    "none";
+
+}
+
+
+/* =========================================================
+   ТАПСЫРМАЛАРДЫ ТЕКСЕРУ
+========================================================= */
+
+function checkSelect(selectId, correctAnswer, resultId) {
+
+  const answer =
+    document.getElementById(selectId).value;
+
+
+  const result =
+    document.getElementById(resultId);
+
+
+  if (answer === correctAnswer) {
+
+    result.innerHTML =
+      "✅ Дұрыс!";
+
+    result.className =
+      "result correct";
+
+  }
+
+  else {
+
+    result.innerHTML =
+      "❌ Қате. Қайта байқап көр.";
+
+    result.className =
+      "result wrong";
+
+  }
+
+}
+
+
+/* =========================================================
+   ТЕСТТІ ТЕКСЕРУ
+========================================================= */
+
+function checkTest() {
+
+  const correctAnswers = {
+
+    t1: "b",
+    t2: "c",
+    t3: "a",
+    t4: "b",
+    t5: "c",
+    t6: "b",
+    t7: "b",
+    t8: "a",
+    t9: "b",
+    t10: "c"
+
+  };
+
+
+  let score = 0;
+
+
+  for (let key in correctAnswers) {
+
+    const selected =
+      document.querySelector(
+        'input[name="' + key + '"]:checked'
+      );
+
+
+    if (
+      selected &&
+      selected.value === correctAnswers[key]
+    ) {
+
+      score++;
+
+    }
+
+  }
+
+
+  const result =
+    document.getElementById("testResult");
+
+
+  result.style.display = "block";
+
+
+  if (score >= 9) {
+
+    result.style.background = "#d1e7dd";
+
+    result.style.color = "#0f5132";
+
+    result.innerHTML =
+      "🎉 Өте жақсы! Нәтижең: " +
+      score +
+      " / 10";
+
+  }
+
+  else if (score >= 7) {
+
+    result.style.background = "#fff3cd";
+
+    result.style.color = "#664d03";
+
+    result.innerHTML =
+      "👍 Жақсы! Нәтижең: " +
+      score +
+      " / 10";
+
+  }
+
+  else {
+
+    result.style.background = "#f8d7da";
+
+    result.style.color = "#842029";
+
+    result.innerHTML =
+      "📚 Тағы бір қайталап шық. Нәтижең: " +
+      score +
+      " / 10";
+
+  }
+
+
+  result.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+
+}
+
+</script>
+
+</body>
+</html>
