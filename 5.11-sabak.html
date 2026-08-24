@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>11-сабақ — Формулалар. Формулалар бойынша есептеу | Kemenger Online</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #173b7a;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #173b7a, #2d65c8);
+      color: white;
+      padding: 55px 7%;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 18px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+    .section {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    }
+
+    .section h2 {
+      margin-bottom: 15px;
+    }
+
+    .video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111827;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 55px;
+      overflow: hidden;
+    }
+
+    .video iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .button {
+      display: inline-block;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    .task {
+      background: #f7f9fc;
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    input[type="number"] {
+      padding: 11px;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #ccd3df;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .result {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    #total {
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #finalResult {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #eef4ff;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .start-test-area {
+      text-align: center;
+      margin-top: 30px;
+      padding: 25px;
+      background: #eef4ff;
+      border-radius: 14px;
+    }
+
+    .start-test-area p {
+      margin-bottom: 5px;
+      font-size: 17px;
+    }
+
+    .start-test-button {
+      display: inline-block;
+      background: #173b7a;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.2s;
+    }
+
+    .start-test-button:hover {
+      background: #2d65c8;
+      transform: translateY(-1px);
+    }
+
+    #testSection {
+      display: none;
+    }
+
+    .test-question {
+      background: #f7f9fc;
+      padding: 20px;
+      border-radius: 14px;
+      margin-top: 18px;
+      border: 1px solid #e1e6ef;
+    }
+
+    .test-question h3 {
+      margin-bottom: 15px;
+      line-height: 1.5;
+      font-size: 17px;
+    }
+
+    .option {
+      display: block;
+      background: white;
+      border: 1px solid #ccd3df;
+      padding: 14px;
+      border-radius: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background: #eef4ff;
+      border-color: #2d65c8;
+    }
+
+    .option input[type="radio"] {
+      width: auto;
+      margin: 0 8px 0 0;
+      cursor: pointer;
+    }
+
+    .test-check {
+      margin-top: 25px;
+      background: #173b7a;
+      color: white;
+      padding: 14px 25px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .test-check:hover {
+      background: #2d65c8;
+    }
+
+    #testResult {
+      display: none;
+      margin-top: 25px;
+      padding: 25px;
+      border-radius: 14px;
+      background: #eef4ff;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #retryButton {
+      display: none;
+      margin: 20px auto 0;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .correct {
+      background: #dff6e5 !important;
+      border-color: #35a853 !important;
+    }
+
+    .wrong {
+      background: #ffe2e2 !important;
+      border-color: #e53935 !important;
+    }
+
+    footer {
+      background: #14284e;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 15px;
+      }
+
+      .logo {
+        font-size: 17px;
+      }
+
+      .hero {
+        padding: 40px 20px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .container {
+        padding: 20px 12px;
+      }
+
+      .section {
+        padding: 18px;
+      }
+
+      .test-question {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">📐 KEMENGER ONLINE</div>
+  <a class="back" href="5-synyp.html">← 5-сынып</a>
+</header>
+
+<section class="hero">
+  <h1>11-сабақ. Формулалар. Формулалар бойынша есептеу</h1>
+  <p>5-сынып • Математика</p>
+</section>
+
+<div class="container">
+
+  <!-- ВИДЕО -->
+
+  <div class="section">
+
+    <h2>🎥 Видеосабақ</h2>
+
+    <div class="video">
+
+      <!--
+      🔴🔴🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР 🔴🔴🔴
+
+      Төмендегі:
+      🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР 🔴
+      деген жазуды өшіріп,
+      орнына YouTube EMBED сілтемесін қой.
+      -->
+
+      <iframe
+        src="🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР 🔴"
+        title="Kemenger Online видеосабақ"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+
+    </div>
+
+    <p style="margin-top:15px;">
+      Видеосабақты көріп, тақырыпты меңгеріп ал.
+    </p>
+
+  </div>
+
+
+  <!-- ТАҚЫРЫПТЫҚ АНЫҚТАМА -->
+
+  <div class="section">
+
+    <h2>📚 Тақырыптық анықтама</h2>
+
+    <p style="margin-bottom:15px;">
+      Математикада шамалардың арасындағы байланысты әріптер арқылы
+      қысқаша жазуға болады. Осындай математикалық ережені
+      <b>формула</b> деп атаймыз. Формуланың көмегімен белгілі шамалардың
+      мәндерін қойып, белгісіз шаманы есептеуге болады.
+    </p>
+
+    <p style="margin-bottom:15px;">
+      Тік төртбұрыштың периметрі оның барлық қабырғаларының
+      ұзындықтарының қосындысына тең. Егер ұзындығы <b>a</b>,
+      ені <b>b</b> болса:
+      <b>P = 2(a + b)</b>.
+      Ал квадраттың барлық қабырғалары тең болғандықтан,
+      оның периметрінің формуласы:
+      <b>P = 4a</b>.
+    </p>
+
+    <p style="margin-bottom:15px; padding:15px; background:#eef4ff; border-radius:10px;">
+      <b>Негізгі формулалар:</b><br><br>
+      Тік төртбұрыштың периметрі: <b>P = 2(a + b)</b><br>
+      Квадраттың периметрі: <b>P = 4a</b><br>
+      Тік төртбұрыштың ауданы: <b>S = ab</b><br>
+      Квадраттың ауданы: <b>S = a²</b>
+    </p>
+
+    <p style="margin-bottom:15px;">
+      Қозғалыс есептерінде жүрген жол жылдамдық пен уақыттың
+      көбейтіндісіне тең:
+      <b>s = v · t</b>.
+      Мұндағы <b>s</b> — жол, <b>v</b> — жылдамдық,
+      <b>t</b> — уақыт.
+      Осы формуладан жылдамдықты
+      <b>v = s : t</b>, ал уақытты
+      <b>t = s : v</b> формулалары арқылы табуға болады.
+    </p>
+
+    <p style="margin-bottom:15px;">
+      Заттың жалпы құнын табу үшін бір заттың бағасын оның санына
+      көбейтеміз:
+      <b>C = a · n</b>.
+      Мұндағы <b>C</b> — жалпы құн, <b>a</b> — бір заттың бағасы,
+      <b>n</b> — зат саны.
+    </p>
+
+    <p>
+      Тік бұрышты параллелепипедтің көлемі оның ұзындығы, ені және
+      биіктігінің көбейтіндісіне тең:
+      <b>V = abc</b>.
+      Ал кубтың барлық қырлары тең болғандықтан,
+      оның көлемі <b>V = a³</b> формуласы арқылы есептеледі.
+      Формула бойынша есептегенде барлық шамалар бірдей өлшем
+      бірлігіне келтірілуі керек.
+    </p>
+
+  </div>
+
+
+  <!-- 10 ТАПСЫРМА -->
+
+  <div class="section">
+
+    <h2>📝 10 тапсырма</h2>
+
+    <p style="margin-bottom:20px;">
+      Формуланы қолданып, жауабын енгізіп, «Тексеру» батырмасын бас.
+    </p>
+
+
+    <div class="task">
+
+      <b>
+        1. Тік төртбұрыштың ұзындығы 9 см, ені 6 см.
+        Периметрін тап.
+      </b>
+
+      <input id="q1" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(1, 30)">
+        Тексеру
+      </button>
+
+      <div id="r1" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        2. Қабырғасы 8 см квадраттың периметрін тап.
+      </b>
+
+      <input id="q2" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(2, 32)">
+        Тексеру
+      </button>
+
+      <div id="r2" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        3. Тік төртбұрыштың ұзындығы 12 см, ені 7 см.
+        Ауданын тап.
+      </b>
+
+      <input id="q3" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(3, 84)">
+        Тексеру
+      </button>
+
+      <div id="r3" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        4. Қабырғасы 11 см квадраттың ауданын тап.
+      </b>
+
+      <input id="q4" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(4, 121)">
+        Тексеру
+      </button>
+
+      <div id="r4" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        5. Автокөлік 75 км/сағ жылдамдықпен 4 сағат жүрді.
+        Жүрген жолын тап.
+      </b>
+
+      <input id="q5" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(5, 300)">
+        Тексеру
+      </button>
+
+      <div id="r5" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        6. Турист 180 км жолды 3 сағатта жүріп өтті.
+        Оның жылдамдығын тап.
+      </b>
+
+      <input id="q6" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(6, 60)">
+        Тексеру
+      </button>
+
+      <div id="r6" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        7. Бір дәптердің бағасы 250 теңге.
+        Осындай 6 дәптердің жалпы құнын тап.
+      </b>
+
+      <input id="q7" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(7, 1500)">
+        Тексеру
+      </button>
+
+      <div id="r7" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        8. Тік бұрышты параллелепипедтің ұзындығы 8 см,
+        ені 5 см, биіктігі 4 см. Көлемін тап.
+      </b>
+
+      <input id="q8" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(8, 160)">
+        Тексеру
+      </button>
+
+      <div id="r8" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        9. Қыры 6 см болатын кубтың көлемін тап.
+      </b>
+
+      <input id="q9" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(9, 216)">
+        Тексеру
+      </button>
+
+      <div id="r9" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        10. Автобус 65 км/сағ жылдамдықпен 325 км жол жүрді.
+        Жолға неше сағат жұмсады?
+      </b>
+
+      <input id="q10" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(10, 5)">
+        Тексеру
+      </button>
+
+      <div id="r10" class="result"></div>
+
+    </div>
+
+
+    <div id="total">
+      Нәтиже: 0 / 10
+    </div>
+
+    <div id="finalResult"></div>
+
+
+    <!-- ТЕСТТІ БАСТАУ -->
+
+    <div class="start-test-area">
+
+      <p>
+        🎯 10 тапсырманы орындап болдың ба?
+      </p>
+
+      <p>
+        Енді біліміңді тест арқылы тексер!
+      </p>
+
+      <button class="start-test-button" onclick="startTest()">
+        📝 Тестті бастау
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       ТЕСТ БӨЛІМІ
+  ========================= -->
+
+  <div class="section" id="testSection">
+
+    <h2>✅ Формулалар. Формулалар бойынша есептеу — тест</h2>
+
+    <p style="margin-bottom:20px;">
+      Әр сұрақтың бір ғана дұрыс жауабы бар.
+      Барлық 10 сұраққа жауап бер.
+    </p>
+
+
+    <!-- 1 -->
+
+    <div class="test-question">
+
+      <h3>
+        1. Тік төртбұрыштың периметрінің формуласы қайсы?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t1" value="A">
+        A) P = 2(a + b)
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t1" value="B">
+        B) P = ab
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t1" value="C">
+        C) P = a²
+      </label>
+
+    </div>
+
+
+    <!-- 2 -->
+
+    <div class="test-question">
+
+      <h3>
+        2. Қабырғасы 7 см квадраттың периметрін тап.
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t2" value="A">
+        A) 14 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t2" value="B">
+        B) 28 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t2" value="C">
+        C) 49 см
+      </label>
+
+    </div>
+
+
+    <!-- 3 -->
+
+    <div class="test-question">
+
+      <h3>
+        3. Тік төртбұрыштың ауданының формуласы қайсы?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t3" value="A">
+        A) S = a + b
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t3" value="B">
+        B) S = ab
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t3" value="C">
+        C) S = 2(a + b)
+      </label>
+
+    </div>
+
+
+    <!-- 4 -->
+
+    <div class="test-question">
+
+      <h3>
+        4. Ұзындығы 10 см, ені 6 см тік төртбұрыштың ауданын тап.
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t4" value="A">
+        A) 32 см²
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t4" value="B">
+        B) 60 см²
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t4" value="C">
+        C) 16 см²
+      </label>
+
+    </div>
+
+
+    <!-- 5 -->
+
+    <div class="test-question">
+
+      <h3>
+        5. Жолдың формуласы қайсы?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t5" value="A">
+        A) s = v · t
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t5" value="B">
+        B) s = v : t
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t5" value="C">
+        C) s = t : v
+      </label>
+
+    </div>
+
+
+    <!-- 6 -->
+
+    <div class="test-question">
+
+      <h3>
+        6. 80 км/сағ жылдамдықпен 3 сағат жүрген көлік неше км жол жүреді?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t6" value="A">
+        A) 240 км
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t6" value="B">
+        B) 83 км
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t6" value="C">
+        C) 160 км
+      </label>
+
+    </div>
+
+
+    <!-- 7 -->
+
+    <div class="test-question">
+
+      <h3>
+        7. Заттың жалпы құнын табу формуласы қайсы?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t7" value="A">
+        A) C = a + n
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t7" value="B">
+        B) C = a · n
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t7" value="C">
+        C) C = a : n
+      </label>
+
+    </div>
+
+
+    <!-- 8 -->
+
+    <div class="test-question">
+
+      <h3>
+        8. Бір қалам 180 теңге тұрса, 5 қаламның құны қанша?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t8" value="A">
+        A) 900 теңге
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t8" value="B">
+        B) 185 теңге
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t8" value="C">
+        C) 36 теңге
+      </label>
+
+    </div>
+
+
+    <!-- 9 -->
+
+    <div class="test-question">
+
+      <h3>
+        9. Тік бұрышты параллелепипедтің көлемінің формуласы қайсы?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t9" value="A">
+        A) V = a + b + c
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t9" value="B">
+        B) V = abc
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t9" value="C">
+        C) V = 2(a + b)
+      </label>
+
+    </div>
+
+
+    <!-- 10 -->
+
+    <div class="test-question">
+
+      <h3>
+        10. Қыры 5 см кубтың көлемін тап.
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t10" value="A">
+        A) 25 см³
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t10" value="B">
+        B) 125 см³
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t10" value="C">
+        C) 20 см³
+      </label>
+
+    </div>
+
+
+    <button class="test-check" onclick="finishTest()">
+      ✅ Тестті аяқтау
+    </button>
+
+    <div id="testResult"></div>
+
+    <button id="retryButton" onclick="retryTest()">
+      🔄 Тестті қайта тапсыру
+    </button>
+
+  </div>
+
+</div>
+
+
+<footer>
+  ©️ 2026 KEMENGER ONLINE
+</footer>
+
+
+<script>
+
+  /* =========================
+     10 ТАПСЫРМАНЫ ТЕКСЕРУ
+  ========================= */
+
+  let score = 0;
+  let answered = {};
+
+  function check(number, correctAnswer) {
+
+    const input = document.getElementById("q" + number);
+    const result = document.getElementById("r" + number);
+
+    if (answered[number]) {
+      return;
+    }
+
+    if (input.value === "") {
+
+      result.innerHTML = "⚠️ Алдымен жауапты енгіз!";
+      result.style.color = "orange";
+
+      return;
+    }
+
+    const answer = Number(input.value);
+
+    if (answer === correctAnswer) {
+
+      result.innerHTML = "✅ Дұрыс!";
+      result.style.color = "green";
+
+      score++;
+
+      answered[number] = true;
+
+      input.disabled = true;
+
+    } else {
+
+      result.innerHTML = "❌ Қате. Қайта байқап көр.";
+      result.style.color = "red";
+
+    }
+
+    document.getElementById("total").innerHTML =
+      "Нәтиже: " + score + " / 10";
+
+
+    if (score === 10) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🏆 Керемет! Барлық 10 тапсырманы дұрыс орындадың!";
+
+    } else if (score >= 8) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🌟 Өте жақсы! Нәтижең: " + score + " / 10";
+
+    } else if (score >= 5) {
+
+      document.getElementById("finalResult").innerHTML =
+        "👍 Жақсы! Нәтижең: " + score + " / 10";
+
+    } else if (score > 0) {
+
+      document.getElementById("finalResult").innerHTML =
+        "📚 Талпынысың жақсы! Сабақты тағы қайталап көр.";
+
+    } else {
+
+      document.getElementById("finalResult").innerHTML = "";
+
+    }
+
+  }
+
+
+  /* =========================
+     ТЕСТТІ БАСТАУ
+  ========================= */
+
+  function startTest() {
+
+    const testSection =
+      document.getElementById("testSection");
+
+    testSection.style.display = "block";
+
+    testSection.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =========================
+     ТЕСТ ЖАУАПТАРЫ
+  ========================= */
+
+  const correctAnswers = {
+
+    t1: "A",
+
+    t2: "B",
+
+    t3: "B",
+
+    t4: "B",
+
+    t5: "A",
+
+    t6: "A",
+
+    t7: "B",
+
+    t8: "A",
+
+    t9: "B",
+
+    t10: "B"
+
+  };
+
+
+  /* =========================
+     ТЕСТТІ АЯҚТАУ
+  ========================= */
+
+  function finishTest() {
+
+    let testScore = 0;
+
+    let answeredCount = 0;
+
+
+    for (let i = 1; i <= 10; i++) {
+
+      const questionName = "t" + i;
+
+      const selected =
+        document.querySelector(
+          'input[name="' +
+          questionName +
+          '"]:checked'
+        );
+
+
+      if (selected) {
+
+        answeredCount++;
+
+
+        if (
+          selected.value ===
+          correctAnswers[questionName]
+        ) {
+
+          testScore++;
+
+        }
+
+      }
+
+    }
+
+
+    const result =
+      document.getElementById("testResult");
+
+
+    if (answeredCount < 10) {
+
+      result.style.display = "block";
+
+      result.innerHTML =
+        "⚠️ Барлық сұраққа жауап бер!<br><br>" +
+        "Жауап берілгені: " +
+        answeredCount +
+        " / 10";
+
+      return;
+
+    }
+
+
+    const percent = testScore * 10;
+
+
+    result.style.display = "block";
+
+
+    if (testScore === 10) {
+
+      result.innerHTML =
+        "🏆 КЕРЕМЕТ!<br><br>" +
+        "Нәтижең: 10 / 10<br>" +
+        "100% — Өте жоғары нәтиже!";
+
+    }
+
+    else if (testScore >= 8) {
+
+      result.innerHTML =
+        "🌟 ӨТЕ ЖАҚСЫ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тақырыпты жақсы меңгердің!";
+
+    }
+
+    else if (testScore >= 5) {
+
+      result.innerHTML =
+        "👍 ЖАҚСЫ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тағы біраз жаттығу қажет.";
+
+    }
+
+    else {
+
+      result.innerHTML =
+        "📚 ҚАЙТА ҚАРАП ШЫҚ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Сабақ материалын қайталап көр.";
+
+    }
+
+
+    document.getElementById(
+      "retryButton"
+    ).style.display = "block";
+
+
+    /* ДҰРЫС / ҚАТЕ ЖАУАПТАР */
+
+    for (let i = 1; i <= 10; i++) {
+
+      const questionName = "t" + i;
+
+
+      const selected =
+        document.querySelector(
+          'input[name="' +
+          questionName +
+          '"]:checked'
+        );
+
+
+      const options =
+        document.querySelectorAll(
+          'input[name="' +
+          questionName +
+          '"]'
+        );
+
+
+      options.forEach(function(option) {
+
+        const label =
+          option.parentElement;
+
+
+        if (
+          option.value ===
+          correctAnswers[questionName]
+        ) {
+
+          label.classList.add(
+            "correct"
+          );
+
+        }
+
+
+        if (
+          selected &&
+          option.value === selected.value &&
+          option.value !==
+          correctAnswers[questionName]
+        ) {
+
+          label.classList.add(
+            "wrong"
+          );
+
+        }
+
+
+        option.disabled = true;
+
+      });
+
+    }
+
+
+    document.querySelector(
+      ".test-check"
+    ).disabled = true;
+
+
+    document.querySelector(
+      ".test-check"
+    ).style.opacity = "0.5";
+
+  }
+
+
+  /* =========================
+     ҚАЙТА ТАПСЫРУ
+  ========================= */
+
+  function retryTest() {
+
+    for (let i = 1; i <= 10; i++) {
+
+      const options =
+        document.querySelectorAll(
+          'input[name="t' + i + '"]'
+        );
+
+
+      options.forEach(function(option) {
+
+        option.checked = false;
+
+        option.disabled = false;
+
+
+        option.parentElement.classList.remove(
+          "correct"
+        );
+
+
+        option.parentElement.classList.remove(
+          "wrong"
+        );
+
+      });
+
+    }
+
+
+    document.getElementById(
+      "testResult"
+    ).style.display = "none";
+
+
+    document.getElementById(
+      "retryButton"
+    ).style.display = "none";
+
+
+    const button =
+      document.querySelector(
+        ".test-check"
+      );
+
+
+    button.disabled = false;
+
+    button.style.opacity = "1";
+
+  }
+
+</script>
+
+</body>
+</html>
