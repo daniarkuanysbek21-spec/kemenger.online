@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>15-сабақ — Бөлінгіштіктің негізгі қасиеттері | Kemenger Online</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #173b7a;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #173b7a, #2d65c8);
+      color: white;
+      padding: 55px 7%;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 18px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+    .section {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    }
+
+    .section h2 {
+      margin-bottom: 15px;
+    }
+
+    .video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111827;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 55px;
+      overflow: hidden;
+    }
+
+    .video iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .button {
+      display: inline-block;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    .task {
+      background: #f7f9fc;
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    input[type="number"] {
+      padding: 11px;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #ccd3df;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .result {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    #total {
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #finalResult {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #eef4ff;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .start-test-area {
+      text-align: center;
+      margin-top: 30px;
+      padding: 25px;
+      background: #eef4ff;
+      border-radius: 14px;
+    }
+
+    .start-test-area p {
+      margin-bottom: 5px;
+      font-size: 17px;
+    }
+
+    .start-test-button {
+      display: inline-block;
+      background: #173b7a;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.2s;
+    }
+
+    .start-test-button:hover {
+      background: #2d65c8;
+      transform: translateY(-1px);
+    }
+
+    #testSection {
+      display: none;
+    }
+
+    .test-question {
+      background: #f7f9fc;
+      padding: 20px;
+      border-radius: 14px;
+      margin-top: 18px;
+      border: 1px solid #e1e6ef;
+    }
+
+    .test-question h3 {
+      margin-bottom: 15px;
+      line-height: 1.5;
+      font-size: 17px;
+    }
+
+    .option {
+      display: block;
+      background: white;
+      border: 1px solid #ccd3df;
+      padding: 14px;
+      border-radius: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background: #eef4ff;
+      border-color: #2d65c8;
+    }
+
+    .option input[type="radio"] {
+      width: auto;
+      margin: 0 8px 0 0;
+      cursor: pointer;
+    }
+
+    .test-check {
+      margin-top: 25px;
+      background: #173b7a;
+      color: white;
+      padding: 14px 25px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .test-check:hover {
+      background: #2d65c8;
+    }
+
+    #testResult {
+      display: none;
+      margin-top: 25px;
+      padding: 25px;
+      border-radius: 14px;
+      background: #eef4ff;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #retryButton {
+      display: none;
+      margin: 20px auto 0;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .correct {
+      background: #dff6e5 !important;
+      border-color: #35a853 !important;
+    }
+
+    .wrong {
+      background: #ffe2e2 !important;
+      border-color: #e53935 !important;
+    }
+
+    footer {
+      background: #14284e;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 15px;
+      }
+
+      .logo {
+        font-size: 17px;
+      }
+
+      .hero {
+        padding: 40px 20px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .container {
+        padding: 20px 12px;
+      }
+
+      .section {
+        padding: 18px;
+      }
+
+      .test-question {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">📐 KEMENGER ONLINE</div>
+  <a class="back" href="5-synyp.html">← 5-сынып</a>
+</header>
+
+<section class="hero">
+  <h1>15-сабақ. Бөлінгіштіктің негізгі қасиеттері</h1>
+  <p>5-сынып • Математика</p>
+</section>
+
+<div class="container">
+
+  <!-- ВИДЕО -->
+
+  <div class="section">
+
+    <h2>🎥 Видеосабақ</h2>
+
+    <div class="video">
+
+      <!--
+      🔴🔴🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР 🔴🔴🔴
+
+      Төмендегі:
+      🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР 🔴
+      деген жазуды өшіріп,
+      орнына YouTube EMBED сілтемесін қой.
+      -->
+
+      <iframe
+        src="🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР 🔴"
+        title="Kemenger Online видеосабақ"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+
+    </div>
+
+    <p style="margin-top:15px;">
+      Видеосабақты көріп, тақырыпты меңгеріп ал.
+    </p>
+
+  </div>
+
+
+  <!-- ТАҚЫРЫПТЫҚ АНЫҚТАМА -->
+
+  <div class="section">
+
+    <h2>📚 Тақырыптық анықтама</h2>
+
+    <p style="margin-bottom:15px;">
+      Сандардың бөлінгіштігін есептеуді орындамай-ақ анықтауға мүмкіндік
+      беретін бірнеше маңызды қасиет бар. Солардың негізгілері —
+      <b>көбейтіндінің бөлінгіштік қасиеті</b> және
+      <b>қосындының бөлінгіштік қасиеті</b>.
+      Бұл қасиеттер үлкен сандармен жұмыс істегенде есептеуді
+      жеңілдетеді.
+    </p>
+
+    <p style="margin-bottom:15px; padding:15px; background:#eef4ff; border-radius:10px;">
+      <b>1. Көбейтіндінің бөлінгіштік қасиеті</b><br><br>
+      Егер көбейткіштердің біреуі берілген санға бөлінсе,
+      онда бүкіл көбейтінді де сол санға бөлінеді.
+    </p>
+
+    <p style="margin-bottom:15px;">
+      Мысалы, <b>24 · 15 · 7</b> көбейтіндісінің 8-ге
+      бөлінетінін анықтайық. 24 саны 8-ге бөлінеді, себебі
+      24 = 8 · 3. Сондықтан:
+      <br><br>
+      <b>24 · 15 · 7 = (8 · 3) · 15 · 7
+      = 8 · (3 · 15 · 7).</b>
+      <br><br>
+      Демек, берілген көбейтінді 8-ге бөлінеді.
+      Мұнда көбейтіндінің барлық көбейткіштерін тексерудің қажеті жоқ.
+      Олардың біреуі 8-ге бөлінсе жеткілікті.
+    </p>
+
+    <p style="margin-bottom:15px; padding:15px; background:#eef4ff; border-radius:10px;">
+      <b>Ереже:</b><br><br>
+      Егер көбейткіштердің біреуі берілген санға бөлінсе,
+      онда көбейтінді де сол санға бөлінеді.
+    </p>
+
+    <p style="margin-bottom:15px;">
+      Мысалы, <b>35 · 18</b> көбейтіндісі 7-ге бөлінеді.
+      Себебі 35 саны 7-ге бөлінеді.
+      Сондықтан көбейтіндінің мәнін алдын ала есептемей-ақ,
+      оның 7-ге бөлінетінін айта аламыз.
+    </p>
+
+    <p style="margin-bottom:15px; padding:15px; background:#eef4ff; border-radius:10px;">
+      <b>2. Қосындының бөлінгіштік қасиеті</b><br><br>
+      Егер қосылғыштардың әрқайсысы берілген санға бөлінсе,
+      онда олардың қосындысы да сол санға бөлінеді.
+    </p>
+
+    <p style="margin-bottom:15px;">
+      Мысалы, <b>84 + 28</b> қосындысының 14-ке бөлінетінін
+      анықтайық. 84 саны да, 28 саны да 14-ке бөлінеді:
+      <br><br>
+      84 = 14 · 6,<br>
+      28 = 14 · 2.
+      <br><br>
+      Сондықтан:
+      <br><br>
+      <b>84 + 28 = 14 · 6 + 14 · 2
+      = 14 · (6 + 2).</b>
+      <br><br>
+      Демек, 84 + 28 қосындысы 14-ке бөлінеді.
+    </p>
+
+    <p style="margin-bottom:15px;">
+      Қосынды бірнеше қосылғыштан тұрса да осы қасиет орындалады.
+      Мысалы, 30, 45 және 60 сандарының әрқайсысы 5-ке бөлінеді.
+      Сондықтан <b>30 + 45 + 60</b> қосындысы да 5-ке бөлінеді.
+    </p>
+
+    <p style="padding:15px; background:#eef4ff; border-radius:10px;">
+      <b>Есте сақта:</b><br><br>
+      • Көбейтіндіде бір көбейткіш берілген санға бөлінсе,
+      бүкіл көбейтінді сол санға бөлінеді.<br><br>
+      • Қосындыда барлық қосылғыштар берілген санға бөлінсе,
+      олардың қосындысы да сол санға бөлінеді.<br><br>
+      Бұл қасиеттерді пайдалану арқылы көптеген есептерді
+      көбейту мен қосуды толық орындамай-ақ шешуге болады.
+    </p>
+
+  </div>
+
+
+  <!-- 10 ТАПСЫРМА -->
+
+  <div class="section">
+
+    <h2>📝 10 тапсырма</h2>
+
+    <p style="margin-bottom:20px;">
+      Бөлінгіштік қасиеттерін пайдаланып, есептердің жауабын тап.
+    </p>
+
+
+    <div class="task">
+
+      <b>
+        1. Көбейтіндінің бөлінгіштік қасиетін пайдаланып есепте:
+        (28 · 15) : 7
+      </b>
+
+      <input id="q1" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(1, 60)">
+        Тексеру
+      </button>
+
+      <div id="r1" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        2. Көбейтіндінің бөлінгіштік қасиетін пайдаланып есепте:
+        (36 · 14) : 9
+      </b>
+
+      <input id="q2" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(2, 56)">
+        Тексеру
+      </button>
+
+      <div id="r2" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        3. Өрнектің мәнін тап:
+        (25 · 32) : 8
+      </b>
+
+      <input id="q3" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(3, 100)">
+        Тексеру
+      </button>
+
+      <div id="r3" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        4. Өрнектің мәнін тап:
+        (48 · 21) : 12
+      </b>
+
+      <input id="q4" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(4, 84)">
+        Тексеру
+      </button>
+
+      <div id="r4" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        5. Қосындының бөлінгіштік қасиетін пайдаланып есепте:
+        (54 + 90) : 18
+      </b>
+
+      <input id="q5" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(5, 8)">
+        Тексеру
+      </button>
+
+      <div id="r5" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        6. Өрнектің мәнін тап:
+        (125 + 75) : 25
+      </b>
+
+      <input id="q6" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(6, 8)">
+        Тексеру
+      </button>
+
+      <div id="r6" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        7. Қосындының бөлінгіштік қасиетін пайдаланып есепте:
+        (168 + 72) : 24
+      </b>
+
+      <input id="q7" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(7, 10)">
+        Тексеру
+      </button>
+
+      <div id="r7" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        8. Өрнектің мәнін тап:
+        (220 + 110) : 55
+      </b>
+
+      <input id="q8" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(8, 6)">
+        Тексеру
+      </button>
+
+      <div id="r8" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        9. Қоймада 18 қорап бар. Әр қорапта 8 қарындаштан.
+        Барлық қарындашты әр оқушыға 6 қарындаштан тең бөліп берді.
+        Қарындаштар неше оқушыға жетті?
+      </b>
+
+      <input id="q9" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(9, 24)">
+        Тексеру
+      </button>
+
+      <div id="r9" class="result"></div>
+
+    </div>
+
+
+    <div class="task">
+
+      <b>
+        10. Бірінші гүлзарда 42 гүл, екінші гүлзарда 63 гүл бар.
+        Барлық гүлді әрқайсысында 7 гүлден болатындай
+        гүлшоқтарға бөлді. Барлығы неше гүлшоқ шықты?
+      </b>
+
+      <input id="q10" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(10, 15)">
+        Тексеру
+      </button>
+
+      <div id="r10" class="result"></div>
+
+    </div>
+
+
+    <div id="total">
+      Нәтиже: 0 / 10
+    </div>
+
+    <div id="finalResult"></div>
+
+
+    <!-- ТЕСТТІ БАСТАУ -->
+
+    <div class="start-test-area">
+
+      <p>
+        🎯 10 тапсырманы орындап болдың ба?
+      </p>
+
+      <p>
+        Енді біліміңді тест арқылы тексер!
+      </p>
+
+      <button class="start-test-button" onclick="startTest()">
+        📝 Тестті бастау
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       ТЕСТ БӨЛІМІ
+  ========================= -->
+
+  <div class="section" id="testSection">
+
+    <h2>✅ Бөлінгіштіктің негізгі қасиеттері — тест</h2>
+
+    <p style="margin-bottom:20px;">
+      Әр сұрақтың бір ғана дұрыс жауабы бар.
+      Барлық 10 сұраққа жауап бер.
+    </p>
+
+
+    <!-- 1 -->
+
+    <div class="test-question">
+
+      <h3>
+        1. Егер көбейткіштердің біреуі 6-ға бөлінсе,
+        онда көбейтінді туралы не айтуға болады?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t1" value="A">
+        A) Көбейтінді 6-ға бөлінеді
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t1" value="B">
+        B) Көбейтінді 6-ға бөлінбейді
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t1" value="C">
+        C) Міндетті түрде 12-ге бөлінеді
+      </label>
+
+    </div>
+
+
+    <!-- 2 -->
+
+    <div class="test-question">
+
+      <h3>
+        2. Қай көбейтіндінің 7-ге бөлінетіні бірден көрінеді?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t2" value="A">
+        A) 12 · 25
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t2" value="B">
+        B) 21 · 13
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t2" value="C">
+        C) 16 · 25
+      </label>
+
+    </div>
+
+
+    <!-- 3 -->
+
+    <div class="test-question">
+
+      <h3>
+        3. (45 · 16) : 9 өрнегінің мәнін тап.
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t3" value="A">
+        A) 70
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t3" value="B">
+        B) 80
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t3" value="C">
+        C) 90
+      </label>
+
+    </div>
+
+
+    <!-- 4 -->
+
+    <div class="test-question">
+
+      <h3>
+        4. Қай қосынды 12-ге бөлінеді?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t4" value="A">
+        A) 24 + 36
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t4" value="B">
+        B) 25 + 36
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t4" value="C">
+        C) 24 + 35
+      </label>
+
+    </div>
+
+
+    <!-- 5 -->
+
+    <div class="test-question">
+
+      <h3>
+        5. (96 + 48) : 24 өрнегінің мәні нешеге тең?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t5" value="A">
+        A) 5
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t5" value="B">
+        B) 6
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t5" value="C">
+        C) 8
+      </label>
+
+    </div>
+
+
+    <!-- 6 -->
+
+    <div class="test-question">
+
+      <h3>
+        6. 40 · 27 көбейтіндісі қай санға міндетті түрде бөлінеді?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t6" value="A">
+        A) 8
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t6" value="B">
+        B) 11
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t6" value="C">
+        C) 13
+      </label>
+
+    </div>
+
+
+    <!-- 7 -->
+
+    <div class="test-question">
+
+      <h3>
+        7. Егер екі қосылғыштың әрқайсысы 15-ке бөлінсе,
+        олардың қосындысы:
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t7" value="A">
+        A) 15-ке бөлінеді
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t7" value="B">
+        B) 15-ке бөлінбейді
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t7" value="C">
+        C) Тек 5-ке ғана бөлінеді
+      </label>
+
+    </div>
+
+
+    <!-- 8 -->
+
+    <div class="test-question">
+
+      <h3>
+        8. (150 + 90) : 30 өрнегінің мәнін тап.
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t8" value="A">
+        A) 6
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t8" value="B">
+        B) 8
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t8" value="C">
+        C) 10
+      </label>
+
+    </div>
+
+
+    <!-- 9 -->
+
+    <div class="test-question">
+
+      <h3>
+        9. Қай өрнек 9-ға бөлінеді?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t9" value="A">
+        A) 27 · 14
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t9" value="B">
+        B) 20 · 14
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t9" value="C">
+        C) 25 · 14
+      </label>
+
+    </div>
+
+
+    <!-- 10 -->
+
+    <div class="test-question">
+
+      <h3>
+        10. 72 және 108 сандарының әрқайсысы 18-ге бөлінеді.
+        Олардың қосындысы 18-ге бөлгенде неше шығады?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t10" value="A">
+        A) 8
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t10" value="B">
+        B) 9
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t10" value="C">
+        C) 10
+      </label>
+
+    </div>
+
+
+    <button class="test-check" onclick="finishTest()">
+      ✅ Тестті аяқтау
+    </button>
+
+    <div id="testResult"></div>
+
+    <button id="retryButton" onclick="retryTest()">
+      🔄 Тестті қайта тапсыру
+    </button>
+
+  </div>
+
+</div>
+
+
+<footer>
+  ©️ 2026 KEMENGER ONLINE
+</footer>
+
+
+<script>
+
+  /* =========================
+     10 ТАПСЫРМАНЫ ТЕКСЕРУ
+  ========================= */
+
+  let score = 0;
+  let answered = {};
+
+  function check(number, correctAnswer) {
+
+    const input = document.getElementById("q" + number);
+    const result = document.getElementById("r" + number);
+
+    if (answered[number]) {
+      return;
+    }
+
+    if (input.value === "") {
+
+      result.innerHTML = "⚠️ Алдымен жауапты енгіз!";
+      result.style.color = "orange";
+
+      return;
+    }
+
+    const answer = Number(input.value);
+
+    if (answer === correctAnswer) {
+
+      result.innerHTML = "✅ Дұрыс!";
+      result.style.color = "green";
+
+      score++;
+
+      answered[number] = true;
+
+      input.disabled = true;
+
+    } else {
+
+      result.innerHTML = "❌ Қате. Қайта байқап көр.";
+      result.style.color = "red";
+
+    }
+
+    document.getElementById("total").innerHTML =
+      "Нәтиже: " + score + " / 10";
+
+
+    if (score === 10) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🏆 Керемет! Барлық 10 тапсырманы дұрыс орындадың!";
+
+    } else if (score >= 8) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🌟 Өте жақсы! Нәтижең: " + score + " / 10";
+
+    } else if (score >= 5) {
+
+      document.getElementById("finalResult").innerHTML =
+        "👍 Жақсы! Нәтижең: " + score + " / 10";
+
+    } else if (score > 0) {
+
+      document.getElementById("finalResult").innerHTML =
+        "📚 Талпынысың жақсы! Сабақты тағы қайталап көр.";
+
+    } else {
+
+      document.getElementById("finalResult").innerHTML = "";
+
+    }
+
+  }
+
+
+  /* =========================
+     ТЕСТТІ БАСТАУ
+  ========================= */
+
+  function startTest() {
+
+    const testSection =
+      document.getElementById("testSection");
+
+    testSection.style.display = "block";
+
+    testSection.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =========================
+     ТЕСТ ЖАУАПТАРЫ
+  ========================= */
+
+  const correctAnswers = {
+
+    t1: "A",
+
+    t2: "B",
+
+    t3: "B",
+
+    t4: "A",
+
+    t5: "B",
+
+    t6: "A",
+
+    t7: "A",
+
+    t8: "B",
+
+    t9: "A",
+
+    t10: "C"
+
+  };
+
+
+  /* =========================
+     ТЕСТТІ АЯҚТАУ
+  ========================= */
+
+  function finishTest() {
+
+    let testScore = 0;
+
+    let answeredCount = 0;
+
+
+    for (let i = 1; i <= 10; i++) {
+
+      const questionName = "t" + i;
+
+      const selected =
+        document.querySelector(
+          'input[name="' +
+          questionName +
+          '"]:checked'
+        );
+
+
+      if (selected) {
+
+        answeredCount++;
+
+
+        if (
+          selected.value ===
+          correctAnswers[questionName]
+        ) {
+
+          testScore++;
+
+        }
+
+      }
+
+    }
+
+
+    const result =
+      document.getElementById("testResult");
+
+
+    if (answeredCount < 10) {
+
+      result.style.display = "block";
+
+      result.innerHTML =
+        "⚠️ Барлық сұраққа жауап бер!<br><br>" +
+        "Жауап берілгені: " +
+        answeredCount +
+        " / 10";
+
+      return;
+
+    }
+
+
+    const percent = testScore * 10;
+
+
+    result.style.display = "block";
+
+
+    if (testScore === 10) {
+
+      result.innerHTML =
+        "🏆 КЕРЕМЕТ!<br><br>" +
+        "Нәтижең: 10 / 10<br>" +
+        "100% — Өте жоғары нәтиже!";
+
+    }
+
+    else if (testScore >= 8) {
+
+      result.innerHTML =
+        "🌟 ӨТЕ ЖАҚСЫ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тақырыпты жақсы меңгердің!";
+
+    }
+
+    else if (testScore >= 5) {
+
+      result.innerHTML =
+        "👍 ЖАҚСЫ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тағы біраз жаттығу қажет.";
+
+    }
+
+    else {
+
+      result.innerHTML =
+        "📚 ҚАЙТА ҚАРАП ШЫҚ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Сабақ материалын қайталап көр.";
+
+    }
+
+
+    document.getElementById(
+      "retryButton"
+    ).style.display = "block";
+
+
+    /* ДҰРЫС / ҚАТЕ ЖАУАПТАР */
+
+    for (let i = 1; i <= 10; i++) {
+
+      const questionName = "t" + i;
+
+
+      const selected =
+        document.querySelector(
+          'input[name="' +
+          questionName +
+          '"]:checked'
+        );
+
+
+      const options =
+        document.querySelectorAll(
+          'input[name="' +
+          questionName +
+          '"]'
+        );
+
+
+      options.forEach(function(option) {
+
+        const label =
+          option.parentElement;
+
+
+        if (
+          option.value ===
+          correctAnswers[questionName]
+        ) {
+
+          label.classList.add(
+            "correct"
+          );
+
+        }
+
+
+        if (
+          selected &&
+          option.value === selected.value &&
+          option.value !==
+          correctAnswers[questionName]
+        ) {
+
+          label.classList.add(
+            "wrong"
+          );
+
+        }
+
+
+        option.disabled = true;
+
+      });
+
+    }
+
+
+    document.querySelector(
+      ".test-check"
+    ).disabled = true;
+
+
+    document.querySelector(
+      ".test-check"
+    ).style.opacity = "0.5";
+
+  }
+
+
+  /* =========================
+     ҚАЙТА ТАПСЫРУ
+  ========================= */
+
+  function retryTest() {
+
+    for (let i = 1; i <= 10; i++) {
+
+      const options =
+        document.querySelectorAll(
+          'input[name="t' + i + '"]'
+        );
+
+
+      options.forEach(function(option) {
+
+        option.checked = false;
+
+        option.disabled = false;
+
+
+        option.parentElement.classList.remove(
+          "correct"
+        );
+
+
+        option.parentElement.classList.remove(
+          "wrong"
+        );
+
+      });
+
+    }
+
+
+    document.getElementById(
+      "testResult"
+    ).style.display = "none";
+
+
+    document.getElementById(
+      "retryButton"
+    ).style.display = "none";
+
+
+    const button =
+      document.querySelector(
+        ".test-check"
+      );
+
+
+    button.disabled = false;
+
+    button.style.opacity = "1";
+
+  }
+
+</script>
+
+</body>
+</html>
