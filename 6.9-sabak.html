@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>9-сабақ — Шеңбердің ұзындығы. Дөңгелектің ауданы. Шар. Сфера | Kemenger Online</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #173b7a;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #173b7a, #2d65c8);
+      color: white;
+      padding: 55px 7%;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 18px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+    .section {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    }
+
+    .section h2 {
+      margin-bottom: 15px;
+    }
+
+    .video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111827;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 55px;
+      overflow: hidden;
+    }
+
+    .video iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .button {
+      display: inline-block;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    .task {
+      background: #f7f9fc;
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    input[type="number"] {
+      padding: 11px;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #ccd3df;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .result {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    #total {
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #finalResult {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #eef4ff;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .start-test-area {
+      text-align: center;
+      margin-top: 30px;
+      padding: 25px;
+      background: #eef4ff;
+      border-radius: 14px;
+    }
+
+    .start-test-area p {
+      margin-bottom: 5px;
+      font-size: 17px;
+    }
+
+    .start-test-button {
+      display: inline-block;
+      background: #173b7a;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.2s;
+    }
+
+    .start-test-button:hover {
+      background: #2d65c8;
+      transform: translateY(-1px);
+    }
+
+    #testSection {
+      display: none;
+    }
+
+    .test-question {
+      background: #f7f9fc;
+      padding: 20px;
+      border-radius: 14px;
+      margin-top: 18px;
+      border: 1px solid #e1e6ef;
+    }
+
+    .test-question h3 {
+      margin-bottom: 15px;
+      line-height: 1.5;
+      font-size: 17px;
+    }
+
+    .option {
+      display: block;
+      background: white;
+      border: 1px solid #ccd3df;
+      padding: 14px;
+      border-radius: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background: #eef4ff;
+      border-color: #2d65c8;
+    }
+
+    .option input[type="radio"] {
+      width: auto;
+      margin: 0 8px 0 0;
+      cursor: pointer;
+    }
+
+    .test-check {
+      margin-top: 25px;
+      background: #173b7a;
+      color: white;
+      padding: 14px 25px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .test-check:hover {
+      background: #2d65c8;
+    }
+
+    #testResult {
+      display: none;
+      margin-top: 25px;
+      padding: 25px;
+      border-radius: 14px;
+      background: #eef4ff;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #retryButton {
+      display: none;
+      margin: 20px auto 0;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .correct {
+      background: #dff6e5 !important;
+      border-color: #35a853 !important;
+    }
+
+    .wrong {
+      background: #ffe2e2 !important;
+      border-color: #e53935 !important;
+    }
+
+    .fraction {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      line-height: 1.05;
+      margin: 0 4px;
+      min-width: 30px;
+    }
+
+    .fraction .top {
+      border-bottom: 1.5px solid #172033;
+      padding: 0 5px 3px;
+    }
+
+    .fraction .bottom {
+      padding: 3px 5px 0;
+    }
+
+    .fraction-answer {
+      width: 130px;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .fraction-answer input {
+      width: 100px;
+      margin: 3px 0;
+      text-align: center;
+    }
+
+    .fraction-line {
+      width: 110px;
+      height: 2px;
+      background: #172033;
+    }
+
+    footer {
+      background: #14284e;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 15px;
+      }
+
+      .logo {
+        font-size: 17px;
+      }
+
+      .hero {
+        padding: 40px 20px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .container {
+        padding: 20px 12px;
+      }
+
+      .section {
+        padding: 18px;
+      }
+
+      .test-question {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">📐 KEMENGER ONLINE</div>
+  <a class="back" href="6-synyp.html">← 6-сынып</a>
+</header>
+
+<section class="hero">
+  <h1>9-сабақ. Шеңбердің ұзындығы. Дөңгелектің ауданы. Шар. Сфера</h1>
+  <p>6-сынып • Математика</p>
+</section>
+
+<div class="container">
+
+  <!-- ВИДЕО -->
+
+  <div class="section">
+
+    <h2>🎥 Видеосабақ</h2>
+
+    <div class="video">
+
+      <!--
+      🔴🔴🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР 🔴🔴🔴
+
+      Төмендегі:
+      🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР 🔴
+      деген жазуды өшіріп,
+      орнына YouTube EMBED сілтемесін қой.
+      -->
+
+      <iframe
+        src="🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР 🔴"
+        title="Kemenger Online видеосабақ"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+
+    </div>
+
+    <p style="margin-top:15px;">
+      Видеосабақты көріп, тақырыпты меңгеріп ал.
+    </p>
+
+  </div>
+
+
+  <!-- ТАҚЫРЫПТЫҚ АНЫҚТАМА -->
+
+  <div class="section">
+
+    <h2>📚 Тақырыптық анықтама</h2>
+
+    <p style="margin-bottom:15px;">
+      Шеңбердің центрінен оның бойындағы кез келген нүктеге дейінгі
+      кесінді <b>радиус</b> деп аталады. Радиус <b>R</b> әрпімен белгіленеді.
+      Центр арқылы өтетін және шеңбердің екі нүктесін қосатын кесінді
+      <b>диаметр</b> деп аталады. Диаметр радиустан екі есе үлкен:
+      <b>D = 2R</b>.
+    </p>
+
+    <p style="margin-bottom:15px; padding:15px; background:#eef4ff; border-radius:10px;">
+      <b>Шеңбер ұзындығы:</b><br><br>
+      C = πD немесе C = 2πR<br><br>
+
+      <b>Дөңгелек ауданы:</b><br><br>
+      S = πR²<br><br>
+
+      Мұнда π ≈ 3,14.
+    </p>
+
+    <p style="margin-bottom:15px;">
+      Шеңбермен шектелген жазықтық бөлігі <b>дөңгелек</b> деп аталады.
+      Дөңгелектің ауданын табу үшін оның радиусының квадратын
+      π санына көбейтеміз.
+    </p>
+
+    <p>
+      Кеңістіктегі барлық нүктелері берілген нүктеден бірдей
+      қашықтықта орналасқан бет <b>сфера</b> деп аталады.
+      Сферамен шектелген дене <b>шар</b> деп аталады.
+      Шардың центрінен оның бетіне дейінгі кесінді шардың радиусы болады.
+    </p>
+
+  </div>
+
+
+  <!-- 10 ТАПСЫРМА -->
+
+  <div class="section">
+
+    <h2>📝 10 тапсырма</h2>
+
+    <p style="margin-bottom:20px;">
+      Есептеулерде π = 3,14 деп ал.
+      Әр есептің жауабын енгізіп, «Тексеру» батырмасын бас.
+    </p>
+
+
+    <!-- 1 -->
+
+    <div class="task">
+
+      <b>
+        1. Шеңбердің радиусы 7 см. Оның диаметрін тап.
+      </b>
+
+      <input id="q1" type="number" placeholder="Жауабың, см">
+
+      <button class="button" onclick="check(1, 14)">
+        Тексеру
+      </button>
+
+      <div id="r1" class="result"></div>
+
+    </div>
+
+
+    <!-- 2 -->
+
+    <div class="task">
+
+      <b>
+        2. Шеңбердің диаметрі 18 см.
+        Оның радиусын тап.
+      </b>
+
+      <input id="q2" type="number" placeholder="Жауабың, см">
+
+      <button class="button" onclick="check(2, 9)">
+        Тексеру
+      </button>
+
+      <div id="r2" class="result"></div>
+
+    </div>
+
+
+    <!-- 3 -->
+
+    <div class="task">
+
+      <b>
+        3. Радиусы 5 см шеңбердің ұзындығын тап.
+        π = 3,14.
+      </b>
+
+      <input id="q3" type="number" step="0.01" placeholder="Жауабың, см">
+
+      <button class="button" onclick="check(3, 31.4)">
+        Тексеру
+      </button>
+
+      <div id="r3" class="result"></div>
+
+    </div>
+
+
+    <!-- 4 -->
+
+    <div class="task">
+
+      <b>
+        4. Диаметрі 12 см шеңбердің ұзындығын тап.
+        π = 3,14.
+      </b>
+
+      <input id="q4" type="number" step="0.01" placeholder="Жауабың, см">
+
+      <button class="button" onclick="check(4, 37.68)">
+        Тексеру
+      </button>
+
+      <div id="r4" class="result"></div>
+
+    </div>
+
+
+    <!-- 5 -->
+
+    <div class="task">
+
+      <b>
+        5. Радиусы 4 см дөңгелектің ауданын тап.
+        π = 3,14.
+      </b>
+
+      <input id="q5" type="number" step="0.01" placeholder="Жауабың, см²">
+
+      <button class="button" onclick="check(5, 50.24)">
+        Тексеру
+      </button>
+
+      <div id="r5" class="result"></div>
+
+    </div>
+
+
+    <!-- 6 -->
+
+    <div class="task">
+
+      <b>
+        6. Радиусы 10 м болатын дөңгелек алаңның ауданын тап.
+        π = 3,14.
+      </b>
+
+      <input id="q6" type="number" step="0.01" placeholder="Жауабың, м²">
+
+      <button class="button" onclick="check(6, 314)">
+        Тексеру
+      </button>
+
+      <div id="r6" class="result"></div>
+
+    </div>
+
+
+    <!-- 7 -->
+
+    <div class="task">
+
+      <b>
+        7. Дөңгелектің диаметрі 26 см.
+        Оның радиусын тап.
+      </b>
+
+      <input id="q7" type="number" placeholder="Жауабың, см">
+
+      <button class="button" onclick="check(7, 13)">
+        Тексеру
+      </button>
+
+      <div id="r7" class="result"></div>
+
+    </div>
+
+
+    <!-- 8 -->
+
+    <div class="task">
+
+      <b>
+        8. Радиусы 2,5 см шеңбердің ұзындығын тап.
+        π = 3,14.
+      </b>
+
+      <input id="q8" type="number" step="0.01" placeholder="Жауабың, см">
+
+      <button class="button" onclick="check(8, 15.7)">
+        Тексеру
+      </button>
+
+      <div id="r8" class="result"></div>
+
+    </div>
+
+
+    <!-- 9 -->
+
+    <div class="task">
+
+      <b>
+        9. Радиус диаметрдің қандай бөлігі?
+        Жауабыңды бөлшек түрінде жаз.
+      </b>
+
+      <div class="fraction-answer">
+
+        <input id="q9top" type="number" placeholder="Алымы">
+
+        <div class="fraction-line"></div>
+
+        <input id="q9bottom" type="number" placeholder="Бөлімі">
+
+      </div>
+
+      <button class="button" onclick="checkFraction(9, 1, 2)">
+        Тексеру
+      </button>
+
+      <div id="r9" class="result"></div>
+
+    </div>
+
+
+    <!-- 10 -->
+
+    <div class="task">
+
+      <b>
+        10. Радиусы 6 см дөңгелектің ауданын тап.
+        π = 3,14.
+      </b>
+
+      <input id="q10" type="number" step="0.01" placeholder="Жауабың, см²">
+
+      <button class="button" onclick="check(10, 113.04)">
+        Тексеру
+      </button>
+
+      <div id="r10" class="result"></div>
+
+    </div>
+
+
+    <div id="total">
+      Нәтиже: 0 / 10
+    </div>
+
+    <div id="finalResult"></div>
+
+
+    <!-- ТЕСТТІ БАСТАУ -->
+
+    <div class="start-test-area">
+
+      <p>
+        🎯 10 тапсырманы орындап болдың ба?
+      </p>
+
+      <p>
+        Енді біліміңді тест арқылы тексер!
+      </p>
+
+      <button class="start-test-button" onclick="startTest()">
+        📝 Тестті бастау
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       ТЕСТ БӨЛІМІ
+  ========================= -->
+
+  <div class="section" id="testSection">
+
+    <h2>✅ Шеңбердің ұзындығы. Дөңгелектің ауданы. Шар. Сфера — тест</h2>
+
+    <p style="margin-bottom:20px;">
+      Әр сұрақтың бір ғана дұрыс жауабы бар.
+      Барлық 10 сұраққа жауап бер.
+    </p>
+
+
+    <!-- 1 -->
+
+    <div class="test-question">
+
+      <h3>
+        1. Шеңбердің центрінен шеңбер бойындағы нүктеге дейінгі
+        кесінді қалай аталады?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t1" value="A">
+        A) Радиус
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t1" value="B">
+        B) Диаметр
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t1" value="C">
+        C) Хорда
+      </label>
+
+    </div>
+
+
+    <!-- 2 -->
+
+    <div class="test-question">
+
+      <h3>
+        2. Радиусы 8 см шеңбердің диаметрі неше сантиметр?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t2" value="A">
+        A) 4 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t2" value="B">
+        B) 8 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t2" value="C">
+        C) 16 см
+      </label>
+
+    </div>
+
+
+    <!-- 3 -->
+
+    <div class="test-question">
+
+      <h3>
+        3. Шеңбер ұзындығын табу формуласы қайсы?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t3" value="A">
+        A) C = 2πR
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t3" value="B">
+        B) C = πR²
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t3" value="C">
+        C) C = R²
+      </label>
+
+    </div>
+
+
+    <!-- 4 -->
+
+    <div class="test-question">
+
+      <h3>
+        4. Дөңгелектің ауданын табу формуласы қайсы?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t4" value="A">
+        A) S = 2πR
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t4" value="B">
+        B) S = πR²
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t4" value="C">
+        C) S = πD
+      </label>
+
+    </div>
+
+
+    <!-- 5 -->
+
+    <div class="test-question">
+
+      <h3>
+        5. Диаметрі 20 см дөңгелектің радиусы қандай?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t5" value="A">
+        A) 5 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t5" value="B">
+        B) 10 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t5" value="C">
+        C) 40 см
+      </label>
+
+    </div>
+
+
+    <!-- 6 -->
+
+    <div class="test-question">
+
+      <h3>
+        6. Радиусы 3 см шеңбердің ұзындығы қандай?
+        π = 3,14.
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t6" value="A">
+        A) 9,42 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t6" value="B">
+        B) 18,84 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t6" value="C">
+        C) 28,26 см
+      </label>
+
+    </div>
+
+
+    <!-- 7 -->
+
+    <div class="test-question">
+
+      <h3>
+        7. Радиусы 5 см дөңгелектің ауданы қандай?
+        π = 3,14.
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t7" value="A">
+        A) 31,4 см²
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t7" value="B">
+        B) 78,5 см²
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t7" value="C">
+        C) 157 см²
+      </label>
+
+    </div>
+
+
+    <!-- 8 -->
+
+    <div class="test-question">
+
+      <h3>
+        8. Радиус диаметрдің қандай бөлігі?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t8" value="A">
+        A)
+        <span class="fraction">
+          <span class="top">1</span>
+          <span class="bottom">2</span>
+        </span>
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t8" value="B">
+        B)
+        <span class="fraction">
+          <span class="top">2</span>
+          <span class="bottom">1</span>
+        </span>
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t8" value="C">
+        C)
+        <span class="fraction">
+          <span class="top">1</span>
+          <span class="bottom">3</span>
+        </span>
+      </label>
+
+    </div>
+
+
+    <!-- 9 -->
+
+    <div class="test-question">
+
+      <h3>
+        9. Кеңістіктегі барлық нүктелері бір нүктеден бірдей
+        қашықтықта орналасқан бет қалай аталады?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t9" value="A">
+        A) Дөңгелек
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t9" value="B">
+        B) Сфера
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t9" value="C">
+        C) Шеңбер
+      </label>
+
+    </div>
+
+
+    <!-- 10 -->
+
+    <div class="test-question">
+
+      <h3>
+        10. Сферамен шектелген дене қалай аталады?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t10" value="A">
+        A) Шар
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t10" value="B">
+        B) Радиус
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t10" value="C">
+        C) Дөңгелек
+      </label>
+
+    </div>
+
+
+    <button class="test-check" onclick="finishTest()">
+      ✅ Тестті аяқтау
+    </button>
+
+    <div id="testResult"></div>
+
+    <button id="retryButton" onclick="retryTest()">
+      🔄 Тестті қайта тапсыру
+    </button>
+
+  </div>
+
+</div>
+
+
+<footer>
+  ©️ 2026 KEMENGER ONLINE
+</footer>
+
+
+<script>
+
+  /* =========================
+     10 ТАПСЫРМАНЫ ТЕКСЕРУ
+  ========================= */
+
+  let score = 0;
+  let answered = {};
+
+  function check(number, correctAnswer) {
+
+    const input = document.getElementById("q" + number);
+    const result = document.getElementById("r" + number);
+
+    if (answered[number]) {
+      return;
+    }
+
+    if (input.value === "") {
+
+      result.innerHTML = "⚠️ Алдымен жауапты енгіз!";
+      result.style.color = "orange";
+
+      return;
+    }
+
+    const answer = Number(input.value);
+
+    if (Math.abs(answer - correctAnswer) < 0.001) {
+
+      result.innerHTML = "✅ Дұрыс!";
+      result.style.color = "green";
+
+      score++;
+
+      answered[number] = true;
+
+      input.disabled = true;
+
+    } else {
+
+      result.innerHTML = "❌ Қате. Қайта байқап көр.";
+      result.style.color = "red";
+
+    }
+
+    updateResult();
+
+  }
+
+
+  /* =========================
+     БӨЛШЕКТІ ТЕКСЕРУ
+  ========================= */
+
+  function checkFraction(number, correctTop, correctBottom) {
+
+    const top =
+      document.getElementById("q" + number + "top");
+
+    const bottom =
+      document.getElementById("q" + number + "bottom");
+
+    const result =
+      document.getElementById("r" + number);
+
+    if (answered[number]) {
+      return;
+    }
+
+    if (top.value === "" || bottom.value === "") {
+
+      result.innerHTML =
+        "⚠️ Алымы мен бөлімін толық енгіз!";
+
+      result.style.color = "orange";
+
+      return;
+    }
+
+    const topValue = Number(top.value);
+    const bottomValue = Number(bottom.value);
+
+    if (bottomValue === 0) {
+
+      result.innerHTML =
+        "❌ Бөлім 0-ге тең болмауы керек.";
+
+      result.style.color = "red";
+
+      return;
+    }
+
+    if (
+      topValue * correctBottom ===
+      bottomValue * correctTop
+    ) {
+
+      result.innerHTML = "✅ Дұрыс!";
+      result.style.color = "green";
+
+      score++;
+
+      answered[number] = true;
+
+      top.disabled = true;
+      bottom.disabled = true;
+
+    } else {
+
+      result.innerHTML =
+        "❌ Қате. Қайта байқап көр.";
+
+      result.style.color = "red";
+
+    }
+
+    updateResult();
+
+  }
+
+
+  function updateResult() {
+
+    document.getElementById("total").innerHTML =
+      "Нәтиже: " + score + " / 10";
+
+
+    if (score === 10) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🏆 Керемет! Барлық 10 тапсырманы дұрыс орындадың!";
+
+    } else if (score >= 8) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🌟 Өте жақсы! Нәтижең: " + score + " / 10";
+
+    } else if (score >= 5) {
+
+      document.getElementById("finalResult").innerHTML =
+        "👍 Жақсы! Нәтижең: " + score + " / 10";
+
+    } else if (score > 0) {
+
+      document.getElementById("finalResult").innerHTML =
+        "📚 Талпынысың жақсы! Сабақты тағы қайталап көр.";
+
+    } else {
+
+      document.getElementById("finalResult").innerHTML = "";
+
+    }
+
+  }
+
+
+  /* =========================
+     ТЕСТТІ БАСТАУ
+  ========================= */
+
+  function startTest() {
+
+    const testSection =
+      document.getElementById("testSection");
+
+    testSection.style.display = "block";
+
+    testSection.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =========================
+     ТЕСТ ЖАУАПТАРЫ
+  ========================= */
+
+  const correctAnswers = {
+
+    t1: "A",
+
+    t2: "C",
+
+    t3: "A",
+
+    t4: "B",
+
+    t5: "B",
+
+    t6: "B",
+
+    t7: "B",
+
+    t8: "A",
+
+    t9: "B",
+
+    t10: "A"
+
+  };
+
+
+  /* =========================
+     ТЕСТТІ АЯҚТАУ
+  ========================= */
+
+  function finishTest() {
+
+    let testScore = 0;
+
+    let answeredCount = 0;
+
+
+    for (let i = 1; i <= 10; i++) {
+
+      const questionName = "t" + i;
+
+      const selected =
+        document.querySelector(
+          'input[name="' +
+          questionName +
+          '"]:checked'
+        );
+
+
+      if (selected) {
+
+        answeredCount++;
+
+
+        if (
+          selected.value ===
+          correctAnswers[questionName]
+        ) {
+
+          testScore++;
+
+        }
+
+      }
+
+    }
+
+
+    const result =
+      document.getElementById("testResult");
+
+
+    if (answeredCount < 10) {
+
+      result.style.display = "block";
+
+      result.innerHTML =
+        "⚠️ Барлық сұраққа жауап бер!<br><br>" +
+        "Жауап берілгені: " +
+        answeredCount +
+        " / 10";
+
+      return;
+
+    }
+
+
+    const percent = testScore * 10;
+
+
+    result.style.display = "block";
+
+
+    if (testScore === 10) {
+
+      result.innerHTML =
+        "🏆 КЕРЕМЕТ!<br><br>" +
+        "Нәтижең: 10 / 10<br>" +
+        "100% — Өте жоғары нәтиже!";
+
+    }
+
+    else if (testScore >= 8) {
+
+      result.innerHTML =
+        "🌟 ӨТЕ ЖАҚСЫ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тақырыпты жақсы меңгердің!";
+
+    }
+
+    else if (testScore >= 5) {
+
+      result.innerHTML =
+        "👍 ЖАҚСЫ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тағы біраз жаттығу қажет.";
+
+    }
+
+    else {
+
+      result.innerHTML =
+        "📚 ҚАЙТА ҚАРАП ШЫҚ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Сабақ материалын қайталап көр.";
+
+    }
+
+
+    document.getElementById(
+      "retryButton"
+    ).style.display = "block";
+
+
+    /* ДҰРЫС / ҚАТЕ ЖАУАПТАР */
+
+    for (let i = 1; i <= 10; i++) {
+
+      const questionName = "t" + i;
+
+
+      const selected =
+        document.querySelector(
+          'input[name="' +
+          questionName +
+          '"]:checked'
+        );
+
+
+      const options =
+        document.querySelectorAll(
+          'input[name="' +
+          questionName +
+          '"]'
+        );
+
+
+      options.forEach(function(option) {
+
+        const label =
+          option.parentElement;
+
+
+        if (
+          option.value ===
+          correctAnswers[questionName]
+        ) {
+
+          label.classList.add(
+            "correct"
+          );
+
+        }
+
+
+        if (
+          selected &&
+          option.value === selected.value &&
+          option.value !==
+          correctAnswers[questionName]
+        ) {
+
+          label.classList.add(
+            "wrong"
+          );
+
+        }
+
+
+        option.disabled = true;
+
+      });
+
+    }
+
+
+    document.querySelector(
+      ".test-check"
+    ).disabled = true;
+
+
+    document.querySelector(
+      ".test-check"
+    ).style.opacity = "0.5";
+
+  }
+
+
+  /* =========================
+     ҚАЙТА ТАПСЫРУ
+  ========================= */
+
+  function retryTest() {
+
+    for (let i = 1; i <= 10; i++) {
+
+      const options =
+        document.querySelectorAll(
+          'input[name="t' + i + '"]'
+        );
+
+
+      options.forEach(function(option) {
+
+        option.checked = false;
+
+        option.disabled = false;
+
+
+        option.parentElement.classList.remove(
+          "correct"
+        );
+
+
+        option.parentElement.classList.remove(
+          "wrong"
+        );
+
+      });
+
+    }
+
+
+    document.getElementById(
+      "testResult"
+    ).style.display = "none";
+
+
+    document.getElementById(
+      "retryButton"
+    ).style.display = "none";
+
+
+    const button =
+      document.querySelector(
+        ".test-check"
+      );
+
+
+    button.disabled = false;
+
+    button.style.opacity = "1";
+
+  }
+
+</script>
+
+</body>
+</html>
