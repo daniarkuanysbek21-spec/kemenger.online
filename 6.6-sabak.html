@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6-сабақ — Кері пропорционал тәуелділік | Kemenger Online</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #173b7a;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #173b7a, #2d65c8);
+      color: white;
+      padding: 55px 7%;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 18px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+    .section {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    }
+
+    .section h2 {
+      margin-bottom: 15px;
+    }
+
+    .video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111827;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 55px;
+      overflow: hidden;
+    }
+
+    .video iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .button {
+      display: inline-block;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    .task {
+      background: #f7f9fc;
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    input[type="number"] {
+      padding: 11px;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #ccd3df;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .fraction {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      line-height: 1.1;
+      min-width: 32px;
+      margin: 0 4px;
+    }
+
+    .fraction .top {
+      border-bottom: 1.5px solid #172033;
+      padding: 0 5px 3px;
+    }
+
+    .fraction .bottom {
+      padding: 3px 5px 0;
+    }
+
+    .fraction-input {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 14px;
+      width: 120px;
+    }
+
+    .fraction-input input {
+      width: 100px;
+      max-width: 100px;
+      text-align: center;
+      margin: 0;
+      padding: 10px;
+    }
+
+    .fraction-line {
+      width: 110px;
+      height: 2px;
+      background: #172033;
+      margin: 5px 0;
+    }
+
+    .fraction-label {
+      font-size: 13px;
+      color: #687386;
+      margin: 3px 0;
+    }
+
+    .result {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    #total {
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #finalResult {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #eef4ff;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .start-test-area {
+      text-align: center;
+      margin-top: 30px;
+      padding: 25px;
+      background: #eef4ff;
+      border-radius: 14px;
+    }
+
+    .start-test-area p {
+      margin-bottom: 5px;
+      font-size: 17px;
+    }
+
+    .start-test-button {
+      display: inline-block;
+      background: #173b7a;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.2s;
+    }
+
+    .start-test-button:hover {
+      background: #2d65c8;
+      transform: translateY(-1px);
+    }
+
+    #testSection {
+      display: none;
+    }
+
+    .test-question {
+      background: #f7f9fc;
+      padding: 20px;
+      border-radius: 14px;
+      margin-top: 18px;
+      border: 1px solid #e1e6ef;
+    }
+
+    .test-question h3 {
+      margin-bottom: 15px;
+      line-height: 1.5;
+      font-size: 17px;
+    }
+
+    .option {
+      display: block;
+      background: white;
+      border: 1px solid #ccd3df;
+      padding: 14px;
+      border-radius: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background: #eef4ff;
+      border-color: #2d65c8;
+    }
+
+    .option input[type="radio"] {
+      width: auto;
+      margin: 0 8px 0 0;
+      cursor: pointer;
+    }
+
+    .test-check {
+      margin-top: 25px;
+      background: #173b7a;
+      color: white;
+      padding: 14px 25px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .test-check:hover {
+      background: #2d65c8;
+    }
+
+    #testResult {
+      display: none;
+      margin-top: 25px;
+      padding: 25px;
+      border-radius: 14px;
+      background: #eef4ff;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #retryButton {
+      display: none;
+      margin: 20px auto 0;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .correct {
+      background: #dff6e5 !important;
+      border-color: #35a853 !important;
+    }
+
+    .wrong {
+      background: #ffe2e2 !important;
+      border-color: #e53935 !important;
+    }
+
+    footer {
+      background: #14284e;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 15px;
+      }
+
+      .logo {
+        font-size: 17px;
+      }
+
+      .hero {
+        padding: 40px 20px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .container {
+        padding: 20px 12px;
+      }
+
+      .section {
+        padding: 18px;
+      }
+
+      .test-question {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">📐 KEMENGER ONLINE</div>
+  <a class="back" href="6-synyp.html">← 6-сынып</a>
+</header>
+
+<section class="hero">
+  <h1>6-сабақ. Кері пропорционал тәуелділік</h1>
+  <p>6-сынып • Математика</p>
+</section>
+
+<div class="container">
+
+  <!-- ВИДЕО -->
+
+  <div class="section">
+
+    <h2>🎥 Видеосабақ</h2>
+
+    <div class="video">
+
+      <!--
+      🔴🔴🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР 🔴🔴🔴
+
+      Төмендегі:
+      🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР 🔴
+      деген жазуды өшіріп,
+      орнына YouTube EMBED сілтемесін қой.
+      -->
+
+      <iframe
+        src="🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР 🔴"
+        title="Kemenger Online видеосабақ"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+
+    </div>
+
+    <p style="margin-top:15px;">
+      Видеосабақты көріп, тақырыпты меңгеріп ал.
+    </p>
+
+  </div>
+
+
+  <!-- ТАҚЫРЫПТЫҚ АНЫҚТАМА -->
+
+  <div class="section">
+
+    <h2>📚 Тақырыптық анықтама</h2>
+
+    <p style="margin-bottom:15px;">
+      Егер екі шаманың біреуі бірнеше есе артқанда,
+      екіншісі сонша есе кемісе немесе біреуі бірнеше есе кемігенде,
+      екіншісі сонша есе артса, онда бұл шамалар
+      <b>кері пропорционал шамалар</b> деп аталады.
+    </p>
+
+    <p style="margin-bottom:15px; padding:15px; background:#eef4ff; border-radius:10px;">
+      Кері пропорционал тәуелділіктің негізгі формуласы:
+      <br><br>
+      <b>x · y = k</b>
+      <br><br>
+      немесе
+      <br><br>
+      y =
+      <span class="fraction">
+        <span class="top">k</span>
+        <span class="bottom">x</span>
+      </span>
+    </p>
+
+    <p style="margin-bottom:15px;">
+      Мұндағы <b>k</b> — тұрақты сан. Кері пропорционал шамалардың
+      сәйкес мәндерінің <b>көбейтіндісі тұрақты</b> болады.
+      Мысалы, бір жұмысты 4 жұмысшы 12 сағатта орындаса,
+      жұмысшылар саны артқан сайын жұмысты орындау уақыты кемиді.
+    </p>
+
+    <p>
+      Бірдей қашықтықты жүргенде жылдамдық пен уақыт,
+      бірдей жұмысты орындағанда жұмысшылар саны мен уақыт
+      кері пропорционал болуы мүмкін.
+    </p>
+
+  </div>
+
+
+  <!-- 10 ТАПСЫРМА -->
+
+  <div class="section">
+
+    <h2>📝 10 тапсырма</h2>
+
+    <p style="margin-bottom:20px;">
+      Әр есептің жауабын енгізіп, «Тексеру» батырмасын бас.
+    </p>
+
+
+    <!-- 1 -->
+
+    <div class="task">
+
+      <b>
+        1. x және y кері пропорционал.
+        x = 6, y = 20 болса, пропорционалдық тұрақтысын тап.
+      </b>
+
+      <input id="q1" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(1, 120)">
+        Тексеру
+      </button>
+
+      <div id="r1" class="result"></div>
+
+    </div>
+
+
+    <!-- 2 -->
+
+    <div class="task">
+
+      <b>
+        2. x · y = 96. x = 8 болса, y мәнін тап.
+      </b>
+
+      <input id="q2" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(2, 12)">
+        Тексеру
+      </button>
+
+      <div id="r2" class="result"></div>
+
+    </div>
+
+
+    <!-- 3 -->
+
+    <div class="task">
+
+      <b>
+        3. x · y = 150. y = 10 болса, x мәнін тап.
+      </b>
+
+      <input id="q3" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(3, 15)">
+        Тексеру
+      </button>
+
+      <div id="r3" class="result"></div>
+
+    </div>
+
+
+    <!-- 4 -->
+
+    <div class="task">
+
+      <b>
+        4. Тіктөртбұрыштың ауданы 72 см².
+        Ұзындығы 9 см болса, енін тап.
+      </b>
+
+      <input id="q4" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(4, 8)">
+        Тексеру
+      </button>
+
+      <div id="r4" class="result"></div>
+
+    </div>
+
+
+    <!-- 5 -->
+
+    <div class="task">
+
+      <b>
+        5. Бір жұмысты 6 жұмысшы 15 сағатта орындайды.
+        Сол жұмысты 10 жұмысшы неше сағатта орындайды?
+      </b>
+
+      <input id="q5" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(5, 9)">
+        Тексеру
+      </button>
+
+      <div id="r5" class="result"></div>
+
+    </div>
+
+
+    <!-- 6 -->
+
+    <div class="task">
+
+      <b>
+        6. Автокөлік белгілі бір жолды 60 км/сағ жылдамдықпен
+        8 сағатта жүріп өтеді. Сол жолды 80 км/сағ жылдамдықпен
+        неше сағатта жүреді?
+      </b>
+
+      <input id="q6" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(6, 6)">
+        Тексеру
+      </button>
+
+      <div id="r6" class="result"></div>
+
+    </div>
+
+
+    <!-- 7 -->
+
+    <div class="task">
+
+      <b>
+        7. 16 адамға жететін азық 12 күнге арналған.
+        Сол азық 24 адамға неше күнге жетеді?
+      </b>
+
+      <input id="q7" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(7, 8)">
+        Тексеру
+      </button>
+
+      <div id="r7" class="result"></div>
+
+    </div>
+
+
+    <!-- 8 -->
+
+    <div class="task">
+
+      <b>
+        8. x пен y кері пропорционал.
+        x = 18, y = 4 болғанда
+        <span class="fraction">
+          <span class="top">y</span>
+          <span class="bottom">x</span>
+        </span>
+        қатынасын қысқартылған бөлшек түрінде жаз.
+      </b>
+
+      <div class="fraction-input">
+
+        <span class="fraction-label">Алымы</span>
+
+        <input id="q8num" type="number" placeholder="Алымы">
+
+        <div class="fraction-line"></div>
+
+        <input id="q8den" type="number" placeholder="Бөлімі">
+
+        <span class="fraction-label">Бөлімі</span>
+
+      </div>
+
+      <br>
+
+      <button class="button" onclick="checkFraction(8, 2, 9)">
+        Тексеру
+      </button>
+
+      <div id="r8" class="result"></div>
+
+    </div>
+
+
+    <!-- 9 -->
+
+    <div class="task">
+
+      <b>
+        9. 12 станок бір тапсырманы 18 сағатта орындайды.
+        Осы жұмысты 27 станок неше сағатта орындайды?
+      </b>
+
+      <input id="q9" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(9, 8)">
+        Тексеру
+      </button>
+
+      <div id="r9" class="result"></div>
+
+    </div>
+
+
+    <!-- 10 -->
+
+    <div class="task">
+
+      <b>
+        10. Резервуарды 4 бірдей құбыр 30 минутта толтырады.
+        Егер 6 сондай құбыр қатар жұмыс істесе,
+        резервуар неше минутта толады?
+      </b>
+
+      <input id="q10" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(10, 20)">
+        Тексеру
+      </button>
+
+      <div id="r10" class="result"></div>
+
+    </div>
+
+
+    <div id="total">
+      Нәтиже: 0 / 10
+    </div>
+
+    <div id="finalResult"></div>
+
+
+    <!-- ТЕСТТІ БАСТАУ -->
+
+    <div class="start-test-area">
+
+      <p>
+        🎯 10 тапсырманы орындап болдың ба?
+      </p>
+
+      <p>
+        Енді біліміңді тест арқылы тексер!
+      </p>
+
+      <button class="start-test-button" onclick="startTest()">
+        📝 Тестті бастау
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       ТЕСТ БӨЛІМІ
+  ========================= -->
+
+  <div class="section" id="testSection">
+
+    <h2>✅ Кері пропорционал тәуелділік — тест</h2>
+
+    <p style="margin-bottom:20px;">
+      Әр сұрақтың бір ғана дұрыс жауабы бар.
+      Барлық 10 сұраққа жауап бер.
+    </p>
+
+
+    <!-- 1 -->
+
+    <div class="test-question">
+
+      <h3>
+        1. Кері пропорционал тәуелділіктің дұрыс формуласын тап.
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t1" value="A">
+        A) y = k · x
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t1" value="B">
+        B) x · y = k
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t1" value="C">
+        C) x + y = k
+      </label>
+
+    </div>
+
+
+    <!-- 2 -->
+
+    <div class="test-question">
+
+      <h3>
+        2. x және y кері пропорционал.
+        x = 5, y = 18 болса, k нешеге тең?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t2" value="A">
+        A) 23
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t2" value="B">
+        B) 90
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t2" value="C">
+        C) 13
+      </label>
+
+    </div>
+
+
+    <!-- 3 -->
+
+    <div class="test-question">
+
+      <h3>
+        3. x · y = 84. x = 7 болса, y неге тең?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t3" value="A">
+        A) 10
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t3" value="B">
+        B) 12
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t3" value="C">
+        C) 14
+      </label>
+
+    </div>
+
+
+    <!-- 4 -->
+
+    <div class="test-question">
+
+      <h3>
+        4. Қай шамалар кері пропорционал болуы мүмкін?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t4" value="A">
+        A) Тұрақты қашықтықтағы жылдамдық пен уақыт
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t4" value="B">
+        B) Зат саны мен жалпы құны
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t4" value="C">
+        C) Квадрат қабырғасы мен периметрі
+      </label>
+
+    </div>
+
+
+    <!-- 5 -->
+
+    <div class="test-question">
+
+      <h3>
+        5. Бір жұмысты 8 жұмысшы 12 сағатта орындайды.
+        16 жұмысшы сол жұмысты неше сағатта орындайды?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t5" value="A">
+        A) 4 сағат
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t5" value="B">
+        B) 6 сағат
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t5" value="C">
+        C) 24 сағат
+      </label>
+
+    </div>
+
+
+    <!-- 6 -->
+
+    <div class="test-question">
+
+      <h3>
+        6. Тіктөртбұрыштың ауданы 96 см².
+        Ұзындығы 12 см болса, ені неше сантиметр?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t6" value="A">
+        A) 6 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t6" value="B">
+        B) 8 см
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t6" value="C">
+        C) 10 см
+      </label>
+
+    </div>
+
+
+    <!-- 7 -->
+
+    <div class="test-question">
+
+      <h3>
+        7. Автокөлік жолды 72 км/сағ жылдамдықпен
+        5 сағатта жүрді. Сол жолды 90 км/сағ жылдамдықпен
+        неше сағатта жүреді?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t7" value="A">
+        A) 4 сағат
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t7" value="B">
+        B) 5 сағат
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t7" value="C">
+        C) 6 сағат
+      </label>
+
+    </div>
+
+
+    <!-- 8 -->
+
+    <div class="test-question">
+
+      <h3>
+        8. Кері пропорционал шамалардың сәйкес мәндерінің
+        қандай амалының нәтижесі тұрақты болады?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t8" value="A">
+        A) Қосындысы
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t8" value="B">
+        B) Айырмасы
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t8" value="C">
+        C) Көбейтіндісі
+      </label>
+
+    </div>
+
+
+    <!-- 9 -->
+
+    <div class="test-question">
+
+      <h3>
+        9. 15 адамға жететін азық 20 күнге арналған.
+        Сол азық 25 адамға неше күнге жетеді?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t9" value="A">
+        A) 10 күн
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t9" value="B">
+        B) 12 күн
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t9" value="C">
+        C) 15 күн
+      </label>
+
+    </div>
+
+
+    <!-- 10 -->
+
+    <div class="test-question">
+
+      <h3>
+        10. 6 бірдей кран бассейнді 8 сағатта толтырады.
+        12 кран қатар жұмыс істесе, бассейн неше сағатта толады?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t10" value="A">
+        A) 3 сағат
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t10" value="B">
+        B) 4 сағат
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t10" value="C">
+        C) 6 сағат
+      </label>
+
+    </div>
+
+
+    <button class="test-check" onclick="finishTest()">
+      ✅ Тестті аяқтау
+    </button>
+
+    <div id="testResult"></div>
+
+    <button id="retryButton" onclick="retryTest()">
+      🔄 Тестті қайта тапсыру
+    </button>
+
+  </div>
+
+</div>
+
+
+<footer>
+  ©️ 2026 KEMENGER ONLINE
+</footer>
+
+
+<script>
+
+  /* =========================
+     10 ТАПСЫРМАНЫ ТЕКСЕРУ
+  ========================= */
+
+  let score = 0;
+  let answered = {};
+
+
+  function updateScore() {
+
+    document.getElementById("total").innerHTML =
+      "Нәтиже: " + score + " / 10";
+
+
+    if (score === 10) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🏆 Керемет! Барлық 10 тапсырманы дұрыс орындадың!";
+
+    } else if (score >= 8) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🌟 Өте жақсы! Нәтижең: " + score + " / 10";
+
+    } else if (score >= 5) {
+
+      document.getElementById("finalResult").innerHTML =
+        "👍 Жақсы! Нәтижең: " + score + " / 10";
+
+    } else if (score > 0) {
+
+      document.getElementById("finalResult").innerHTML =
+        "📚 Талпынысың жақсы! Сабақты тағы қайталап көр.";
+
+    } else {
+
+      document.getElementById("finalResult").innerHTML = "";
+
+    }
+
+  }
+
+
+  function check(number, correctAnswer) {
+
+    const input =
+      document.getElementById("q" + number);
+
+    const result =
+      document.getElementById("r" + number);
+
+
+    if (answered[number]) {
+      return;
+    }
+
+
+    if (input.value === "") {
+
+      result.innerHTML =
+        "⚠️ Алдымен жауапты енгіз!";
+
+      result.style.color =
+        "orange";
+
+      return;
+    }
+
+
+    const answer =
+      Number(input.value);
+
+
+    if (answer === correctAnswer) {
+
+      result.innerHTML =
+        "✅ Дұрыс!";
+
+      result.style.color =
+        "green";
+
+      score++;
+
+      answered[number] = true;
+
+      input.disabled = true;
+
+    } else {
+
+      result.innerHTML =
+        "❌ Қате. Қайта байқап көр.";
+
+      result.style.color =
+        "red";
+
+    }
+
+
+    updateScore();
+
+  }
+
+
+  /* =========================
+     БӨЛШЕКТІ ТЕКСЕРУ
+  ========================= */
+
+  function checkFraction(number, correctNum, correctDen) {
+
+    if (answered[number]) {
+      return;
+    }
+
+
+    const numerator =
+      document.getElementById(
+        "q" + number + "num"
+      );
+
+
+    const denominator =
+      document.getElementById(
+        "q" + number + "den"
+      );
+
+
+    const result =
+      document.getElementById(
+        "r" + number
+      );
+
+
+    if (
+      numerator.value === "" ||
+      denominator.value === ""
+    ) {
+
+      result.innerHTML =
+        "⚠️ Алым мен бөлімді толық енгіз!";
+
+      result.style.color =
+        "orange";
+
+      return;
+    }
+
+
+    const num =
+      Number(numerator.value);
+
+    const den =
+      Number(denominator.value);
+
+
+    if (den === 0) {
+
+      result.innerHTML =
+        "⚠️ Бөлім нөлге тең болмауы керек!";
+
+      result.style.color =
+        "orange";
+
+      return;
+    }
+
+
+    if (
+      num * correctDen ===
+      den * correctNum
+    ) {
+
+      result.innerHTML =
+        "✅ Дұрыс!";
+
+      result.style.color =
+        "green";
+
+      score++;
+
+      answered[number] = true;
+
+      numerator.disabled = true;
+      denominator.disabled = true;
+
+    } else {
+
+      result.innerHTML =
+        "❌ Қате. Қайта байқап көр.";
+
+      result.style.color =
+        "red";
+
+    }
+
+
+    updateScore();
+
+  }
+
+
+  /* =========================
+     ТЕСТТІ БАСТАУ
+  ========================= */
+
+  function startTest() {
+
+    const testSection =
+      document.getElementById("testSection");
+
+    testSection.style.display =
+      "block";
+
+    testSection.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =========================
+     ТЕСТ ЖАУАПТАРЫ
+  ========================= */
+
+  const correctAnswers = {
+
+    t1: "B",
+
+    t2: "B",
+
+    t3: "B",
+
+    t4: "A",
+
+    t5: "B",
+
+    t6: "B",
+
+    t7: "A",
+
+    t8: "C",
+
+    t9: "B",
+
+    t10: "B"
+
+  };
+
+
+  /* =========================
+     ТЕСТТІ АЯҚТАУ
+  ========================= */
+
+  function finishTest() {
+
+    let testScore = 0;
+
+    let answeredCount = 0;
+
+
+    for (let i = 1; i <= 10; i++) {
+
+      const questionName =
+        "t" + i;
+
+
+      const selected =
+        document.querySelector(
+          'input[name="' +
+          questionName +
+          '"]:checked'
+        );
+
+
+      if (selected) {
+
+        answeredCount++;
+
+
+        if (
+          selected.value ===
+          correctAnswers[questionName]
+        ) {
+
+          testScore++;
+
+        }
+
+      }
+
+    }
+
+
+    const result =
+      document.getElementById(
+        "testResult"
+      );
+
+
+    if (answeredCount < 10) {
+
+      result.style.display =
+        "block";
+
+
+      result.innerHTML =
+        "⚠️ Барлық сұраққа жауап бер!<br><br>" +
+        "Жауап берілгені: " +
+        answeredCount +
+        " / 10";
+
+      return;
+
+    }
+
+
+    const percent =
+      testScore * 10;
+
+
+    result.style.display =
+      "block";
+
+
+    if (testScore === 10) {
+
+      result.innerHTML =
+        "🏆 КЕРЕМЕТ!<br><br>" +
+        "Нәтижең: 10 / 10<br>" +
+        "100% — Өте жоғары нәтиже!";
+
+    }
+
+    else if (testScore >= 8) {
+
+      result.innerHTML =
+        "🌟 ӨТЕ ЖАҚСЫ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тақырыпты жақсы меңгердің!";
+
+    }
+
+    else if (testScore >= 5) {
+
+      result.innerHTML =
+        "👍 ЖАҚСЫ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тағы біраз жаттығу қажет.";
+
+    }
+
+    else {
+
+      result.innerHTML =
+        "📚 ҚАЙТА ҚАРАП ШЫҚ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Сабақ материалын қайталап көр.";
+
+    }
+
+
+    document.getElementById(
+      "retryButton"
+    ).style.display = "block";
+
+
+    /* ДҰРЫС / ҚАТЕ ЖАУАПТАР */
+
+    for (let i = 1; i <= 10; i++) {
+
+      const questionName =
+        "t" + i;
+
+
+      const selected =
+        document.querySelector(
+          'input[name="' +
+          questionName +
+          '"]:checked'
+        );
+
+
+      const options =
+        document.querySelectorAll(
+          'input[name="' +
+          questionName +
+          '"]'
+        );
+
+
+      options.forEach(function(option) {
+
+        const label =
+          option.parentElement;
+
+
+        if (
+          option.value ===
+          correctAnswers[questionName]
+        ) {
+
+          label.classList.add(
+            "correct"
+          );
+
+        }
+
+
+        if (
+          selected &&
+          option.value ===
+          selected.value &&
+          option.value !==
+          correctAnswers[questionName]
+        ) {
+
+          label.classList.add(
+            "wrong"
+          );
+
+        }
+
+
+        option.disabled = true;
+
+      });
+
+    }
+
+
+    document.querySelector(
+      ".test-check"
+    ).disabled = true;
+
+
+    document.querySelector(
+      ".test-check"
+    ).style.opacity = "0.5";
+
+  }
+
+
+  /* =========================
+     ҚАЙТА ТАПСЫРУ
+  ========================= */
+
+  function retryTest() {
+
+    for (let i = 1; i <= 10; i++) {
+
+      const options =
+        document.querySelectorAll(
+          'input[name="t' + i + '"]'
+        );
+
+
+      options.forEach(function(option) {
+
+        option.checked = false;
+
+        option.disabled = false;
+
+
+        option.parentElement.classList.remove(
+          "correct"
+        );
+
+
+        option.parentElement.classList.remove(
+          "wrong"
+        );
+
+      });
+
+    }
+
+
+    document.getElementById(
+      "testResult"
+    ).style.display = "none";
+
+
+    document.getElementById(
+      "retryButton"
+    ).style.display = "none";
+
+
+    const button =
+      document.querySelector(
+        ".test-check"
+      );
+
+
+    button.disabled = false;
+
+    button.style.opacity = "1";
+
+  }
+
+</script>
+
+</body>
+</html>
