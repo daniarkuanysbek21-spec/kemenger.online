@@ -86,6 +86,10 @@
       margin: 8px 0;
     }
 
+    /* =========================
+       ДОСТУП
+    ========================= */
+
     .access-row {
       margin-top: 16px;
     }
@@ -122,12 +126,100 @@
       color: #777;
     }
 
+    /* =========================
+       ҚҰРЫЛҒЫЛАР
+    ========================= */
+
+    .devices-box {
+      margin-top: 20px;
+      padding: 16px;
+      background: #f7f9fc;
+      border: 1px solid #dfe5ef;
+      border-radius: 12px;
+    }
+
+    .devices-title {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #173b7a;
+    }
+
+    .device-count {
+      display: inline-block;
+      background: #e8eef9;
+      color: #173b7a;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      margin-left: 5px;
+    }
+
+    .device-count.full {
+      background: #ffe4e1;
+      color: #c0392b;
+    }
+
+    .device-item {
+      background: white;
+      border: 1px solid #dce3ee;
+      border-radius: 10px;
+      padding: 13px;
+      margin-top: 10px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .device-info {
+      flex: 1;
+    }
+
+    .device-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .device-browser {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .device-date {
+      font-size: 12px;
+      color: #888;
+      margin-top: 5px;
+    }
+
+    .delete-device {
+      border: none;
+      background: #e74c3c;
+      color: white;
+      padding: 9px 13px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .delete-device:hover {
+      background: #c0392b;
+    }
+
+    .no-device {
+      color: #777;
+      font-size: 14px;
+    }
+
     #status {
       padding: 20px;
       text-align: center;
     }
 
     @media (max-width: 650px) {
+
       header {
         padding: 15px;
         flex-direction: column;
@@ -141,6 +233,15 @@
 
       main {
         padding: 0 15px;
+      }
+
+      .device-item {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .delete-device {
+        width: 100%;
       }
     }
   </style>
@@ -174,10 +275,18 @@
     <h2>Оқушыларды басқару</h2>
 
     <p>
-      Оқушы сұраған сыныпқа доступты осы жерден ашып немесе жаба аласыз.
+      Оқушы сұраған сыныпқа доступты осы жерден
+      ашып немесе жаба аласыз.
+    </p>
+
+    <p>
+      Әр оқушы ең көбі 2 құрылғы пайдалана алады.
+      Қажет болған жағдайда тіркелген құрылғыны
+      осы жерден өшіруге болады.
     </p>
 
   </div>
+
 
   <div id="status">
     Оқушылар жүктелуде...
@@ -189,6 +298,10 @@
 
 
 <script type="module">
+
+  /* =========================
+     FIREBASE
+  ========================= */
 
   import {
     initializeApp
@@ -209,7 +322,8 @@
     collection,
     getDocs,
     doc,
-    updateDoc
+    updateDoc,
+    deleteField
   }
   from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
@@ -261,6 +375,10 @@
     document.getElementById("status");
 
 
+  /* =========================
+     АДМИНДІ ТЕКСЕРУ
+  ========================= */
+
   onAuthStateChanged(
     auth,
     async (user) => {
@@ -296,6 +414,10 @@
     }
   );
 
+
+  /* =========================
+     ОҚУШЫЛАРДЫ ЖҮКТЕУ
+  ========================= */
 
   async function loadStudents() {
 
@@ -336,6 +458,8 @@
             studentDoc.data();
 
 
+          /* АДМИНДІ КӨРСЕТПЕУ */
+
           if (
             data.role === "admin" ||
             (
@@ -346,6 +470,7 @@
           ) {
 
             return;
+
           }
 
 
@@ -354,6 +479,7 @@
 
           const card =
             document.createElement("div");
+
 
           card.className =
             "student";
@@ -381,13 +507,18 @@
               : "";
 
 
+          /* =========================
+             ДОСТУП
+          ========================= */
+
           let accessHtml = "";
 
 
           if (requestedClass) {
 
             const field =
-              "grade" + requestedClass;
+              "grade" +
+              requestedClass;
 
 
             const hasAccess =
@@ -425,6 +556,7 @@
                       ? "open"
                       : "closed"
                   }"
+
                   onclick="changeAccess(
                     '${studentDoc.id}',
                     '${field}',
@@ -444,7 +576,9 @@
 
             `;
 
-          } else {
+          }
+
+          else {
 
             accessHtml = `
 
@@ -457,6 +591,158 @@
 
           }
 
+
+          /* =========================
+             ҚҰРЫЛҒЫЛАР
+          ========================= */
+
+          const devices =
+            data.devices || {};
+
+
+          const deviceEntries =
+            Object.entries(devices);
+
+
+          const deviceCount =
+            deviceEntries.length;
+
+
+          let devicesHtml = `
+
+            <div class="devices-box">
+
+              <div class="devices-title">
+
+                📱 Құрылғылар
+
+                <span class="device-count ${
+                  deviceCount >= 2
+                    ? "full"
+                    : ""
+                }">
+
+                  ${deviceCount} / 2
+
+                </span>
+
+              </div>
+
+          `;
+
+
+          if (
+            deviceCount === 0
+          ) {
+
+            devicesHtml += `
+
+              <div class="no-device">
+                Бұл аккаунтқа әзірге құрылғы тіркелмеген.
+              </div>
+
+            `;
+
+          }
+
+          else {
+
+            deviceEntries.forEach(
+              ([deviceId, device], index) => {
+
+                const deviceName =
+                  device.deviceName ||
+                  "Белгісіз құрылғы";
+
+
+                const browser =
+                  device.browser ||
+                  "Белгісіз браузер";
+
+
+                let lastLogin =
+                  "Уақыты белгісіз";
+
+
+                if (
+                  device.lastLoginAt &&
+                  device.lastLoginAt.toDate
+                ) {
+
+                  lastLogin =
+                    formatDate(
+                      device
+                      .lastLoginAt
+                      .toDate()
+                    );
+
+                }
+
+
+                devicesHtml += `
+
+                  <div class="device-item">
+
+                    <div class="device-info">
+
+                      <div class="device-name">
+
+                        ${index + 1}.
+                        ${escapeHtml(deviceName)}
+
+                      </div>
+
+
+                      <div class="device-browser">
+
+                        🌐
+                        ${escapeHtml(browser)}
+
+                      </div>
+
+
+                      <div class="device-date">
+
+                        Соңғы кіру:
+                        ${escapeHtml(lastLogin)}
+
+                      </div>
+
+                    </div>
+
+
+                    <button
+                      class="delete-device"
+
+                      onclick="removeDevice(
+                        '${studentDoc.id}',
+                        '${escapeJs(deviceId)}',
+                        '${escapeJs(deviceName)}'
+                      )"
+                    >
+
+                      🗑 Өшіру
+
+                    </button>
+
+                  </div>
+
+                `;
+
+              }
+            );
+
+          }
+
+
+          devicesHtml += `
+            </div>
+          `;
+
+
+          /* =========================
+             КАРТОЧКА
+          ========================= */
 
           card.innerHTML = `
 
@@ -479,6 +765,9 @@
 
             ${accessHtml}
 
+
+            ${devicesHtml}
+
           `;
 
 
@@ -490,16 +779,21 @@
       );
 
 
-      if (studentCount === 0) {
+      if (
+        studentCount === 0
+      ) {
 
         status.textContent =
           "Әзірге оқушылар тіркелмеген.";
 
       }
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
       console.error(error);
+
 
       status.textContent =
         "Оқушыларды жүктеу кезінде қате шықты.";
@@ -508,6 +802,10 @@
 
   }
 
+
+  /* =========================
+     ДОСТУПТЫ ӨЗГЕРТУ
+  ========================= */
 
   window.changeAccess =
     async function(
@@ -525,17 +823,22 @@
             uid
           ),
           {
-            [field]: newValue
+
+            [field]:
+              newValue
+
           }
         );
 
 
         await loadStudents();
 
+      }
 
-      } catch (error) {
+      catch (error) {
 
         console.error(error);
+
 
         alert(
           "Доступты өзгерту кезінде қате шықты."
@@ -546,6 +849,76 @@
     };
 
 
+  /* =========================
+     ҚҰРЫЛҒЫНЫ ӨШІРУ
+  ========================= */
+
+  window.removeDevice =
+    async function(
+      uid,
+      deviceId,
+      deviceName
+    ) {
+
+      const confirmed =
+        confirm(
+          deviceName +
+          " құрылғысын өшіргіңіз келе ме?\n\n" +
+          "Өшірілгеннен кейін оқушы жаңа құрылғыны тіркей алады."
+        );
+
+
+      if (!confirmed) {
+
+        return;
+
+      }
+
+
+      try {
+
+        await updateDoc(
+          doc(
+            db,
+            "users",
+            uid
+          ),
+          {
+
+            ["devices." + deviceId]:
+              deleteField()
+
+          }
+        );
+
+
+        alert(
+          "Құрылғы сәтті өшірілді."
+        );
+
+
+        await loadStudents();
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+
+        alert(
+          "Құрылғыны өшіру кезінде қате шықты."
+        );
+
+      }
+
+    };
+
+
+  /* =========================
+     ШЫҒУ
+  ========================= */
+
   document
     .getElementById("logoutBtn")
     .addEventListener(
@@ -554,6 +927,7 @@
 
         await signOut(auth);
 
+
         window.location.href =
           "login.html";
 
@@ -561,15 +935,66 @@
     );
 
 
+  /* =========================
+     HTML ҚАУІПСІЗДІГІ
+  ========================= */
+
   function escapeHtml(text) {
 
     const div =
       document.createElement("div");
 
+
     div.textContent =
       String(text);
 
+
     return div.innerHTML;
+
+  }
+
+
+  /* =========================
+     JS МӘТІНІН ҚАУІПСІЗ ЕТУ
+  ========================= */
+
+  function escapeJs(text) {
+
+    return String(text)
+      .replace(/\\/g, "\\\\")
+      .replace(/'/g, "\\'")
+      .replace(/\r/g, "")
+      .replace(/\n/g, "\\n");
+
+  }
+
+
+  /* =========================
+     УАҚЫТТЫ КӨРСЕТУ
+  ========================= */
+
+  function formatDate(date) {
+
+    try {
+
+      return new Intl.DateTimeFormat(
+        "kk-KZ",
+        {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit"
+        }
+      ).format(date);
+
+    }
+
+    catch (error) {
+
+      return date.toLocaleString();
+
+    }
 
   }
 
