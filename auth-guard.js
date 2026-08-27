@@ -72,6 +72,71 @@ document.documentElement.style.visibility =
 
 
 /* =========================
+   КҮТУ ЭКРАНЫ
+========================= */
+
+const loadingScreen =
+  document.createElement("div");
+
+loadingScreen.id =
+  "kemenger-loading-screen";
+
+loadingScreen.innerHTML = `
+  <div style="
+    text-align:center;
+    font-family:Arial,sans-serif;
+  ">
+    <div style="
+      font-size:22px;
+      font-weight:bold;
+      margin-bottom:14px;
+    ">
+      📐 KEMENGER ONLINE
+    </div>
+
+    <div style="
+      font-size:17px;
+    ">
+      ⏳ Күте тұрыңыз...
+    </div>
+  </div>
+`;
+
+loadingScreen.style.cssText = `
+  position:fixed;
+  inset:0;
+  z-index:999999;
+  background:#ffffff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#173b7a;
+  visibility:visible;
+`;
+
+document.documentElement.appendChild(
+  loadingScreen
+);
+
+
+function showPage() {
+
+  document.documentElement.style.visibility =
+    "visible";
+
+  const screen =
+    document.getElementById(
+      "kemenger-loading-screen"
+    );
+
+  if (screen) {
+    screen.remove();
+  }
+
+}
+
+
+/* =========================
    ҚАЙ СЫНЫП ЕКЕНІН АНЫҚТАУ
 ========================= */
 
@@ -194,8 +259,7 @@ onAuthStateChanged(
           ADMIN_EMAIL.toLowerCase()
         ) {
 
-          document.documentElement.style.visibility =
-            "visible";
+          showPage();
 
           return;
 
@@ -221,8 +285,7 @@ onAuthStateChanged(
         ADMIN_EMAIL.toLowerCase()
       ) {
 
-        document.documentElement.style.visibility =
-          "visible";
+        showPage();
 
         return;
 
@@ -292,8 +355,7 @@ onAuthStateChanged(
 
       if (!requiredClass) {
 
-        document.documentElement.style.visibility =
-          "visible";
+        showPage();
 
         return;
 
@@ -324,8 +386,7 @@ onAuthStateChanged(
 
       if (hasAccess) {
 
-        document.documentElement.style.visibility =
-          "visible";
+        showPage();
 
         return;
 
