@@ -517,6 +517,14 @@
       getFirestore(app);
 
 
+    /*
+      АДМИН EMAIL
+    */
+
+    const ADMIN_EMAIL =
+      "d.kuanyshbek11@mail.ru";
+
+
     await setPersistence(
       auth,
       browserLocalPersistence
@@ -1019,12 +1027,23 @@
 
 
           /*
-            ҚҰРЫЛҒЫНЫ ТЕКСЕРУ
+            АДМИНГЕ ҚҰРЫЛҒЫ ШЕКТЕУІ ЖОҚ
+
+            ТЕК ОҚУШЫЛАРДЫҢ
+            ҚҰРЫЛҒЫСЫ ТЕКСЕРІЛЕДІ
           */
 
-          await registerDevice(
-            user
-          );
+          if (
+            !user.email ||
+            user.email.toLowerCase() !==
+            ADMIN_EMAIL.toLowerCase()
+          ) {
+
+            await registerDevice(
+              user
+            );
+
+          }
 
 
           loginMessage.style.color =
