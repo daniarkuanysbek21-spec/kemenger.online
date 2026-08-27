@@ -200,6 +200,7 @@
     <div class="subtitle">Жеке кабинет</div>
 
     <div class="tabs">
+
       <button
         type="button"
         class="tab-btn active"
@@ -215,14 +216,19 @@
       >
         Тіркелу
       </button>
+
     </div>
 
 
-    <!-- КІРУ -->
+    <!-- =========================
+         КІРУ
+    ========================== -->
 
     <form id="loginForm">
 
-      <label for="loginEmail">Email</label>
+      <label for="loginEmail">
+        Email
+      </label>
 
       <input
         type="email"
@@ -232,7 +238,9 @@
       >
 
 
-      <label for="loginPassword">Құпия сөз</label>
+      <label for="loginPassword">
+        Құпия сөз
+      </label>
 
       <input
         type="password"
@@ -249,6 +257,7 @@
         Кіру
       </button>
 
+
       <div
         id="loginMessage"
         class="message"
@@ -258,7 +267,9 @@
 
 
 
-    <!-- ТІРКЕЛУ -->
+    <!-- =========================
+         ТІРКЕЛУ
+    ========================== -->
 
     <form id="registerForm">
 
@@ -270,7 +281,9 @@
       </div>
 
 
-      <label for="fullName">Аты-жөніңіз</label>
+      <label for="fullName">
+        Аты-жөніңіз
+      </label>
 
       <input
         type="text"
@@ -280,7 +293,9 @@
       >
 
 
-      <label for="phone">Телефон нөмірі</label>
+      <label for="phone">
+        Телефон нөмірі
+      </label>
 
       <input
         type="tel"
@@ -303,18 +318,40 @@
           Сыныпты таңдаңыз
         </option>
 
-        <option value="5">5-сынып</option>
-        <option value="6">6-сынып</option>
-        <option value="7">7-сынып</option>
-        <option value="8">8-сынып</option>
-        <option value="9">9-сынып</option>
-        <option value="10">10-сынып</option>
-        <option value="11">11-сынып</option>
+        <option value="5">
+          5-сынып
+        </option>
+
+        <option value="6">
+          6-сынып
+        </option>
+
+        <option value="7">
+          7-сынып
+        </option>
+
+        <option value="8">
+          8-сынып
+        </option>
+
+        <option value="9">
+          9-сынып
+        </option>
+
+        <option value="10">
+          10-сынып
+        </option>
+
+        <option value="11">
+          11-сынып
+        </option>
 
       </select>
 
 
-      <label for="registerEmail">Email</label>
+      <label for="registerEmail">
+        Email
+      </label>
 
       <input
         type="email"
@@ -324,7 +361,9 @@
       >
 
 
-      <label for="registerPassword">Құпия сөз</label>
+      <label for="registerPassword">
+        Құпия сөз
+      </label>
 
       <input
         type="password"
@@ -360,7 +399,9 @@
           >
 
           <span>
+
             Мен
+
             <a
               href="agreement.html"
               target="_blank"
@@ -368,7 +409,9 @@
             >
               Пайдаланушы келісімімен
             </a>
+
             таныстым және оның шарттарымен келісемін.
+
           </span>
 
         </label>
@@ -382,6 +425,7 @@
       >
         Тіркелу
       </button>
+
 
       <div
         id="registerMessage"
@@ -404,6 +448,10 @@
 
   <script type="module">
 
+    /* =========================
+       FIREBASE
+    ========================= */
+
     import {
       initializeApp
     }
@@ -415,7 +463,8 @@
       signInWithEmailAndPassword,
       createUserWithEmailAndPassword,
       setPersistence,
-      browserLocalPersistence
+      browserLocalPersistence,
+      signOut
     }
     from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
@@ -424,7 +473,9 @@
       getFirestore,
       doc,
       setDoc,
-      serverTimestamp
+      runTransaction,
+      serverTimestamp,
+      Timestamp
     }
     from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
@@ -456,11 +507,14 @@
     };
 
 
-    const app = initializeApp(firebaseConfig);
+    const app =
+      initializeApp(firebaseConfig);
 
-    const auth = getAuth(app);
+    const auth =
+      getAuth(app);
 
-    const db = getFirestore(app);
+    const db =
+      getFirestore(app);
 
 
     await setPersistence(
@@ -470,59 +524,447 @@
 
 
 
+    /* =========================
+       ҚҰРЫЛҒЫ ID
+    ========================= */
+
+    function getDeviceId() {
+
+      let deviceId =
+        localStorage.getItem(
+          "kemenger_device_id"
+        );
+
+
+      if (!deviceId) {
+
+        if (
+          window.crypto &&
+          crypto.randomUUID
+        ) {
+
+          deviceId =
+            crypto.randomUUID();
+
+        }
+
+        else {
+
+          deviceId =
+            "device_" +
+            Date.now() +
+            "_" +
+            Math.random()
+            .toString(36)
+            .substring(2, 12);
+
+        }
+
+
+        localStorage.setItem(
+          "kemenger_device_id",
+          deviceId
+        );
+
+      }
+
+
+      return deviceId;
+
+    }
+
+
+
+    /* =========================
+       ҚҰРЫЛҒЫ АТАУЫ
+    ========================= */
+
+    function getDeviceName() {
+
+      const ua =
+        navigator.userAgent || "";
+
+
+      if (/iPhone/i.test(ua)) {
+
+        return "iPhone";
+
+      }
+
+
+      if (/iPad/i.test(ua)) {
+
+        return "iPad";
+
+      }
+
+
+      if (/Android/i.test(ua)) {
+
+        return "Android";
+
+      }
+
+
+      if (/Windows/i.test(ua)) {
+
+        return "Windows";
+
+      }
+
+
+      if (/Macintosh|Mac OS X/i.test(ua)) {
+
+        return "Mac";
+
+      }
+
+
+      if (/Linux/i.test(ua)) {
+
+        return "Linux";
+
+      }
+
+
+      return "Белгісіз құрылғы";
+
+    }
+
+
+
+    /* =========================
+       БРАУЗЕР АТАУЫ
+    ========================= */
+
+    function getBrowserName() {
+
+      const ua =
+        navigator.userAgent || "";
+
+
+      if (
+        /Edg/i.test(ua)
+      ) {
+
+        return "Edge";
+
+      }
+
+
+      if (
+        /CriOS|Chrome/i.test(ua) &&
+        !/Edg/i.test(ua)
+      ) {
+
+        return "Chrome";
+
+      }
+
+
+      if (
+        /FxiOS|Firefox/i.test(ua)
+      ) {
+
+        return "Firefox";
+
+      }
+
+
+      if (
+        /Safari/i.test(ua) &&
+        !/Chrome|CriOS|Edg/i.test(ua)
+      ) {
+
+        return "Safari";
+
+      }
+
+
+      return "Браузер";
+
+    }
+
+
+
+    /* =========================
+       2 ҚҰРЫЛҒЫ ЛИМИТІ
+    ========================= */
+
+    async function registerDevice(user) {
+
+      const deviceId =
+        getDeviceId();
+
+      const deviceName =
+        getDeviceName();
+
+      const browserName =
+        getBrowserName();
+
+
+      const userRef =
+        doc(
+          db,
+          "users",
+          user.uid
+        );
+
+
+      let userRole =
+        "student";
+
+
+      await runTransaction(
+        db,
+        async (transaction) => {
+
+          const userSnap =
+            await transaction.get(
+              userRef
+            );
+
+
+          if (!userSnap.exists()) {
+
+            throw new Error(
+              "USER_DATA_NOT_FOUND"
+            );
+
+          }
+
+
+          const data =
+            userSnap.data();
+
+
+          userRole =
+            data.role || "student";
+
+
+          /* АДМИНГЕ ШЕКТЕУ ЖОҚ */
+
+          if (
+            userRole === "admin"
+          ) {
+
+            return;
+
+          }
+
+
+          const devices =
+            data.devices || {};
+
+
+          const deviceIds =
+            Object.keys(devices);
+
+
+          /*
+            БҰЛ ҚҰРЫЛҒЫ БҰРЫННАН
+            ТІРКЕЛГЕН БОЛСА
+          */
+
+          if (
+            devices[deviceId]
+          ) {
+
+            devices[deviceId] = {
+
+              ...devices[deviceId],
+
+              deviceName:
+                deviceName,
+
+              browser:
+                browserName,
+
+              lastLoginAt:
+                Timestamp.now()
+
+            };
+
+
+            transaction.update(
+              userRef,
+              {
+                devices: devices
+              }
+            );
+
+
+            return;
+
+          }
+
+
+          /*
+            2 ҚҰРЫЛҒЫ ТОЛЫП ТҰРСА
+          */
+
+          if (
+            deviceIds.length >= 2
+          ) {
+
+            throw new Error(
+              "DEVICE_LIMIT_REACHED"
+            );
+
+          }
+
+
+          /*
+            ЖАҢА ҚҰРЫЛҒЫНЫ
+            ТІРКЕУ
+          */
+
+          devices[deviceId] = {
+
+            deviceId:
+              deviceId,
+
+            deviceName:
+              deviceName,
+
+            browser:
+              browserName,
+
+            firstLoginAt:
+              Timestamp.now(),
+
+            lastLoginAt:
+              Timestamp.now()
+
+          };
+
+
+          transaction.update(
+            userRef,
+            {
+              devices: devices
+            }
+          );
+
+        }
+      );
+
+
+      return userRole;
+
+    }
+
+
+
+    /* =========================
+       ЭЛЕМЕНТТЕР
+    ========================= */
+
     const loginTab =
-      document.getElementById("loginTab");
+      document.getElementById(
+        "loginTab"
+      );
 
     const registerTab =
-      document.getElementById("registerTab");
+      document.getElementById(
+        "registerTab"
+      );
 
     const loginForm =
-      document.getElementById("loginForm");
+      document.getElementById(
+        "loginForm"
+      );
 
     const registerForm =
-      document.getElementById("registerForm");
+      document.getElementById(
+        "registerForm"
+      );
 
     const loginMessage =
-      document.getElementById("loginMessage");
+      document.getElementById(
+        "loginMessage"
+      );
 
     const registerMessage =
-      document.getElementById("registerMessage");
+      document.getElementById(
+        "registerMessage"
+      );
 
 
 
-    loginTab.addEventListener("click", () => {
+    /* =========================
+       TAB — КІРУ
+    ========================= */
 
-      loginTab.classList.add("active");
+    loginTab.addEventListener(
+      "click",
+      () => {
 
-      registerTab.classList.remove("active");
-
-      loginForm.style.display = "block";
-
-      registerForm.style.display = "none";
-
-      loginMessage.textContent = "";
-
-      registerMessage.textContent = "";
-
-    });
+        loginTab
+        .classList
+        .add("active");
 
 
+        registerTab
+        .classList
+        .remove("active");
 
-    registerTab.addEventListener("click", () => {
 
-      registerTab.classList.add("active");
+        loginForm.style.display =
+          "block";
 
-      loginTab.classList.remove("active");
 
-      registerForm.style.display = "block";
+        registerForm.style.display =
+          "none";
 
-      loginForm.style.display = "none";
 
-      loginMessage.textContent = "";
+        loginMessage.textContent =
+          "";
 
-      registerMessage.textContent = "";
 
-    });
+        registerMessage.textContent =
+          "";
+
+      }
+    );
+
+
+
+    /* =========================
+       TAB — ТІРКЕЛУ
+    ========================= */
+
+    registerTab.addEventListener(
+      "click",
+      () => {
+
+        registerTab
+        .classList
+        .add("active");
+
+
+        loginTab
+        .classList
+        .remove("active");
+
+
+        registerForm.style.display =
+          "block";
+
+
+        loginForm.style.display =
+          "none";
+
+
+        loginMessage.textContent =
+          "";
+
+
+        registerMessage.textContent =
+          "";
+
+      }
+    );
 
 
 
@@ -539,18 +981,24 @@
 
         const email =
           document
-          .getElementById("loginEmail")
+          .getElementById(
+            "loginEmail"
+          )
           .value
           .trim();
 
 
         const password =
           document
-          .getElementById("loginPassword")
+          .getElementById(
+            "loginPassword"
+          )
           .value;
 
 
-        loginMessage.style.color = "#555";
+        loginMessage.style.color =
+          "#555";
+
 
         loginMessage.textContent =
           "Кіру орындалуда...";
@@ -558,32 +1006,107 @@
 
         try {
 
-          await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
+          const userCredential =
+            await signInWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+
+
+          const user =
+            userCredential.user;
+
+
+          /*
+            ҚҰРЫЛҒЫНЫ ТЕКСЕРУ
+          */
+
+          await registerDevice(
+            user
           );
 
 
-          loginMessage.style.color = "green";
+          loginMessage.style.color =
+            "green";
+
 
           loginMessage.textContent =
             "Сәтті кірдіңіз!";
 
 
-          setTimeout(() => {
+          setTimeout(
+            () => {
 
-            window.location.href =
-              "index.html";
+              window.location.href =
+                "index.html";
 
-          }, 700);
+            },
+            700
+          );
 
 
-        } catch (error) {
+        }
+
+        catch (error) {
 
           console.error(error);
 
-          loginMessage.style.color = "red";
+
+          /*
+            ҮШІНШІ ҚҰРЫЛҒЫ
+          */
+
+          if (
+            error.message ===
+            "DEVICE_LIMIT_REACHED"
+          ) {
+
+            await signOut(auth);
+
+
+            loginMessage.style.color =
+              "red";
+
+
+            loginMessage.innerHTML =
+              "⛔ Бұл аккаунтқа 2 құрылғы тіркеліп қойған.<br><br>" +
+              "Үшінші құрылғыдан кіруге рұқсат жоқ.<br>" +
+              "Жаңа құрылғы қосу үшін әкімшіге хабарласыңыз.";
+
+
+            return;
+
+          }
+
+
+          /*
+            FIREBASE-ДА USER ҚҰЖАТЫ ЖОҚ
+          */
+
+          if (
+            error.message ===
+            "USER_DATA_NOT_FOUND"
+          ) {
+
+            await signOut(auth);
+
+
+            loginMessage.style.color =
+              "red";
+
+
+            loginMessage.textContent =
+              "Пайдаланушы мәліметтері табылмады.";
+
+
+            return;
+
+          }
+
+
+          loginMessage.style.color =
+            "red";
 
 
           if (
@@ -603,6 +1126,21 @@
 
             loginMessage.textContent =
               "Email дұрыс жазылмаған.";
+
+          }
+
+          else if (
+            error.code ===
+            "permission-denied" ||
+            error.code ===
+            "firestore/permission-denied"
+          ) {
+
+            await signOut(auth);
+
+
+            loginMessage.textContent =
+              "Құрылғыны тексеруге Firebase рұқсат бермеді.";
 
           }
 
@@ -633,59 +1171,77 @@
 
         const fullName =
           document
-          .getElementById("fullName")
+          .getElementById(
+            "fullName"
+          )
           .value
           .trim();
 
 
         const phone =
           document
-          .getElementById("phone")
+          .getElementById(
+            "phone"
+          )
           .value
           .trim();
 
 
         const requestedClass =
           document
-          .getElementById("requestedClass")
+          .getElementById(
+            "requestedClass"
+          )
           .value;
 
 
         const email =
           document
-          .getElementById("registerEmail")
+          .getElementById(
+            "registerEmail"
+          )
           .value
           .trim();
 
 
         const password =
           document
-          .getElementById("registerPassword")
+          .getElementById(
+            "registerPassword"
+          )
           .value;
 
 
         const confirmPassword =
           document
-          .getElementById("confirmPassword")
+          .getElementById(
+            "confirmPassword"
+          )
           .value;
 
 
         const agreement =
           document
-          .getElementById("agreement")
+          .getElementById(
+            "agreement"
+          )
           .checked;
 
 
 
-        /* ПАЙДАЛАНУШЫ КЕЛІСІМІН ТЕКСЕРУ */
+        /* =========================
+           КЕЛІСІМ
+        ========================= */
 
         if (!agreement) {
 
           registerMessage.style.color =
             "red";
 
+
           registerMessage.textContent =
             "Тіркелу үшін Пайдаланушы келісімімен келісуіңіз қажет.";
+
 
           return;
 
@@ -693,15 +1249,22 @@
 
 
 
+        /* =========================
+           ҚҰПИЯ СӨЗ
+        ========================= */
+
         if (
-          password !== confirmPassword
+          password !==
+          confirmPassword
         ) {
 
           registerMessage.style.color =
             "red";
 
+
           registerMessage.textContent =
             "Құпия сөздер бірдей емес.";
+
 
           return;
 
@@ -716,8 +1279,10 @@
           registerMessage.style.color =
             "red";
 
+
           registerMessage.textContent =
             "Құпия сөз кемінде 6 таңбадан тұруы керек.";
+
 
           return;
 
@@ -727,6 +1292,7 @@
 
         registerMessage.style.color =
           "#555";
+
 
         registerMessage.textContent =
           "Тіркелу орындалуда...";
@@ -746,6 +1312,44 @@
             userCredential.user;
 
 
+          /*
+            ТІРКЕЛГЕН ҚҰРЫЛҒЫ —
+            1-ҚҰРЫЛҒЫ
+          */
+
+          const deviceId =
+            getDeviceId();
+
+          const deviceName =
+            getDeviceName();
+
+          const browserName =
+            getBrowserName();
+
+
+          const firstDevice = {};
+
+
+          firstDevice[deviceId] = {
+
+            deviceId:
+              deviceId,
+
+            deviceName:
+              deviceName,
+
+            browser:
+              browserName,
+
+            firstLoginAt:
+              Timestamp.now(),
+
+            lastLoginAt:
+              Timestamp.now()
+
+          };
+
+
 
           await setDoc(
             doc(
@@ -755,41 +1359,69 @@
             ),
             {
 
-              uid: user.uid,
+              uid:
+                user.uid,
 
-              name: fullName,
+              name:
+                fullName,
 
-              fullName: fullName,
+              fullName:
+                fullName,
 
-              phone: phone,
+              phone:
+                phone,
 
-              email: email,
+              email:
+                email,
 
-              role: "student",
+              role:
+                "student",
 
               requestedClass:
                 requestedClass,
 
-              grade5: false,
+              grade5:
+                false,
 
-              grade6: false,
+              grade6:
+                false,
 
-              grade7: false,
+              grade7:
+                false,
 
-              grade8: false,
+              grade8:
+                false,
 
-              grade9: false,
+              grade9:
+                false,
 
-              grade10: false,
+              grade10:
+                false,
 
-              grade11: false,
+              grade11:
+                false,
 
 
-              /* ПАЙДАЛАНУШЫ КЕЛІСІМІ */
+              /* =========================
+                 ҚҰРЫЛҒЫЛАР
+              ========================= */
 
-              termsAccepted: true,
+              devices:
+                firstDevice,
 
-              termsVersion: "1.0",
+              deviceLimit:
+                2,
+
+
+              /* =========================
+                 ПАЙДАЛАНУШЫ КЕЛІСІМІ
+              ========================= */
+
+              termsAccepted:
+                true,
+
+              termsVersion:
+                "1.0",
 
               termsAcceptedAt:
                 serverTimestamp(),
@@ -805,21 +1437,29 @@
           registerMessage.style.color =
             "green";
 
+
           registerMessage.innerHTML =
-            "Сәтті тіркелдіңіз!<br>Сұранысыңыз әкімшіге жіберілді.";
+            "Сәтті тіркелдіңіз!<br>" +
+            "Сұранысыңыз әкімшіге жіберілді.";
 
 
-          setTimeout(() => {
+          setTimeout(
+            () => {
 
-            window.location.href =
-              "index.html";
+              window.location.href =
+                "index.html";
 
-          }, 1500);
+            },
+            1500
+          );
 
 
-        } catch (error) {
+        }
+
+        catch (error) {
 
           console.error(error);
+
 
           registerMessage.style.color =
             "red";
