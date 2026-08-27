@@ -121,21 +121,17 @@ document.documentElement.appendChild(
 
 function showPage() {
 
-  setTimeout(() => {
+  document.documentElement.style.visibility =
+    "visible";
 
-    document.documentElement.style.visibility =
-      "visible";
+  const screen =
+    document.getElementById(
+      "kemenger-loading-screen"
+    );
 
-    const screen =
-      document.getElementById(
-        "kemenger-loading-screen"
-      );
-
-    if (screen) {
-      screen.remove();
-    }
-
-  }, 3000);
+  if (screen) {
+    screen.remove();
+  }
 
 }
 
