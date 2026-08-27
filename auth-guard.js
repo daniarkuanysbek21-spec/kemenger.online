@@ -172,6 +172,46 @@ onAuthStateChanged(
     try {
 
       /*
+        АДМИН БЕТІН ҚОРҒАУ
+        ТЕК АДМИН КІРЕ АЛАДЫ
+      */
+
+      const path =
+        window.location.pathname
+        .toLowerCase();
+
+      const fileName =
+        path.split("/").pop();
+
+
+      if (
+        fileName === "admin.html"
+      ) {
+
+        if (
+          user.email &&
+          user.email.toLowerCase() ===
+          ADMIN_EMAIL.toLowerCase()
+        ) {
+
+          document.documentElement.style.visibility =
+            "visible";
+
+          return;
+
+        }
+
+
+        window.location.replace(
+          "/index.html"
+        );
+
+        return;
+
+      }
+
+
+      /*
         АДМИНГЕ БАРЛЫҒЫ АШЫҚ
       */
 
