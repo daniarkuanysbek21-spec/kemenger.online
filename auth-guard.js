@@ -135,7 +135,7 @@ function showPage() {
       screen.remove();
     }
 
-  }, 500);
+  }, 3000);
 
 }
 
