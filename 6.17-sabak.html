@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>17-сабақ — Теріс сандарды қосу | Kemenger Online</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #173b7a;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #173b7a, #2d65c8);
+      color: white;
+      padding: 55px 7%;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 18px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+    .section {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    }
+
+    .section h2 {
+      margin-bottom: 15px;
+    }
+
+    .video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111827;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 55px;
+      overflow: hidden;
+    }
+
+    .video iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .button {
+      display: inline-block;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    .task {
+      background: #f7f9fc;
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    input[type="number"] {
+      padding: 11px;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #ccd3df;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .result {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    #total {
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #finalResult {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #eef4ff;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .start-test-area {
+      text-align: center;
+      margin-top: 30px;
+      padding: 25px;
+      background: #eef4ff;
+      border-radius: 14px;
+    }
+
+    .start-test-area p {
+      margin-bottom: 5px;
+      font-size: 17px;
+    }
+
+    .start-test-button {
+      display: inline-block;
+      background: #173b7a;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.2s;
+    }
+
+    .start-test-button:hover {
+      background: #2d65c8;
+      transform: translateY(-1px);
+    }
+
+    #testSection {
+      display: none;
+    }
+
+    .test-question {
+      background: #f7f9fc;
+      padding: 20px;
+      border-radius: 14px;
+      margin-top: 18px;
+      border: 1px solid #e1e6ef;
+    }
+
+    .test-question h3 {
+      margin-bottom: 15px;
+      line-height: 1.5;
+      font-size: 17px;
+    }
+
+    .option {
+      display: block;
+      background: white;
+      border: 1px solid #ccd3df;
+      padding: 14px;
+      border-radius: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background: #eef4ff;
+      border-color: #2d65c8;
+    }
+
+    .option input[type="radio"] {
+      width: auto;
+      margin: 0 8px 0 0;
+      cursor: pointer;
+    }
+
+    .test-check {
+      margin-top: 25px;
+      background: #173b7a;
+      color: white;
+      padding: 14px 25px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .test-check:hover {
+      background: #2d65c8;
+    }
+
+    #testResult {
+      display: none;
+      margin-top: 25px;
+      padding: 25px;
+      border-radius: 14px;
+      background: #eef4ff;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #retryButton {
+      display: none;
+      margin: 20px auto 0;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .correct {
+      background: #dff6e5 !important;
+      border-color: #35a853 !important;
+    }
+
+    .wrong {
+      background: #ffe2e2 !important;
+      border-color: #e53935 !important;
+    }
+
+    /* БӨЛШЕКТЕР */
+
+    .frac {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      line-height: 1.05;
+      margin: 0 4px;
+      min-width: 25px;
+    }
+
+    .frac .top {
+      border-bottom: 1.5px solid #172033;
+      padding: 0 5px 3px;
+    }
+
+    .frac .bottom {
+      padding: 3px 5px 0;
+    }
+
+    .fraction-input {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      width: 130px;
+      margin-top: 15px;
+    }
+
+    .fraction-input input {
+      width: 100px;
+      text-align: center;
+      margin: 4px 0;
+    }
+
+    .fraction-line {
+      width: 105px;
+      height: 2px;
+      background: #172033;
+      margin: 2px 0;
+    }
+
+    .fraction-label {
+      font-size: 13px;
+      color: #667085;
+    }
+
+    /* КООРДИНАТАЛЫҚ ТҮЗУ */
+
+    .number-line-box {
+      margin-top: 20px;
+      padding: 18px 10px;
+      background: #eef4ff;
+      border-radius: 14px;
+      overflow-x: auto;
+    }
+
+    .number-line-title {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .number-line {
+      min-width: 650px;
+      width: 100%;
+      height: 190px;
+    }
+
+    footer {
+      background: #14284e;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 15px;
+      }
+
+      .logo {
+        font-size: 17px;
+      }
+
+      .hero {
+        padding: 40px 20px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .container {
+        padding: 20px 12px;
+      }
+
+      .section {
+        padding: 18px;
+      }
+
+      .test-question {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">📐 KEMENGER ONLINE</div>
+  <a class="back" href="6-synyp.html">← 6-сынып</a>
+</header>
+
+<section class="hero">
+  <h1>17-сабақ. Теріс сандарды қосу</h1>
+  <p>6-сынып • Математика</p>
+</section>
+
+<div class="container">
+
+  <!-- ВИДЕО -->
+
+  <div class="section">
+
+    <h2>🎥 Видеосабақ</h2>
+
+    <div class="video">
+
+      <iframe
+        src="🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР 🔴"
+        title="Kemenger Online видеосабақ"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+
+    </div>
+
+    <p style="margin-top:15px;">
+      Видеосабақты көріп, тақырыпты меңгеріп ал.
+    </p>
+
+  </div>
+
+
+  <!-- ТАҚЫРЫПТЫҚ АНЫҚТАМА -->
+
+  <div class="section">
+
+    <h2>📚 Тақырыптық анықтама</h2>
+
+    <p style="margin-bottom:15px;">
+      Екі теріс санды қосқанда олардың модульдерін қосып,
+      шыққан санның алдына <b>«−» таңбасын</b> қоямыз.
+    </p>
+
+    <p style="margin-bottom:15px; padding:15px; background:#eef4ff; border-radius:10px;">
+      <b>Ереже:</b><br><br>
+      (−a) + (−b) = −(a + b)<br><br>
+      Мысалы:<br>
+      −5 + (−3) = −(5 + 3) = −8<br>
+      −12 + (−7) = −19
+    </p>
+
+    <p style="margin-bottom:15px;">
+      Екі теріс санның қосындысы әрқашан <b>теріс сан</b> болады.
+      Қосындының модулі қосылғыштардың модульдерінің қосындысына тең.
+    </p>
+
+    <p>
+      Координаталық түзуде теріс санды қосу үшін бастапқы нүктеден
+      <b>солға қарай</b> қажетті бірлік санына жылжимыз.
+      Ал 0 санын қосқанда сан өзгермейді:
+      <b>a + 0 = a</b>.
+    </p>
+
+
+    <!-- СЫЗБА -->
+
+    <div class="number-line-box">
+
+      <div class="number-line-title">
+        −3 + (−4) = −7
+      </div>
+
+      <svg class="number-line" viewBox="0 0 700 190">
+
+        <line
+          x1="40"
+          y1="110"
+          x2="660"
+          y2="110"
+          stroke="#172033"
+          stroke-width="3"
+        />
+
+        <polygon
+          points="660,110 645,102 645,118"
+          fill="#172033"
+        />
+
+        <g stroke="#172033" stroke-width="2">
+          <line x1="80" y1="100" x2="80" y2="120"/>
+          <line x1="130" y1="100" x2="130" y2="120"/>
+          <line x1="180" y1="100" x2="180" y2="120"/>
+          <line x1="230" y1="100" x2="230" y2="120"/>
+          <line x1="280" y1="100" x2="280" y2="120"/>
+          <line x1="330" y1="100" x2="330" y2="120"/>
+          <line x1="380" y1="100" x2="380" y2="120"/>
+          <line x1="430" y1="100" x2="430" y2="120"/>
+          <line x1="480" y1="100" x2="480" y2="120"/>
+          <line x1="530" y1="100" x2="530" y2="120"/>
+          <line x1="580" y1="100" x2="580" y2="120"/>
+          <line x1="630" y1="100" x2="630" y2="120"/>
+        </g>
+
+        <g
+          font-size="15"
+          fill="#172033"
+          text-anchor="middle"
+        >
+          <text x="80" y="145">−9</text>
+          <text x="130" y="145">−8</text>
+          <text x="180" y="145">−7</text>
+          <text x="230" y="145">−6</text>
+          <text x="280" y="145">−5</text>
+          <text x="330" y="145">−4</text>
+          <text x="380" y="145">−3</text>
+          <text x="430" y="145">−2</text>
+          <text x="480" y="145">−1</text>
+          <text x="530" y="145">0</text>
+          <text x="580" y="145">1</text>
+          <text x="630" y="145">2</text>
+        </g>
+
+        <!-- −3 нүктесі -->
+
+        <circle
+          cx="380"
+          cy="110"
+          r="7"
+          fill="#173b7a"
+        />
+
+        <text
+          x="380"
+          y="92"
+          text-anchor="middle"
+          font-size="17"
+          font-weight="bold"
+          fill="#173b7a"
+        >
+          A(−3)
+        </text>
+
+        <!-- −7 нүктесі -->
+
+        <circle
+          cx="180"
+          cy="110"
+          r="7"
+          fill="#e53935"
+        />
+
+        <text
+          x="180"
+          y="92"
+          text-anchor="middle"
+          font-size="17"
+          font-weight="bold"
+          fill="#e53935"
+        >
+          B(−7)
+        </text>
+
+        <!-- Солға бағытталған доға -->
+
+        <path
+          d="M380 95 Q280 20 180 95"
+          fill="none"
+          stroke="#2d65c8"
+          stroke-width="4"
+        />
+
+        <polygon
+          points="180,95 194,87 192,103"
+          fill="#2d65c8"
+        />
+
+        <text
+          x="280"
+          y="42"
+          text-anchor="middle"
+          font-size="20"
+          font-weight="bold"
+          fill="#173b7a"
+        >
+          −4
+        </text>
+
+      </svg>
+
+    </div>
+
+  </div>
+
+
+  <!-- 10 ТАПСЫРМА -->
+
+  <div class="section">
+
+    <h2>📝 10 тапсырма</h2>
+
+    <p style="margin-bottom:20px;">
+      Әр есептің жауабын енгізіп, «Тексеру» батырмасын бас.
+    </p>
+
+
+    <!-- 1 -->
+
+    <div class="task">
+
+      <b>
+        1. Қосындыны тап:<br><br>
+        −7 + (−5)
+      </b>
+
+      <input id="q1" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(1, -12)">
+        Тексеру
+      </button>
+
+      <div id="r1" class="result"></div>
+
+    </div>
+
+
+    <!-- 2 -->
+
+    <div class="task">
+
+      <b>
+        2. Қосындыны тап:<br><br>
+        −18 + (−9)
+      </b>
+
+      <input id="q2" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(2, -27)">
+        Тексеру
+      </button>
+
+      <div id="r2" class="result"></div>
+
+    </div>
+
+
+    <!-- 3 -->
+
+    <div class="task">
+
+      <b>
+        3. Қосындыны тап:<br><br>
+        −4,6 + (−2,3)
+      </b>
+
+      <input
+        id="q3"
+        type="number"
+        step="0.1"
+        placeholder="Жауабың"
+      >
+
+      <button class="button" onclick="check(3, -6.9)">
+        Тексеру
+      </button>
+
+      <div id="r3" class="result"></div>
+
+    </div>
+
+
+    <!-- 4 -->
+
+    <div class="task">
+
+      <b>
+        4. Қосындыны тап:<br><br>
+        −12,5 + (−3,8)
+      </b>
+
+      <input
+        id="q4"
+        type="number"
+        step="0.1"
+        placeholder="Жауабың"
+      >
+
+      <button class="button" onclick="check(4, -16.3)">
+        Тексеру
+      </button>
+
+      <div id="r4" class="result"></div>
+
+    </div>
+
+
+    <!-- 5 БӨЛШЕК -->
+
+    <div class="task">
+
+      <b>
+        5. Қосындыны тап:<br><br>
+
+        −
+        <span class="frac">
+          <span class="top">2</span>
+          <span class="bottom">7</span>
+        </span>
+
+        +
+
+        (−
+        <span class="frac">
+          <span class="top">3</span>
+          <span class="bottom">7</span>
+        </span>
+        )
+      </b>
+
+      <br>
+
+      <div class="fraction-input">
+
+        <span class="fraction-label">Алымы</span>
+
+        <input
+          id="q5n"
+          type="number"
+          placeholder="Алым"
+        >
+
+        <div class="fraction-line"></div>
+
+        <span class="fraction-label">Бөлімі</span>
+
+        <input
+          id="q5d"
+          type="number"
+          placeholder="Бөлім"
+        >
+
+      </div>
+
+      <br>
+
+      <button
+        class="button"
+        onclick="checkFraction(5, -5, 7)"
+      >
+        Тексеру
+      </button>
+
+      <div id="r5" class="result"></div>
+
+    </div>
+
+
+    <!-- 6 БӨЛШЕК -->
+
+    <div class="task">
+
+      <b>
+        6. Қосындыны тап:<br><br>
+
+        −
+        <span class="frac">
+          <span class="top">5</span>
+          <span class="bottom">8</span>
+        </span>
+
+        +
+
+        (−
+        <span class="frac">
+          <span class="top">1</span>
+          <span class="bottom">4</span>
+        </span>
+        )
+      </b>
+
+      <br>
+
+      <div class="fraction-input">
+
+        <span class="fraction-label">Алымы</span>
+
+        <input
+          id="q6n"
+          type="number"
+          placeholder="Алым"
+        >
+
+        <div class="fraction-line"></div>
+
+        <span class="fraction-label">Бөлімі</span>
+
+        <input
+          id="q6d"
+          type="number"
+          placeholder="Бөлім"
+        >
+
+      </div>
+
+      <br>
+
+      <button
+        class="button"
+        onclick="checkFraction(6, -7, 8)"
+      >
+        Тексеру
+      </button>
+
+      <div id="r6" class="result"></div>
+
+    </div>
+
+
+    <!-- 7 -->
+
+    <div class="task">
+
+      <b>
+        7. Кеше ауа температурасы −6°C болды.
+        Түнде температура тағы 5°C-қа төмендеді.
+        Түндегі температураны тап.
+      </b>
+
+      <input id="q7" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(7, -11)">
+        Тексеру
+      </button>
+
+      <div id="r7" class="result"></div>
+
+    </div>
+
+
+    <!-- 8 -->
+
+    <div class="task">
+
+      <b>
+        8. Сүңгуір −14 м тереңдікте болды.
+        Ол тағы 9 м төмен түсті.
+        Сүңгуірдің жаңа орнын санмен көрсет.
+      </b>
+
+      <input id="q8" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(8, -23)">
+        Тексеру
+      </button>
+
+      <div id="r8" class="result"></div>
+
+    </div>
+
+
+    <!-- 9 -->
+
+    <div class="task">
+
+      <b>
+        9. Өзен суының деңгейі бірінші күні 8 см төмендеді,
+        екінші күні тағы 7 см төмендеді.
+        Екі күндегі жалпы өзгерісті санмен жаз.
+      </b>
+
+      <input id="q9" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(9, -15)">
+        Тексеру
+      </button>
+
+      <div id="r9" class="result"></div>
+
+    </div>
+
+
+    <!-- 10 -->
+
+    <div class="task">
+
+      <b>
+        10. Қосындыны тап:<br><br>
+        −125 + (−76)
+      </b>
+
+      <input id="q10" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(10, -201)">
+        Тексеру
+      </button>
+
+      <div id="r10" class="result"></div>
+
+    </div>
+
+
+    <div id="total">
+      Нәтиже: 0 / 10
+    </div>
+
+    <div id="finalResult"></div>
+
+
+    <!-- ТЕСТТІ БАСТАУ -->
+
+    <div class="start-test-area">
+
+      <p>
+        🎯 10 тапсырманы орындап болдың ба?
+      </p>
+
+      <p>
+        Енді біліміңді тест арқылы тексер!
+      </p>
+
+      <button class="start-test-button" onclick="startTest()">
+        📝 Тестті бастау
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       ТЕСТ БӨЛІМІ
+  ========================= -->
+
+  <div class="section" id="testSection">
+
+    <h2>✅ Теріс сандарды қосу — тест</h2>
+
+    <p style="margin-bottom:20px;">
+      Әр сұрақтың бір ғана дұрыс жауабы бар.
+      Барлық 10 сұраққа жауап бер.
+    </p>
+
+
+    <!-- 1 -->
+
+    <div class="test-question">
+
+      <h3>
+        1. −8 + (−6) қосындысының мәнін тап.
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t1" value="A">
+        A) −14
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t1" value="B">
+        B) −2
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t1" value="C">
+        C) 14
+      </label>
+
+    </div>
+
+
+    <!-- 2 -->
+
+    <div class="test-question">
+
+      <h3>
+        2. Екі теріс санды қосу үшін не істеу керек?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t2" value="A">
+        A) Модульдерін азайтып, «+» таңбасын қою
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t2" value="B">
+        B) Модульдерін қосып, «−» таңбасын қою
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t2" value="C">
+        C) Сандарды көбейту
+      </label>
+
+    </div>
+
+
+    <!-- 3 -->
+
+    <div class="test-question">
+
+      <h3>
+        3. −15 + (−12) қосындысын тап.
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t3" value="A">
+        A) −3
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t3" value="B">
+        B) 27
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t3" value="C">
+        C) −27
+      </label>
+
+    </div>
+
+
+    <!-- 4 -->
+
+    <div class="test-question">
+
+      <h3>
+        4. −2,4 + (−1,7) қосындысының мәнін тап.
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t4" value="A">
+        A) −4,1
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t4" value="B">
+        B) −0,7
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t4" value="C">
+        C) 4,1
+      </label>
+
+    </div>
+
+
+    <!-- 5 -->
+
+    <div class="test-question">
+
+      <h3>
+        5. Екі теріс санның қосындысы қандай сан болады?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t5" value="A">
+        A) Әрқашан оң сан
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t5" value="B">
+        B) Әрқашан теріс сан
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t5" value="C">
+        C) Әрқашан 0
+      </label>
+
+    </div>
+
+
+    <!-- 6 -->
+
+    <div class="test-question">
+
+      <h3>
+        6. Қосындыны тап:<br><br>
+
+        −
+        <span class="frac">
+          <span class="top">1</span>
+          <span class="bottom">6</span>
+        </span>
+
+        +
+
+        (−
+        <span class="frac">
+          <span class="top">2</span>
+          <span class="bottom">3</span>
+        </span>
+        )
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t6" value="A">
+
+        A) −
+        <span class="frac">
+          <span class="top">5</span>
+          <span class="bottom">6</span>
+        </span>
+
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t6" value="B">
+
+        B)
+        <span class="frac">
+          <span class="top">1</span>
+          <span class="bottom">2</span>
+        </span>
+
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t6" value="C">
+
+        C) −
+        <span class="frac">
+          <span class="top">1</span>
+          <span class="bottom">3</span>
+        </span>
+
+      </label>
+
+    </div>
+
+
+    <!-- 7 -->
+
+    <div class="test-question">
+
+      <h3>
+        7. Таңертең температура −9°C болды.
+        Кешке ол тағы 4°C-қа төмендеді.
+        Кешкі температура қандай?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t7" value="A">
+        A) −5°C
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t7" value="B">
+        B) 13°C
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t7" value="C">
+        C) −13°C
+      </label>
+
+    </div>
+
+
+    <!-- 8 -->
+
+    <div class="test-question">
+
+      <h3>
+        8. −36 + (−24) қосындысының мәнін тап.
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t8" value="A">
+        A) −12
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t8" value="B">
+        B) −60
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t8" value="C">
+        C) 60
+      </label>
+
+    </div>
+
+
+    <!-- 9 -->
+
+    <div class="test-question">
+
+      <h3>
+        9. −7 + 0 өрнегінің мәнін тап.
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t9" value="A">
+        A) 0
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t9" value="B">
+        B) −7
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t9" value="C">
+        C) 7
+      </label>
+
+    </div>
+
+
+    <!-- 10 -->
+
+    <div class="test-question">
+
+      <h3>
+        10. Сүңгуір −22 м тереңдікте тұр.
+        Ол тағы 6 м төмен түсті.
+        Оның жаңа орны қандай?
+      </h3>
+
+      <label class="option">
+        <input type="radio" name="t10" value="A">
+        A) −16 м
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t10" value="B">
+        B) −28 м
+      </label>
+
+      <label class="option">
+        <input type="radio" name="t10" value="C">
+        C) 28 м
+      </label>
+
+    </div>
+
+
+    <button class="test-check" onclick="finishTest()">
+      ✅ Тестті аяқтау
+    </button>
+
+    <div id="testResult"></div>
+
+    <button id="retryButton" onclick="retryTest()">
+      🔄 Тестті қайта тапсыру
+    </button>
+
+  </div>
+
+</div>
+
+
+<footer>
+  ©️ 2026 KEMENGER ONLINE
+</footer>
+
+
+<script>
+
+  /* =========================
+     10 ТАПСЫРМАНЫ ТЕКСЕРУ
+  ========================= */
+
+  let score = 0;
+  let answered = {};
+
+  function check(number, correctAnswer) {
+
+    const input = document.getElementById("q" + number);
+    const result = document.getElementById("r" + number);
+
+    if (answered[number]) {
+      return;
+    }
+
+    if (input.value === "") {
+
+      result.innerHTML = "⚠️ Алдымен жауапты енгіз!";
+      result.style.color = "orange";
+
+      return;
+    }
+
+    const answer = Number(input.value);
+
+    if (Math.abs(answer - correctAnswer) < 0.000001) {
+
+      result.innerHTML = "✅ Дұрыс!";
+      result.style.color = "green";
+
+      score++;
+
+      answered[number] = true;
+
+      input.disabled = true;
+
+    } else {
+
+      result.innerHTML = "❌ Қате. Қайта байқап көр.";
+      result.style.color = "red";
+
+    }
+
+    updateTotal();
+
+  }
+
+
+  /* =========================
+     БӨЛШЕК ЖАУАПТЫ ТЕКСЕРУ
+  ========================= */
+
+  function checkFraction(
+    number,
+    correctNumerator,
+    correctDenominator
+  ) {
+
+    const numerator =
+      document.getElementById("q" + number + "n");
+
+    const denominator =
+      document.getElementById("q" + number + "d");
+
+    const result =
+      document.getElementById("r" + number);
+
+    if (answered[number]) {
+      return;
+    }
+
+    if (
+      numerator.value === "" ||
+      denominator.value === ""
+    ) {
+
+      result.innerHTML =
+        "⚠️ Алым мен бөлімді толық енгіз!";
+
+      result.style.color = "orange";
+
+      return;
+    }
+
+    const n = Number(numerator.value);
+    const d = Number(denominator.value);
+
+    if (d === 0) {
+
+      result.innerHTML =
+        "⚠️ Бөлім 0-ге тең болмауы керек!";
+
+      result.style.color = "orange";
+
+      return;
+    }
+
+    if (
+      n * correctDenominator ===
+      correctNumerator * d
+    ) {
+
+      result.innerHTML = "✅ Дұрыс!";
+      result.style.color = "green";
+
+      score++;
+
+      answered[number] = true;
+
+      numerator.disabled = true;
+      denominator.disabled = true;
+
+    } else {
+
+      result.innerHTML =
+        "❌ Қате. Қайта байқап көр.";
+
+      result.style.color = "red";
+
+    }
+
+    updateTotal();
+
+  }
+
+
+  /* =========================
+     НӘТИЖЕНІ ЖАҢАРТУ
+  ========================= */
+
+  function updateTotal() {
+
+    document.getElementById("total").innerHTML =
+      "Нәтиже: " + score + " / 10";
+
+    if (score === 10) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🏆 Керемет! Барлық 10 тапсырманы дұрыс орындадың!";
+
+    } else if (score >= 8) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🌟 Өте жақсы! Нәтижең: " + score + " / 10";
+
+    } else if (score >= 5) {
+
+      document.getElementById("finalResult").innerHTML =
+        "👍 Жақсы! Нәтижең: " + score + " / 10";
+
+    } else if (score > 0) {
+
+      document.getElementById("finalResult").innerHTML =
+        "📚 Талпынысың жақсы! Сабақты тағы қайталап көр.";
+
+    } else {
+
+      document.getElementById("finalResult").innerHTML = "";
+
+    }
+
+  }
+
+
+  /* =========================
+     ТЕСТТІ БАСТАУ
+  ========================= */
+
+  function startTest() {
+
+    const testSection =
+      document.getElementById("testSection");
+
+    testSection.style.display = "block";
+
+    testSection.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =========================
+     ТЕСТ ЖАУАПТАРЫ
+  ========================= */
+
+  const correctAnswers = {
+
+    t1: "A",
+
+    t2: "B",
+
+    t3: "C",
+
+    t4: "A",
+
+    t5: "B",
+
+    t6: "A",
+
+    t7: "C",
+
+    t8: "B",
+
+    t9: "B",
+
+    t10: "B"
+
+  };
+
+
+  /* =========================
+     ТЕСТТІ АЯҚТАУ
+  ========================= */
+
+  function finishTest() {
+
+    let testScore = 0;
+
+    let answeredCount = 0;
+
+
+    for (let i = 1; i <= 10; i++) {
+
+      const questionName = "t" + i;
+
+      const selected =
+        document.querySelector(
+          'input[name="' +
+          questionName +
+          '"]:checked'
+        );
+
+
+      if (selected) {
+
+        answeredCount++;
+
+
+        if (
+          selected.value ===
+          correctAnswers[questionName]
+        ) {
+
+          testScore++;
+
+        }
+
+      }
+
+    }
+
+
+    const result =
+      document.getElementById("testResult");
+
+
+    if (answeredCount < 10) {
+
+      result.style.display = "block";
+
+      result.innerHTML =
+        "⚠️ Барлық сұраққа жауап бер!<br><br>" +
+        "Жауап берілгені: " +
+        answeredCount +
+        " / 10";
+
+      return;
+
+    }
+
+
+    const percent = testScore * 10;
+
+
+    result.style.display = "block";
+
+
+    if (testScore === 10) {
+
+      result.innerHTML =
+        "🏆 КЕРЕМЕТ!<br><br>" +
+        "Нәтижең: 10 / 10<br>" +
+        "100% — Өте жоғары нәтиже!";
+
+    }
+
+    else if (testScore >= 8) {
+
+      result.innerHTML =
+        "🌟 ӨТЕ ЖАҚСЫ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тақырыпты жақсы меңгердің!";
+
+    }
+
+    else if (testScore >= 5) {
+
+      result.innerHTML =
+        "👍 ЖАҚСЫ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тағы біраз жаттығу қажет.";
+
+    }
+
+    else {
+
+      result.innerHTML =
+        "📚 ҚАЙТА ҚАРАП ШЫҚ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Сабақ материалын қайталап көр.";
+
+    }
+
+
+    document.getElementById(
+      "retryButton"
+    ).style.display = "block";
+
+
+    /* ДҰРЫС / ҚАТЕ ЖАУАПТАР */
+
+    for (let i = 1; i <= 10; i++) {
+
+      const questionName = "t" + i;
+
+
+      const selected =
+        document.querySelector(
+          'input[name="' +
+          questionName +
+          '"]:checked'
+        );
+
+
+      const options =
+        document.querySelectorAll(
+          'input[name="' +
+          questionName +
+          '"]'
+        );
+
+
+      options.forEach(function(option) {
+
+        const label =
+          option.parentElement;
+
+
+        if (
+          option.value ===
+          correctAnswers[questionName]
+        ) {
+
+          label.classList.add(
+            "correct"
+          );
+
+        }
+
+
+        if (
+          selected &&
+          option.value === selected.value &&
+          option.value !==
+          correctAnswers[questionName]
+        ) {
+
+          label.classList.add(
+            "wrong"
+          );
+
+        }
+
+
+        option.disabled = true;
+
+      });
+
+    }
+
+
+    document.querySelector(
+      ".test-check"
+    ).disabled = true;
+
+
+    document.querySelector(
+      ".test-check"
+    ).style.opacity = "0.5";
+
+  }
+
+
+  /* =========================
+     ҚАЙТА ТАПСЫРУ
+  ========================= */
+
+  function retryTest() {
+
+    for (let i = 1; i <= 10; i++) {
+
+      const options =
+        document.querySelectorAll(
+          'input[name="t' + i + '"]'
+        );
+
+
+      options.forEach(function(option) {
+
+        option.checked = false;
+
+        option.disabled = false;
+
+
+        option.parentElement.classList.remove(
+          "correct"
+        );
+
+
+        option.parentElement.classList.remove(
+          "wrong"
+        );
+
+      });
+
+    }
+
+
+    document.getElementById(
+      "testResult"
+    ).style.display = "none";
+
+
+    document.getElementById(
+      "retryButton"
+    ).style.display = "none";
+
+
+    const button =
+      document.querySelector(
+        ".test-check"
+      );
+
+
+    button.disabled = false;
+
+    button.style.opacity = "1";
+
+  }
+
+</script>
+
+</body>
+</html>
