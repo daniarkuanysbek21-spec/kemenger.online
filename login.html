@@ -137,6 +137,58 @@
       margin-bottom: 18px;
       line-height: 1.5;
     }
+
+    /* ПАЙДАЛАНУШЫ КЕЛІСІМІ */
+
+    .agreement-box {
+      background: #f7f9fc;
+      border: 1px solid #dce3ee;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 18px;
+    }
+
+    .agreement-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 0;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: normal;
+    }
+
+    .agreement-label input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      margin: 1px 0 0 0;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .agreement-label a {
+      color: #173b7a;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .agreement-label a:hover {
+      color: #2d65c8;
+    }
+
+    @media (max-width: 500px) {
+
+      .login-box {
+        padding: 25px 20px;
+      }
+
+      .logo {
+        font-size: 23px;
+      }
+
+    }
   </style>
 </head>
 
@@ -212,7 +264,8 @@
 
       <div class="info">
         Тіркелгеннен кейін әкімші сіздің сұранысыңызды көреді.
-        Төлем жасау үшін сіз көрсеткен нөмірге хабарлама жіберіледі (дұрыс нөмірді енгізуді сұраймыз).
+        Төлем жасау үшін сіз көрсеткен нөмірге хабарлама жіберіледі
+        (дұрыс нөмірді енгізуді сұраймыз).
         Төлем расталған соң қажетті сыныпқа доступ беріледі.
       </div>
 
@@ -293,6 +346,34 @@
         minlength="6"
         required
       >
+
+
+      <!-- ПАЙДАЛАНУШЫ КЕЛІСІМІ -->
+
+      <div class="agreement-box">
+
+        <label class="agreement-label">
+
+          <input
+            type="checkbox"
+            id="agreement"
+          >
+
+          <span>
+            Мен
+            <a
+              href="agreement.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Пайдаланушы келісімімен
+            </a>
+            таныстым және оның шарттарымен келісемін.
+          </span>
+
+        </label>
+
+      </div>
 
 
       <button
@@ -445,7 +526,9 @@
 
 
 
-    /* КІРУ */
+    /* =========================
+       КІРУ
+    ========================= */
 
     loginForm.addEventListener(
       "submit",
@@ -537,7 +620,9 @@
 
 
 
-    /* ТІРКЕЛУ */
+    /* =========================
+       ТІРКЕЛУ
+    ========================= */
 
     registerForm.addEventListener(
       "submit",
@@ -583,6 +668,28 @@
           document
           .getElementById("confirmPassword")
           .value;
+
+
+        const agreement =
+          document
+          .getElementById("agreement")
+          .checked;
+
+
+
+        /* ПАЙДАЛАНУШЫ КЕЛІСІМІН ТЕКСЕРУ */
+
+        if (!agreement) {
+
+          registerMessage.style.color =
+            "red";
+
+          registerMessage.textContent =
+            "Тіркелу үшін Пайдаланушы келісімімен келісуіңіз қажет.";
+
+          return;
+
+        }
 
 
 
@@ -676,6 +783,17 @@
               grade10: false,
 
               grade11: false,
+
+
+              /* ПАЙДАЛАНУШЫ КЕЛІСІМІ */
+
+              termsAccepted: true,
+
+              termsVersion: "1.0",
+
+              termsAcceptedAt:
+                serverTimestamp(),
+
 
               createdAt:
                 serverTimestamp()
