@@ -67,9 +67,20 @@
     }
 
     .logo {
-      font-size: 22px;
-      font-weight: bold;
-    }
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
 
     .login-top {
       background: #ffcf33;
@@ -424,8 +435,9 @@
 
 <header>
   <div class="logo">
-    📐 KEMENGER ONLINE
-  </div>
+  <img src="logo.jpg" alt="Kemenger Online">
+  <span>KEMENGER ONLINE</span>
+</div>
 
   <div id="userArea">
     <span class="login-top">⏳ Тексерілуде...</span>
