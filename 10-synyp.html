@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>10-сынып — Kemenger Online</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #173b7a;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .back:hover {
+      opacity: 0.85;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #173b7a, #2d65c8);
+      color: white;
+      padding: 55px 7%;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: auto;
+      padding: 50px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      color: #173b7a;
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .section-text {
+      text-align: center;
+      color: #68738a;
+      font-size: 17px;
+      margin-bottom: 35px;
+    }
+
+    .subjects {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    .subject {
+      background: white;
+      border-radius: 18px;
+      padding: 35px 30px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+      transition: 0.25s;
+      border: 2px solid transparent;
+    }
+
+    .subject:hover {
+      transform: translateY(-4px);
+      border-color: #d9e3f5;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    .subject-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .subject h2 {
+      color: #173b7a;
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .subject p {
+      color: #68738a;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      min-height: 52px;
+    }
+
+    .button {
+      display: inline-block;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 20px;
+      border-radius: 9px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .button:hover {
+      background: #f4c21d;
+    }
+
+    footer {
+      background: #14284e;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 700px) {
+
+      header {
+        padding: 16px 5%;
+      }
+
+      .logo {
+        font-size: 17px;
+      }
+
+      .back {
+        font-size: 14px;
+      }
+
+      .hero {
+        padding: 42px 6%;
+      }
+
+      .hero h1 {
+        font-size: 31px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .container {
+        padding: 35px 15px;
+      }
+
+      .section-title {
+        font-size: 25px;
+      }
+
+      .subjects {
+        grid-template-columns: 1fr;
+      }
+
+      .subject {
+        padding: 28px 22px;
+      }
+
+      .subject h2 {
+        font-size: 25px;
+      }
+
+      .subject p {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">📐 KEMENGER ONLINE</div>
+  <a class="back" href="index.html">← Басты бет</a>
+</header>
+
+
+<section class="hero">
+  <h1>10-сынып</h1>
+  <p>
+    Алгебра және геометрия • Видеосабақтар • Тапсырмалар • Тесттер
+  </p>
+</section>
+
+
+<div class="container">
+
+  <h2 class="section-title">Пәнді таңдаңыз</h2>
+
+  <p class="section-text">
+    Сабақтарды көру үшін төмендегі пәндердің бірін таңдаңыз.
+  </p>
+
+
+  <div class="subjects">
+
+    <!-- АЛГЕБРА -->
+    <div class="subject">
+
+      <div class="subject-icon">📘</div>
+
+      <h2>Алгебра</h2>
+
+      <p>
+        10-сынып алгебрасы бойынша видеосабақтар,
+        тапсырмалар және тесттер.
+      </p>
+
+      <a class="button" href="10-algebra.html">
+        📚 Алгебраны ашу
+      </a>
+
+    </div>
+
+
+    <!-- ГЕОМЕТРИЯ -->
+    <div class="subject">
+
+      <div class="subject-icon">📐</div>
+
+      <h2>Геометрия</h2>
+
+      <p>
+        10-сынып геометриясы бойынша видеосабақтар,
+        тапсырмалар және тесттер.
+      </p>
+
+      <a class="button" href="10-geometriya.html">
+        📚 Геометрияны ашу
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<footer>
+  ©️ 2026 KEMENGER ONLINE
+</footer>
+
+
+<script type="module" src="/auth-guard.js"></script>
+
+</body>
+</html>
