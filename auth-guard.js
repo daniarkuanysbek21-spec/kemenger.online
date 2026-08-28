@@ -91,7 +91,8 @@ loadingScreen.innerHTML = `
       font-weight:bold;
       margin-bottom:14px;
     ">
-      📐 KEMENGER ONLINE
+      <img src="favicon.png" style="width:55px;height:55px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:10px;">
+KEMENGER ONLINE
     </div>
 
     <div style="
