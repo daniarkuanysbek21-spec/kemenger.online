@@ -1,0 +1,2496 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>3-сабақ — Көбейтіндіні, бөлшекті және дәрежені дәрежеге шығару | Kemenger Online</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #173b7a;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #173b7a, #2d65c8);
+      color: white;
+      padding: 55px 7%;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 18px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+    .section {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    }
+
+    .section h2 {
+      margin-bottom: 15px;
+    }
+
+    .video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111827;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 55px;
+      overflow: hidden;
+    }
+
+    .video iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .button {
+      display: inline-block;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    .task {
+      background: #f7f9fc;
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    input[type="number"] {
+      padding: 11px;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #ccd3df;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .result {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    #total {
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #finalResult {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #eef4ff;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .start-test-area {
+      text-align: center;
+      margin-top: 30px;
+      padding: 25px;
+      background: #eef4ff;
+      border-radius: 14px;
+    }
+
+    .start-test-area p {
+      margin-bottom: 5px;
+      font-size: 17px;
+    }
+
+    .start-test-button {
+      display: inline-block;
+      background: #173b7a;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.2s;
+    }
+
+    .start-test-button:hover {
+      background: #2d65c8;
+      transform: translateY(-1px);
+    }
+
+    /* НҰСҚАЛАР */
+
+    #variantButtons {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .variant-button {
+      display: inline-block;
+      background: #173b7a;
+      color: white;
+      padding: 13px 22px;
+      border: none;
+      border-radius: 10px;
+      margin: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .variant-button:hover {
+      background: #2d65c8;
+    }
+
+    #testSection {
+      display: none;
+    }
+
+    .variant {
+      display: none;
+    }
+
+    .test-question {
+      background: #f7f9fc;
+      padding: 20px;
+      border-radius: 14px;
+      margin-top: 18px;
+      border: 1px solid #e1e6ef;
+    }
+
+    .test-question h3 {
+      margin-bottom: 15px;
+      line-height: 1.5;
+      font-size: 17px;
+    }
+
+    .option {
+      display: block;
+      background: white;
+      border: 1px solid #ccd3df;
+      padding: 14px;
+      border-radius: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background: #eef4ff;
+      border-color: #2d65c8;
+    }
+
+    .option input[type="radio"] {
+      width: auto;
+      margin: 0 8px 0 0;
+      cursor: pointer;
+    }
+
+    .test-check {
+      margin-top: 25px;
+      background: #173b7a;
+      color: white;
+      padding: 14px 25px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .test-check:hover {
+      background: #2d65c8;
+    }
+
+    .test-result {
+      display: none;
+      margin-top: 25px;
+      padding: 25px;
+      border-radius: 14px;
+      background: #eef4ff;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .retry-button {
+      display: none;
+      margin: 20px auto 0;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .correct {
+      background: #dff6e5 !important;
+      border-color: #35a853 !important;
+    }
+
+    .wrong {
+      background: #ffe2e2 !important;
+      border-color: #e53935 !important;
+    }
+
+    /* КӘДІМГІ БӨЛШЕК */
+
+    .frac {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      line-height: 1.05;
+      margin: 0 4px;
+    }
+
+    .frac .top {
+      border-bottom: 1.5px solid #172033;
+      padding: 0 5px 3px;
+    }
+
+    .frac .bottom {
+      padding: 3px 5px 0;
+    }
+
+    .fraction-input {
+      display: inline-flex;
+      flex-direction: column;
+      width: 100px;
+      vertical-align: middle;
+      margin-top: 10px;
+    }
+
+    .fraction-input input {
+      width: 100% !important;
+      margin: 0 !important;
+      text-align: center;
+      padding: 9px !important;
+    }
+
+    .fraction-line {
+      height: 2px;
+      background: #172033;
+      margin: 4px 0;
+    }
+
+    .math {
+      font-family: "Times New Roman", serif;
+      font-size: 20px;
+    }
+
+    sup {
+      font-size: 0.7em;
+    }
+
+    footer {
+      background: #14284e;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 15px;
+      }
+
+      .logo {
+        font-size: 17px;
+      }
+
+      .hero {
+        padding: 40px 20px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .container {
+        padding: 20px 12px;
+      }
+
+      .section {
+        padding: 18px;
+      }
+
+      .test-question {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">📐 KEMENGER ONLINE</div>
+  <a class="back" href="7-synyp-algebra.html">← 7-сынып Алгебра</a>
+</header>
+
+
+<section class="hero">
+
+  <h1>
+    3-сабақ. Көбейтіндіні, бөлшекті және дәрежені дәрежеге шығару
+  </h1>
+
+  <p>7-сынып • Алгебра</p>
+
+</section>
+
+
+<div class="container">
+
+  <!-- ВИДЕО -->
+
+  <div class="section">
+
+    <h2>🎥 Видеосабақ</h2>
+
+    <div class="video">
+
+      <iframe
+        src="🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР 🔴"
+        title="Kemenger Online видеосабақ"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+
+    </div>
+
+    <p style="margin-top:15px;">
+      Видеосабақты көріп, тақырыпты меңгеріп ал.
+    </p>
+
+  </div>
+
+
+  <!-- ТАҚЫРЫПТЫҚ АНЫҚТАМА -->
+
+  <div class="section">
+
+    <h2>📚 Тақырыптық анықтама</h2>
+
+    <p style="margin-bottom:15px;">
+      Көбейтіндіні дәрежеге шығарғанда әрбір көбейткішті
+      сол дәрежеге шығарып, нәтижелерін көбейтеді.
+    </p>
+
+    <p class="math"
+       style="margin-bottom:15px; padding:14px; background:#eef4ff; border-radius:10px; text-align:center;">
+      (ab)<sup>n</sup> =
+      a<sup>n</sup>b<sup>n</sup>
+    </p>
+
+    <p style="margin-bottom:15px;">
+      Бөлшекті дәрежеге шығарғанда оның алымын да,
+      бөлімін де сол дәрежеге шығарамыз.
+    </p>
+
+    <p class="math"
+       style="margin-bottom:15px; padding:14px; background:#eef4ff; border-radius:10px; text-align:center;">
+
+      (
+      <span class="frac">
+        <span class="top">a</span>
+        <span class="bottom">b</span>
+      </span>
+      )<sup>n</sup>
+
+      =
+
+      <span class="frac">
+        <span class="top">a<sup>n</sup></span>
+        <span class="bottom">b<sup>n</sup></span>
+      </span>
+
+      , &nbsp; b ≠ 0
+
+    </p>
+
+    <p style="margin-bottom:15px;">
+      Дәрежені дәрежеге шығарғанда негіз өзгермейді,
+      ал дәреже көрсеткіштері көбейтіледі.
+    </p>
+
+    <p class="math"
+       style="margin-bottom:15px; padding:14px; background:#eef4ff; border-radius:10px; text-align:center;">
+
+      (a<sup>n</sup>)<sup>m</sup>
+      =
+      a<sup>nm</sup>
+
+    </p>
+
+    <p>
+      <b>Мысал:</b>
+      <span class="math">(3x)<sup>3</sup> = 27x<sup>3</sup></span>,
+      &nbsp;
+      <span class="math">(a<sup>4</sup>)<sup>5</sup> = a<sup>20</sup></span>.
+    </p>
+
+  </div>
+
+
+  <!-- 10 ТАПСЫРМА -->
+
+  <div class="section">
+
+    <h2>📝 10 тапсырма</h2>
+
+    <p style="margin-bottom:20px;">
+      Әр есептің жауабын енгізіп, «Тексеру» батырмасын бас.
+    </p>
+
+
+    <!-- 1 -->
+
+    <div class="task">
+
+      <b class="math">
+        1. (2a)<sup>4</sup> өрнегіндегі сандық коэффициентті тап.
+      </b>
+
+      <input id="q1" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(1, 16)">
+        Тексеру
+      </button>
+
+      <div id="r1" class="result"></div>
+
+    </div>
+
+
+    <!-- 2 -->
+
+    <div class="task">
+
+      <b class="math">
+        2. (−3x)<sup>4</sup> өрнегіндегі сандық коэффициентті тап.
+      </b>
+
+      <input id="q2" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(2, 81)">
+        Тексеру
+      </button>
+
+      <div id="r2" class="result"></div>
+
+    </div>
+
+
+    <!-- 3 -->
+
+    <div class="task">
+
+      <b class="math">
+        3. (y<sup>3</sup>)<sup>5</sup> = y<sup>?</sup>.
+        Дәреже көрсеткішін тап.
+      </b>
+
+      <input id="q3" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(3, 15)">
+        Тексеру
+      </button>
+
+      <div id="r3" class="result"></div>
+
+    </div>
+
+
+    <!-- 4 -->
+
+    <div class="task">
+
+      <b class="math">
+        4. (a<sup>6</sup>)<sup>4</sup> = a<sup>?</sup>.
+        Дәреже көрсеткішін тап.
+      </b>
+
+      <input id="q4" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(4, 24)">
+        Тексеру
+      </button>
+
+      <div id="r4" class="result"></div>
+
+    </div>
+
+
+    <!-- 5 БӨЛШЕК -->
+
+    <div class="task">
+
+      <b class="math">
+        5.
+
+        (
+        <span class="frac">
+          <span class="top">2</span>
+          <span class="bottom">3</span>
+        </span>
+        )<sup>3</sup>
+
+        мәнін тап.
+      </b>
+
+      <br>
+
+      <div class="fraction-input">
+
+        <input id="q5n"
+               type="number"
+               placeholder="Алымы">
+
+        <div class="fraction-line"></div>
+
+        <input id="q5d"
+               type="number"
+               placeholder="Бөлімі">
+
+      </div>
+
+      <br>
+
+      <button class="button"
+              onclick="checkFraction(5, 8, 27)">
+        Тексеру
+      </button>
+
+      <div id="r5" class="result"></div>
+
+    </div>
+
+
+    <!-- 6 -->
+
+    <div class="task">
+
+      <b class="math">
+        6. (5ab)<sup>3</sup> өрнегіндегі
+        сандық коэффициентті тап.
+      </b>
+
+      <input id="q6"
+             type="number"
+             placeholder="Жауабың">
+
+      <button class="button"
+              onclick="check(6, 125)">
+        Тексеру
+      </button>
+
+      <div id="r6" class="result"></div>
+
+    </div>
+
+
+    <!-- 7 -->
+
+    <div class="task">
+
+      <b class="math">
+        7. (m<sup>7</sup>)<sup>3</sup> =
+        m<sup>?</sup>.
+        Дәреже көрсеткішін тап.
+      </b>
+
+      <input id="q7"
+             type="number"
+             placeholder="Жауабың">
+
+      <button class="button"
+              onclick="check(7, 21)">
+        Тексеру
+      </button>
+
+      <div id="r7" class="result"></div>
+
+    </div>
+
+
+    <!-- 8 БӨЛШЕК -->
+
+    <div class="task">
+
+      <b class="math">
+        8.
+
+        (
+        <span class="frac">
+          <span class="top">3</span>
+          <span class="bottom">5</span>
+        </span>
+        )<sup>2</sup>
+
+        мәнін тап.
+      </b>
+
+      <br>
+
+      <div class="fraction-input">
+
+        <input id="q8n"
+               type="number"
+               placeholder="Алымы">
+
+        <div class="fraction-line"></div>
+
+        <input id="q8d"
+               type="number"
+               placeholder="Бөлімі">
+
+      </div>
+
+      <br>
+
+      <button class="button"
+              onclick="checkFraction(8, 9, 25)">
+        Тексеру
+      </button>
+
+      <div id="r8" class="result"></div>
+
+    </div>
+
+
+    <!-- 9 -->
+
+    <div class="task">
+
+      <b class="math">
+        9. (−2xy)<sup>5</sup> өрнегіндегі
+        сандық коэффициентті тап.
+      </b>
+
+      <input id="q9"
+             type="number"
+             placeholder="Жауабың">
+
+      <button class="button"
+              onclick="check(9, -32)">
+        Тексеру
+      </button>
+
+      <div id="r9" class="result"></div>
+
+    </div>
+
+
+    <!-- 10 -->
+
+    <div class="task">
+
+      <b class="math">
+        10.
+        ((x<sup>2</sup>)<sup>3</sup>)<sup>4</sup>
+        = x<sup>?</sup>.
+        Дәреже көрсеткішін тап.
+      </b>
+
+      <input id="q10"
+             type="number"
+             placeholder="Жауабың">
+
+      <button class="button"
+              onclick="check(10, 24)">
+        Тексеру
+      </button>
+
+      <div id="r10" class="result"></div>
+
+    </div>
+
+
+    <div id="total">
+      Нәтиже: 0 / 10
+    </div>
+
+    <div id="finalResult"></div>
+
+
+    <!-- ТЕСТТІ БАСТАУ -->
+
+    <div class="start-test-area">
+
+      <p>
+        🎯 10 тапсырманы орындап болдың ба?
+      </p>
+
+      <p>
+        Енді біліміңді тест арқылы тексер!
+      </p>
+
+      <button class="start-test-button"
+              onclick="showVariants()">
+        📝 Тестті бастау
+      </button>
+
+
+      <div id="variantButtons">
+
+        <button class="variant-button"
+                onclick="startTest(1)">
+          1-нұсқа
+        </button>
+
+        <button class="variant-button"
+                onclick="startTest(2)">
+          2-нұсқа
+        </button>
+
+        <button class="variant-button"
+                onclick="startTest(3)">
+          3-нұсқа
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ====================================================
+       ТЕСТ БӨЛІМІ
+  ===================================================== -->
+
+  <div class="section" id="testSection">
+
+    <h2 id="testTitle">
+      ✅ Тест
+    </h2>
+
+
+    <!-- ==================================================
+         1 НҰСҚА
+    =================================================== -->
+
+    <div id="variant1" class="variant">
+
+      <p style="margin-bottom:20px;">
+        1-нұсқа. Әр сұрақтың бір ғана дұрыс жауабы бар.
+      </p>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          1. (3a)<sup>2</sup> өрнегін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v1t1" value="A">
+          A) 6a<sup>2</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t1" value="B">
+          B) 9a<sup>2</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t1" value="C">
+          C) 9a
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          2. (xy)<sup>4</sup> өрнегінің дұрыс түрін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v1t2" value="A">
+          A) x<sup>4</sup>y<sup>4</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t2" value="B">
+          B) x<sup>4</sup>y
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t2" value="C">
+          C) x<sup>8</sup>y<sup>8</sup>
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          3. (a<sup>5</sup>)<sup>3</sup> өрнегін ықшамда.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v1t3" value="A">
+          A) a<sup>8</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t3" value="B">
+          B) a<sup>15</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t3" value="C">
+          C) a<sup>5</sup>
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          4.
+
+          (
+          <span class="frac">
+            <span class="top">2</span>
+            <span class="bottom">5</span>
+          </span>
+          )<sup>2</sup>
+
+          мәнін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v1t4" value="A">
+
+          A)
+          <span class="frac">
+            <span class="top">4</span>
+            <span class="bottom">25</span>
+          </span>
+
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t4" value="B">
+
+          B)
+          <span class="frac">
+            <span class="top">4</span>
+            <span class="bottom">10</span>
+          </span>
+
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t4" value="C">
+
+          C)
+          <span class="frac">
+            <span class="top">2</span>
+            <span class="bottom">25</span>
+          </span>
+
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          5. (−2b)<sup>3</sup> өрнегін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v1t5" value="A">
+          A) −8b<sup>3</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t5" value="B">
+          B) 8b<sup>3</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t5" value="C">
+          C) −6b<sup>3</sup>
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          6. (m<sup>4</sup>)<sup>6</sup> =
+          m<sup>?</sup>
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v1t6" value="A">
+          A) 10
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t6" value="B">
+          B) 24
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t6" value="C">
+          C) 20
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          7. (4xy)<sup>2</sup> өрнегін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v1t7" value="A">
+          A) 8x<sup>2</sup>y<sup>2</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t7" value="B">
+          B) 16xy
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t7" value="C">
+          C) 16x<sup>2</sup>y<sup>2</sup>
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          8. Дәрежені дәрежеге шығару ережесін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v1t8" value="A">
+          A) (a<sup>n</sup>)<sup>m</sup> =
+          a<sup>n+m</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t8" value="B">
+          B) (a<sup>n</sup>)<sup>m</sup> =
+          a<sup>nm</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t8" value="C">
+          C) (a<sup>n</sup>)<sup>m</sup> =
+          a<sup>n-m</sup>
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          9.
+
+          (
+          <span class="frac">
+            <span class="top">a</span>
+            <span class="bottom">b</span>
+          </span>
+          )<sup>3</sup>
+
+          өрнегінің дұрыс түрі қайсы?
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v1t9" value="A">
+
+          A)
+          <span class="frac">
+            <span class="top">a<sup>3</sup></span>
+            <span class="bottom">b</span>
+          </span>
+
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t9" value="B">
+
+          B)
+          <span class="frac">
+            <span class="top">a<sup>3</sup></span>
+            <span class="bottom">b<sup>3</sup></span>
+          </span>
+
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t9" value="C">
+
+          C)
+          <span class="frac">
+            <span class="top">3a</span>
+            <span class="bottom">3b</span>
+          </span>
+
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          10. ((x<sup>2</sup>)<sup>3</sup>)<sup>2</sup>
+          өрнегін ықшамда.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v1t10" value="A">
+          A) x<sup>7</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t10" value="B">
+          B) x<sup>10</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v1t10" value="C">
+          C) x<sup>12</sup>
+        </label>
+
+      </div>
+
+
+      <button class="test-check"
+              onclick="finishTest(1)">
+        ✅ Тестті аяқтау
+      </button>
+
+      <div id="testResult1"
+           class="test-result">
+      </div>
+
+      <button id="retryButton1"
+              class="retry-button"
+              onclick="retryTest(1)">
+        🔄 Тестті қайта тапсыру
+      </button>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         2 НҰСҚА
+    =================================================== -->
+
+    <div id="variant2" class="variant">
+
+      <p style="margin-bottom:20px;">
+        2-нұсқа. Әр сұрақтың бір ғана дұрыс жауабы бар.
+      </p>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          1. (5x)<sup>2</sup> өрнегін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v2t1" value="A">
+          A) 10x<sup>2</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t1" value="B">
+          B) 25x<sup>2</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t1" value="C">
+          C) 25x
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          2. (ab)<sup>5</sup> өрнегін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v2t2" value="A">
+          A) a<sup>5</sup>b<sup>5</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t2" value="B">
+          B) a<sup>10</sup>b<sup>10</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t2" value="C">
+          C) 5ab
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          3. (x<sup>7</sup>)<sup>2</sup> =
+          x<sup>?</sup>
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v2t3" value="A">
+          A) 9
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t3" value="B">
+          B) 14
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t3" value="C">
+          C) 49
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          4.
+
+          (
+          <span class="frac">
+            <span class="top">3</span>
+            <span class="bottom">4</span>
+          </span>
+          )<sup>2</sup>
+
+          мәнін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v2t4" value="A">
+
+          A)
+          <span class="frac">
+            <span class="top">6</span>
+            <span class="bottom">8</span>
+          </span>
+
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t4" value="B">
+
+          B)
+          <span class="frac">
+            <span class="top">9</span>
+            <span class="bottom">16</span>
+          </span>
+
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t4" value="C">
+
+          C)
+          <span class="frac">
+            <span class="top">9</span>
+            <span class="bottom">8</span>
+          </span>
+
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          5. (−4a)<sup>3</sup> өрнегін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v2t5" value="A">
+          A) −64a<sup>3</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t5" value="B">
+          B) 64a<sup>3</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t5" value="C">
+          C) −12a<sup>3</sup>
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          6. (b<sup>3</sup>)<sup>8</sup> =
+          b<sup>?</sup>
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v2t6" value="A">
+          A) 11
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t6" value="B">
+          B) 24
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t6" value="C">
+          C) 64
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          7. (2mn)<sup>4</sup> өрнегін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v2t7" value="A">
+          A) 8m<sup>4</sup>n<sup>4</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t7" value="B">
+          B) 16m<sup>4</sup>n<sup>4</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t7" value="C">
+          C) 16mn
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          8. (−3x)<sup>2</sup> өрнегін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v2t8" value="A">
+          A) −9x<sup>2</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t8" value="B">
+          B) 6x<sup>2</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t8" value="C">
+          C) 9x<sup>2</sup>
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          9.
+
+          (
+          <span class="frac">
+            <span class="top">x</span>
+            <span class="bottom">y</span>
+          </span>
+          )<sup>4</sup>
+
+          өрнегін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v2t9" value="A">
+
+          A)
+          <span class="frac">
+            <span class="top">x<sup>4</sup></span>
+            <span class="bottom">y<sup>4</sup></span>
+          </span>
+
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t9" value="B">
+
+          B)
+          <span class="frac">
+            <span class="top">4x</span>
+            <span class="bottom">4y</span>
+          </span>
+
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t9" value="C">
+
+          C)
+          <span class="frac">
+            <span class="top">x<sup>4</sup></span>
+            <span class="bottom">y</span>
+          </span>
+
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          10. ((a<sup>3</sup>)<sup>2</sup>)<sup>5</sup>
+          = a<sup>?</sup>
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v2t10" value="A">
+          A) 10
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t10" value="B">
+          B) 30
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v2t10" value="C">
+          C) 15
+        </label>
+
+      </div>
+
+
+      <button class="test-check"
+              onclick="finishTest(2)">
+        ✅ Тестті аяқтау
+      </button>
+
+      <div id="testResult2"
+           class="test-result">
+      </div>
+
+      <button id="retryButton2"
+              class="retry-button"
+              onclick="retryTest(2)">
+        🔄 Тестті қайта тапсыру
+      </button>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         3 НҰСҚА
+    =================================================== -->
+
+    <div id="variant3" class="variant">
+
+      <p style="margin-bottom:20px;">
+        3-нұсқа. Әр сұрақтың бір ғана дұрыс жауабы бар.
+      </p>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          1. (6a)<sup>2</sup> өрнегін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v3t1" value="A">
+          A) 12a<sup>2</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t1" value="B">
+          B) 36a<sup>2</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t1" value="C">
+          C) 36a
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          2. (abc)<sup>3</sup> өрнегін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v3t2" value="A">
+          A) a<sup>3</sup>b<sup>3</sup>c<sup>3</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t2" value="B">
+          B) 3abc
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t2" value="C">
+          C) a<sup>9</sup>b<sup>9</sup>c<sup>9</sup>
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          3. (p<sup>6</sup>)<sup>5</sup> =
+          p<sup>?</sup>
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v3t3" value="A">
+          A) 11
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t3" value="B">
+          B) 30
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t3" value="C">
+          C) 25
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          4.
+
+          (
+          <span class="frac">
+            <span class="top">4</span>
+            <span class="bottom">7</span>
+          </span>
+          )<sup>2</sup>
+
+          мәнін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v3t4" value="A">
+
+          A)
+          <span class="frac">
+            <span class="top">8</span>
+            <span class="bottom">14</span>
+          </span>
+
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t4" value="B">
+
+          B)
+          <span class="frac">
+            <span class="top">16</span>
+            <span class="bottom">49</span>
+          </span>
+
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t4" value="C">
+
+          C)
+          <span class="frac">
+            <span class="top">16</span>
+            <span class="bottom">14</span>
+          </span>
+
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          5. (−5x)<sup>3</sup> өрнегін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v3t5" value="A">
+          A) −125x<sup>3</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t5" value="B">
+          B) 125x<sup>3</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t5" value="C">
+          C) −15x<sup>3</sup>
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          6. (c<sup>8</sup>)<sup>3</sup> =
+          c<sup>?</sup>
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v3t6" value="A">
+          A) 11
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t6" value="B">
+          B) 24
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t6" value="C">
+          C) 64
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          7. (3xy)<sup>4</sup> өрнегін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v3t7" value="A">
+          A) 12x<sup>4</sup>y<sup>4</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t7" value="B">
+          B) 81x<sup>4</sup>y<sup>4</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t7" value="C">
+          C) 81xy
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          8. (−2m)<sup>4</sup> өрнегін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v3t8" value="A">
+          A) −16m<sup>4</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t8" value="B">
+          B) 16m<sup>4</sup>
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t8" value="C">
+          C) 8m<sup>4</sup>
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          9.
+
+          (
+          <span class="frac">
+            <span class="top">m</span>
+            <span class="bottom">n</span>
+          </span>
+          )<sup>5</sup>
+
+          өрнегін тап.
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v3t9" value="A">
+
+          A)
+          <span class="frac">
+            <span class="top">m<sup>5</sup></span>
+            <span class="bottom">n<sup>5</sup></span>
+          </span>
+
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t9" value="B">
+
+          B)
+          <span class="frac">
+            <span class="top">5m</span>
+            <span class="bottom">5n</span>
+          </span>
+
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t9" value="C">
+
+          C)
+          <span class="frac">
+            <span class="top">m<sup>5</sup></span>
+            <span class="bottom">n</span>
+          </span>
+
+        </label>
+
+      </div>
+
+
+      <div class="test-question">
+
+        <h3 class="math">
+          10. ((y<sup>4</sup>)<sup>2</sup>)<sup>3</sup>
+          = y<sup>?</sup>
+        </h3>
+
+        <label class="option">
+          <input type="radio" name="v3t10" value="A">
+          A) 9
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t10" value="B">
+          B) 24
+        </label>
+
+        <label class="option">
+          <input type="radio" name="v3t10" value="C">
+          C) 12
+        </label>
+
+      </div>
+
+
+      <button class="test-check"
+              onclick="finishTest(3)">
+        ✅ Тестті аяқтау
+      </button>
+
+      <div id="testResult3"
+           class="test-result">
+      </div>
+
+      <button id="retryButton3"
+              class="retry-button"
+              onclick="retryTest(3)">
+        🔄 Тестті қайта тапсыру
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<footer>
+  ©️ 2026 KEMENGER ONLINE
+</footer>
+
+
+<script>
+
+  /* =====================================================
+     10 ТАПСЫРМАНЫ ТЕКСЕРУ
+  ===================================================== */
+
+  let score = 0;
+  let answered = {};
+
+
+  function updateResult() {
+
+    document.getElementById("total").innerHTML =
+      "Нәтиже: " + score + " / 10";
+
+
+    if (score === 10) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🏆 Керемет! Барлық 10 тапсырманы дұрыс орындадың!";
+
+    }
+
+    else if (score >= 8) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🌟 Өте жақсы! Нәтижең: " +
+        score +
+        " / 10";
+
+    }
+
+    else if (score >= 5) {
+
+      document.getElementById("finalResult").innerHTML =
+        "👍 Жақсы! Нәтижең: " +
+        score +
+        " / 10";
+
+    }
+
+    else if (score > 0) {
+
+      document.getElementById("finalResult").innerHTML =
+        "📚 Талпынысың жақсы! Сабақты тағы қайталап көр.";
+
+    }
+
+    else {
+
+      document.getElementById("finalResult").innerHTML = "";
+
+    }
+
+  }
+
+
+  function check(number, correctAnswer) {
+
+    const input =
+      document.getElementById("q" + number);
+
+    const result =
+      document.getElementById("r" + number);
+
+
+    if (answered[number]) {
+      return;
+    }
+
+
+    if (input.value === "") {
+
+      result.innerHTML =
+        "⚠️ Алдымен жауапты енгіз!";
+
+      result.style.color =
+        "orange";
+
+      return;
+
+    }
+
+
+    const answer =
+      Number(input.value);
+
+
+    if (answer === correctAnswer) {
+
+      result.innerHTML =
+        "✅ Дұрыс!";
+
+      result.style.color =
+        "green";
+
+      score++;
+
+      answered[number] =
+        true;
+
+      input.disabled =
+        true;
+
+    }
+
+    else {
+
+      result.innerHTML =
+        "❌ Қате. Қайта байқап көр.";
+
+      result.style.color =
+        "red";
+
+    }
+
+
+    updateResult();
+
+  }
+
+
+  /* БӨЛШЕК ЖАУАП */
+
+  function checkFraction(
+    number,
+    correctNumerator,
+    correctDenominator
+  ) {
+
+    const numerator =
+      document.getElementById(
+        "q" + number + "n"
+      );
+
+    const denominator =
+      document.getElementById(
+        "q" + number + "d"
+      );
+
+    const result =
+      document.getElementById(
+        "r" + number
+      );
+
+
+    if (answered[number]) {
+      return;
+    }
+
+
+    if (
+      numerator.value === "" ||
+      denominator.value === ""
+    ) {
+
+      result.innerHTML =
+        "⚠️ Алымы мен бөлімін толық енгіз!";
+
+      result.style.color =
+        "orange";
+
+      return;
+
+    }
+
+
+    const n =
+      Number(numerator.value);
+
+    const d =
+      Number(denominator.value);
+
+
+    if (d === 0) {
+
+      result.innerHTML =
+        "⚠️ Бөлім 0-ге тең болмауы керек.";
+
+      result.style.color =
+        "orange";
+
+      return;
+
+    }
+
+
+    /*
+      Тең бөлшектер де дұрыс деп есептеледі.
+      Мысалы 8/27 орнына 16/54 жазылса да дұрыс.
+    */
+
+    if (
+      n * correctDenominator ===
+      d * correctNumerator
+    ) {
+
+      result.innerHTML =
+        "✅ Дұрыс!";
+
+      result.style.color =
+        "green";
+
+      score++;
+
+      answered[number] =
+        true;
+
+      numerator.disabled =
+        true;
+
+      denominator.disabled =
+        true;
+
+    }
+
+    else {
+
+      result.innerHTML =
+        "❌ Қате. Қайта байқап көр.";
+
+      result.style.color =
+        "red";
+
+    }
+
+
+    updateResult();
+
+  }
+
+
+
+  /* =====================================================
+     НҰСҚАЛАРДЫ КӨРСЕТУ
+  ===================================================== */
+
+  function showVariants() {
+
+    document.getElementById(
+      "variantButtons"
+    ).style.display =
+      "block";
+
+  }
+
+
+
+  /* =====================================================
+     ТЕСТТІ БАСТАУ
+  ===================================================== */
+
+  function startTest(variantNumber) {
+
+    const testSection =
+      document.getElementById(
+        "testSection"
+      );
+
+
+    testSection.style.display =
+      "block";
+
+
+    document.querySelectorAll(
+      ".variant"
+    ).forEach(function(variant) {
+
+      variant.style.display =
+        "none";
+
+    });
+
+
+    document.getElementById(
+      "variant" + variantNumber
+    ).style.display =
+      "block";
+
+
+    document.getElementById(
+      "testTitle"
+    ).innerHTML =
+      "✅ " +
+      variantNumber +
+      "-нұсқа — тест";
+
+
+    testSection.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+
+
+  /* =====================================================
+     ДҰРЫС ЖАУАПТАР
+  ===================================================== */
+
+  const correctAnswers = {
+
+    1: {
+      t1: "B",
+      t2: "A",
+      t3: "B",
+      t4: "A",
+      t5: "A",
+      t6: "B",
+      t7: "C",
+      t8: "B",
+      t9: "B",
+      t10: "C"
+    },
+
+    2: {
+      t1: "B",
+      t2: "A",
+      t3: "B",
+      t4: "B",
+      t5: "A",
+      t6: "B",
+      t7: "B",
+      t8: "C",
+      t9: "A",
+      t10: "B"
+    },
+
+    3: {
+      t1: "B",
+      t2: "A",
+      t3: "B",
+      t4: "B",
+      t5: "A",
+      t6: "B",
+      t7: "B",
+      t8: "B",
+      t9: "A",
+      t10: "B"
+    }
+
+  };
+
+
+
+  /* =====================================================
+     ТЕСТТІ АЯҚТАУ
+  ===================================================== */
+
+  function finishTest(variantNumber) {
+
+    let testScore = 0;
+    let answeredCount = 0;
+
+
+    for (let i = 1; i <= 10; i++) {
+
+      const name =
+        "v" +
+        variantNumber +
+        "t" +
+        i;
+
+
+      const selected =
+        document.querySelector(
+          'input[name="' +
+          name +
+          '"]:checked'
+        );
+
+
+      if (selected) {
+
+        answeredCount++;
+
+
+        if (
+          selected.value ===
+          correctAnswers[
+            variantNumber
+          ][
+            "t" + i
+          ]
+        ) {
+
+          testScore++;
+
+        }
+
+      }
+
+    }
+
+
+    const result =
+      document.getElementById(
+        "testResult" +
+        variantNumber
+      );
+
+
+    if (answeredCount < 10) {
+
+      result.style.display =
+        "block";
+
+      result.innerHTML =
+        "⚠️ Барлық сұраққа жауап бер!<br><br>" +
+        "Жауап берілгені: " +
+        answeredCount +
+        " / 10";
+
+      return;
+
+    }
+
+
+    const percent =
+      testScore * 10;
+
+
+    result.style.display =
+      "block";
+
+
+    if (testScore === 10) {
+
+      result.innerHTML =
+        "🏆 КЕРЕМЕТ!<br><br>" +
+        "Нәтижең: 10 / 10<br>" +
+        "100% — Өте жоғары нәтиже!";
+
+    }
+
+    else if (testScore >= 8) {
+
+      result.innerHTML =
+        "🌟 ӨТЕ ЖАҚСЫ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тақырыпты жақсы меңгердің!";
+
+    }
+
+    else if (testScore >= 5) {
+
+      result.innerHTML =
+        "👍 ЖАҚСЫ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тағы біраз жаттығу қажет.";
+
+    }
+
+    else {
+
+      result.innerHTML =
+        "📚 ҚАЙТА ҚАРАП ШЫҚ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Сабақ материалын қайталап көр.";
+
+    }
+
+
+
+    /* ДҰРЫС / ҚАТЕ ЖАУАПТАР */
+
+    for (let i = 1; i <= 10; i++) {
+
+      const name =
+        "v" +
+        variantNumber +
+        "t" +
+        i;
+
+
+      const selected =
+        document.querySelector(
+          'input[name="' +
+          name +
+          '"]:checked'
+        );
+
+
+      const options =
+        document.querySelectorAll(
+          'input[name="' +
+          name +
+          '"]'
+        );
+
+
+      options.forEach(function(option) {
+
+        const label =
+          option.parentElement;
+
+
+        if (
+          option.value ===
+          correctAnswers[
+            variantNumber
+          ][
+            "t" + i
+          ]
+        ) {
+
+          label.classList.add(
+            "correct"
+          );
+
+        }
+
+
+        if (
+          selected &&
+          option.value ===
+          selected.value &&
+          option.value !==
+          correctAnswers[
+            variantNumber
+          ][
+            "t" + i
+          ]
+        ) {
+
+          label.classList.add(
+            "wrong"
+          );
+
+        }
+
+
+        option.disabled =
+          true;
+
+      });
+
+    }
+
+
+    const variant =
+      document.getElementById(
+        "variant" +
+        variantNumber
+      );
+
+
+    const finishButton =
+      variant.querySelector(
+        ".test-check"
+      );
+
+
+    finishButton.disabled =
+      true;
+
+    finishButton.style.opacity =
+      "0.5";
+
+
+    document.getElementById(
+      "retryButton" +
+      variantNumber
+    ).style.display =
+      "block";
+
+  }
+
+
+
+  /* =====================================================
+     ТЕСТТІ ҚАЙТА ТАПСЫРУ
+  ===================================================== */
+
+  function retryTest(variantNumber) {
+
+    for (let i = 1; i <= 10; i++) {
+
+      const name =
+        "v" +
+        variantNumber +
+        "t" +
+        i;
+
+
+      const options =
+        document.querySelectorAll(
+          'input[name="' +
+          name +
+          '"]'
+        );
+
+
+      options.forEach(function(option) {
+
+        option.checked =
+          false;
+
+        option.disabled =
+          false;
+
+
+        option.parentElement
+          .classList.remove(
+            "correct"
+          );
+
+
+        option.parentElement
+          .classList.remove(
+            "wrong"
+          );
+
+      });
+
+    }
+
+
+    document.getElementById(
+      "testResult" +
+      variantNumber
+    ).style.display =
+      "none";
+
+
+    document.getElementById(
+      "retryButton" +
+      variantNumber
+    ).style.display =
+      "none";
+
+
+    const variant =
+      document.getElementById(
+        "variant" +
+        variantNumber
+      );
+
+
+    const finishButton =
+      variant.querySelector(
+        ".test-check"
+      );
+
+
+    finishButton.disabled =
+      false;
+
+    finishButton.style.opacity =
+      "1";
+
+
+    variant.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+</script>
+
+</body>
+</html>
