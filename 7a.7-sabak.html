@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>7-сабақ — Санның стандарт түрі | Kemenger Online</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #173b7a;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #173b7a, #2d65c8);
+      color: white;
+      padding: 55px 7%;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 18px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+    .section {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    }
+
+    .section h2 {
+      margin-bottom: 15px;
+    }
+
+    .video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111827;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 55px;
+      overflow: hidden;
+    }
+
+    .video iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .button {
+      display: inline-block;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    .task {
+      background: #f7f9fc;
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    input[type="number"] {
+      padding: 11px;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #ccd3df;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .result {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    #total {
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #finalResult {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #eef4ff;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .start-test-area {
+      text-align: center;
+      margin-top: 30px;
+      padding: 25px;
+      background: #eef4ff;
+      border-radius: 14px;
+    }
+
+    .start-test-area p {
+      margin-bottom: 5px;
+      font-size: 17px;
+    }
+
+    .start-test-button {
+      display: inline-block;
+      background: #173b7a;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.2s;
+    }
+
+    .start-test-button:hover {
+      background: #2d65c8;
+      transform: translateY(-1px);
+    }
+
+    #variantArea {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .variant-button {
+      background: #173b7a;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 13px 20px;
+      margin: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .variant-button:hover {
+      background: #2d65c8;
+    }
+
+    #testSection {
+      display: none;
+    }
+
+    .test-question {
+      background: #f7f9fc;
+      padding: 20px;
+      border-radius: 14px;
+      margin-top: 18px;
+      border: 1px solid #e1e6ef;
+    }
+
+    .test-question h3 {
+      margin-bottom: 15px;
+      line-height: 1.5;
+      font-size: 17px;
+    }
+
+    .option {
+      display: block;
+      background: white;
+      border: 1px solid #ccd3df;
+      padding: 14px;
+      border-radius: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background: #eef4ff;
+      border-color: #2d65c8;
+    }
+
+    .option input[type="radio"] {
+      width: auto;
+      margin: 0 8px 0 0;
+      cursor: pointer;
+    }
+
+    .test-check {
+      margin-top: 25px;
+      background: #173b7a;
+      color: white;
+      padding: 14px 25px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .test-check:hover {
+      background: #2d65c8;
+    }
+
+    #testResult {
+      display: none;
+      margin-top: 25px;
+      padding: 25px;
+      border-radius: 14px;
+      background: #eef4ff;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #retryButton {
+      display: none;
+      margin: 20px auto 0;
+      background: #ffcf33;
+      color: #172033;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .correct {
+      background: #dff6e5 !important;
+      border-color: #35a853 !important;
+    }
+
+    .wrong {
+      background: #ffe2e2 !important;
+      border-color: #e53935 !important;
+    }
+
+    /* БӨЛШЕКТІ КӨРСЕТУ */
+
+    .fraction {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      line-height: 1.15;
+      margin: 0 4px;
+      font-size: 1em;
+    }
+
+    .fraction .top {
+      border-bottom: 1.5px solid #172033;
+      padding: 0 4px 2px;
+    }
+
+    .fraction .bottom {
+      padding: 2px 4px 0;
+    }
+
+    /* БӨЛШЕКТІ ЕНГІЗУ */
+
+    .fraction-input-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .fraction-input {
+      display: flex;
+      flex-direction: column;
+      width: 100px;
+      text-align: center;
+    }
+
+    .fraction-input input {
+      width: 100%;
+      margin: 0;
+      text-align: center;
+      padding: 9px;
+    }
+
+    .fraction-line {
+      height: 2px;
+      background: #172033;
+      margin: 4px 0;
+    }
+
+    footer {
+      background: #14284e;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 15px;
+      }
+
+      .logo {
+        font-size: 17px;
+      }
+
+      .hero {
+        padding: 40px 20px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .container {
+        padding: 20px 12px;
+      }
+
+      .section {
+        padding: 18px;
+      }
+
+      .test-question {
+        padding: 16px;
+      }
+
+      .variant-button {
+        width: 100%;
+        margin: 6px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">📐 KEMENGER ONLINE</div>
+  <a class="back" href="7-algebra.html">← 7-сынып Алгебра</a>
+</header>
+
+<section class="hero">
+  <h1>7-сабақ. Санның стандарт түрі</h1>
+  <p>7-сынып • Алгебра</p>
+</section>
+
+<div class="container">
+
+  <!-- ВИДЕО -->
+
+  <div class="section">
+
+    <h2>🎥 Видеосабақ</h2>
+
+    <div class="video">
+
+      <iframe
+        src="🔴 СІЛТЕМЕ ҚОЯТЫН ЖЕР 🔴"
+        title="Kemenger Online видеосабақ"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+
+    </div>
+
+    <p style="margin-top:15px;">
+      Видеосабақты көріп, тақырыпты меңгеріп ал.
+    </p>
+
+  </div>
+
+
+  <!-- ТАҚЫРЫПТЫҚ АНЫҚТАМА -->
+
+  <div class="section">
+
+    <h2>📚 Тақырыптық анықтама</h2>
+
+    <p style="margin-bottom:15px;">
+      Өте үлкен немесе өте кіші сандарды ықшам жазу үшін
+      <b>санның стандарт түрі</b> қолданылады.
+    </p>
+
+    <p style="margin-bottom:15px; padding:15px; background:#eef4ff; border-radius:10px; text-align:center; font-size:19px;">
+      <b>a · 10<sup>n</sup>, &nbsp; 1 ≤ a &lt; 10</b>
+    </p>
+
+    <p style="margin-bottom:15px;">
+      Мұндағы <b>a</b> — санның мәнді бөлігі,
+      ал <b>n</b> — санның реті.
+      Мысалы:
+      <b>4 700 000 = 4,7 · 10<sup>6</sup></b>.
+    </p>
+
+    <p style="margin-bottom:15px;">
+      Кіші санды стандарт түрде жазғанда дәреже көрсеткіші теріс болады:
+      <b>0,00032 = 3,2 · 10<sup>−4</sup></b>.
+    </p>
+
+    <p style="margin-bottom:15px;">
+      Стандарт түрдегі сандарды көбейткенде мәнді бөліктер көбейтіліп,
+      10 санының дәреже көрсеткіштері қосылады.
+    </p>
+
+    <p>
+      Мысалы:
+      <b>
+        (2 · 10<sup>3</sup>) ·
+        (4 · 10<sup>5</sup>) =
+        8 · 10<sup>8</sup>
+      </b>.
+      Бөлгенде мәнді бөліктер бөлініп, дәреже көрсеткіштері азайтылады.
+    </p>
+
+  </div>
+
+
+  <!-- 10 ТАПСЫРМА -->
+
+  <div class="section">
+
+    <h2>📝 10 тапсырма</h2>
+
+    <p style="margin-bottom:20px;">
+      Әр есептің жауабын енгізіп, «Тексеру» батырмасын бас.
+      Стандарт түрдегі жауапта мәнді бөлік пен дәреже көрсеткішін бөлек енгіз.
+    </p>
+
+
+    <!-- 1 -->
+
+    <div class="task">
+
+      <b>
+        1. 5 600 000 санын стандарт түрде жаз.
+      </b>
+
+      <p style="margin-top:12px;">
+        <b>a · 10<sup>n</sup></b>
+      </p>
+
+      <input id="q1a" type="number" step="any" placeholder="Мәнді бөлік a">
+
+      <input id="q1n" type="number" placeholder="Дәреже n">
+
+      <button class="button" onclick="checkStandard(1, 5.6, 6)">
+        Тексеру
+      </button>
+
+      <div id="r1" class="result"></div>
+
+    </div>
+
+
+    <!-- 2 -->
+
+    <div class="task">
+
+      <b>
+        2. 0,000047 санын стандарт түрде жаз.
+      </b>
+
+      <p style="margin-top:12px;">
+        <b>a · 10<sup>n</sup></b>
+      </p>
+
+      <input id="q2a" type="number" step="any" placeholder="Мәнді бөлік a">
+
+      <input id="q2n" type="number" placeholder="Дәреже n">
+
+      <button class="button" onclick="checkStandard(2, 4.7, -5)">
+        Тексеру
+      </button>
+
+      <div id="r2" class="result"></div>
+
+    </div>
+
+
+    <!-- 3 -->
+
+    <div class="task">
+
+      <b>
+        3. 7,3 · 10<sup>8</sup> санындағы санның ретін тап.
+      </b>
+
+      <input id="q3" type="number" placeholder="Жауабың">
+
+      <button class="button" onclick="check(3, 8)">
+        Тексеру
+      </button>
+
+      <div id="r3" class="result"></div>
+
+    </div>
+
+
+    <!-- 4 -->
+
+    <div class="task">
+
+      <b>
+        4. 2,45 · 10<sup>−6</sup> санындағы мәнді бөлікті тап.
+      </b>
+
+      <input id="q4" type="number" step="any" placeholder="Жауабың">
+
+      <button class="button" onclick="check(4, 2.45)">
+        Тексеру
+      </button>
+
+      <div id="r4" class="result"></div>
+
+    </div>
+
+
+    <!-- 5 -->
+
+    <div class="task">
+
+      <b>
+        5.
+        (3 · 10<sup>4</sup>) ·
+        (2 · 10<sup>3</sup>)
+        нәтижесін стандарт түрде жаз.
+      </b>
+
+      <p style="margin-top:12px;">
+        <b>a · 10<sup>n</sup></b>
+      </p>
+
+      <input id="q5a" type="number" step="any" placeholder="Мәнді бөлік a">
+
+      <input id="q5n" type="number" placeholder="Дәреже n">
+
+      <button class="button" onclick="checkStandard(5, 6, 7)">
+        Тексеру
+      </button>
+
+      <div id="r5" class="result"></div>
+
+    </div>
+
+
+    <!-- 6 -->
+
+    <div class="task">
+
+      <b>
+        6.
+        (8,4 · 10<sup>7</sup>) :
+        (2,1 · 10<sup>3</sup>)
+        нәтижесін стандарт түрде жаз.
+      </b>
+
+      <p style="margin-top:12px;">
+        <b>a · 10<sup>n</sup></b>
+      </p>
+
+      <input id="q6a" type="number" step="any" placeholder="Мәнді бөлік a">
+
+      <input id="q6n" type="number" placeholder="Дәреже n">
+
+      <button class="button" onclick="checkStandard(6, 4, 4)">
+        Тексеру
+      </button>
+
+      <div id="r6" class="result"></div>
+
+    </div>
+
+
+    <!-- 7 -->
+
+    <div class="task">
+
+      <b>
+        7.
+        (1,5 · 10<sup>−3</sup>) ·
+        (4 · 10<sup>5</sup>)
+        нәтижесін стандарт түрде жаз.
+      </b>
+
+      <p style="margin-top:12px;">
+        <b>a · 10<sup>n</sup></b>
+      </p>
+
+      <input id="q7a" type="number" step="any" placeholder="Мәнді бөлік a">
+
+      <input id="q7n" type="number" placeholder="Дәреже n">
+
+      <button class="button" onclick="checkStandard(7, 6, 2)">
+        Тексеру
+      </button>
+
+      <div id="r7" class="result"></div>
+
+    </div>
+
+
+    <!-- 8 -->
+
+    <div class="task">
+
+      <b>
+        8.
+        (6,3 · 10<sup>−4</sup>) :
+        (2,1 · 10<sup>2</sup>)
+        нәтижесін стандарт түрде жаз.
+      </b>
+
+      <p style="margin-top:12px;">
+        <b>a · 10<sup>n</sup></b>
+      </p>
+
+      <input id="q8a" type="number" step="any" placeholder="Мәнді бөлік a">
+
+      <input id="q8n" type="number" placeholder="Дәреже n">
+
+      <button class="button" onclick="checkStandard(8, 3, -6)">
+        Тексеру
+      </button>
+
+      <div id="r8" class="result"></div>
+
+    </div>
+
+
+    <!-- 9 -->
+
+    <div class="task">
+
+      <b>
+        9. 72 000 000 санын стандарт түрде жаз.
+      </b>
+
+      <p style="margin-top:12px;">
+        <b>a · 10<sup>n</sup></b>
+      </p>
+
+      <input id="q9a" type="number" step="any" placeholder="Мәнді бөлік a">
+
+      <input id="q9n" type="number" placeholder="Дәреже n">
+
+      <button class="button" onclick="checkStandard(9, 7.2, 7)">
+        Тексеру
+      </button>
+
+      <div id="r9" class="result"></div>
+
+    </div>
+
+
+    <!-- 10 -->
+
+    <div class="task">
+
+      <b>
+        10. 0,00000081 санын стандарт түрде жаз.
+      </b>
+
+      <p style="margin-top:12px;">
+        <b>a · 10<sup>n</sup></b>
+      </p>
+
+      <input id="q10a" type="number" step="any" placeholder="Мәнді бөлік a">
+
+      <input id="q10n" type="number" placeholder="Дәреже n">
+
+      <button class="button" onclick="checkStandard(10, 8.1, -7)">
+        Тексеру
+      </button>
+
+      <div id="r10" class="result"></div>
+
+    </div>
+
+
+    <div id="total">
+      Нәтиже: 0 / 10
+    </div>
+
+    <div id="finalResult"></div>
+
+
+    <!-- ТЕСТТІ БАСТАУ -->
+
+    <div class="start-test-area">
+
+      <p>
+        🎯 10 тапсырманы орындап болдың ба?
+      </p>
+
+      <p>
+        Енді біліміңді тест арқылы тексер!
+      </p>
+
+      <button class="start-test-button" onclick="showVariants()">
+        📝 Тестті бастау
+      </button>
+
+
+      <div id="variantArea">
+
+        <p style="margin-top:15px; margin-bottom:12px;">
+          <b>Тест нұсқасын таңда:</b>
+        </p>
+
+        <button class="variant-button" onclick="startTest(1)">
+          1-нұсқа
+        </button>
+
+        <button class="variant-button" onclick="startTest(2)">
+          2-нұсқа
+        </button>
+
+        <button class="variant-button" onclick="startTest(3)">
+          3-нұсқа
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ТЕСТ -->
+
+  <div class="section" id="testSection">
+
+    <h2 id="testTitle">
+      ✅ Санның стандарт түрі — тест
+    </h2>
+
+    <p style="margin-bottom:20px;">
+      Әр сұрақтың бір ғана дұрыс жауабы бар.
+      Барлық 10 сұраққа жауап бер.
+    </p>
+
+    <div id="testQuestions"></div>
+
+
+    <button class="test-check" onclick="finishTest()">
+      ✅ Тестті аяқтау
+    </button>
+
+    <div id="testResult"></div>
+
+    <button id="retryButton" onclick="retryTest()">
+      🔄 Тестті қайта тапсыру
+    </button>
+
+  </div>
+
+</div>
+
+
+<footer>
+  ©️ 2026 KEMENGER ONLINE
+</footer>
+
+
+<script>
+
+  /* =========================
+     10 ТАПСЫРМАНЫ ТЕКСЕРУ
+  ========================= */
+
+  let score = 0;
+  let answered = {};
+
+
+  function updateScore() {
+
+    document.getElementById("total").innerHTML =
+      "Нәтиже: " + score + " / 10";
+
+
+    if (score === 10) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🏆 Керемет! Барлық 10 тапсырманы дұрыс орындадың!";
+
+    }
+
+    else if (score >= 8) {
+
+      document.getElementById("finalResult").innerHTML =
+        "🌟 Өте жақсы! Нәтижең: " + score + " / 10";
+
+    }
+
+    else if (score >= 5) {
+
+      document.getElementById("finalResult").innerHTML =
+        "👍 Жақсы! Нәтижең: " + score + " / 10";
+
+    }
+
+    else if (score > 0) {
+
+      document.getElementById("finalResult").innerHTML =
+        "📚 Талпынысың жақсы! Сабақты тағы қайталап көр.";
+
+    }
+
+    else {
+
+      document.getElementById("finalResult").innerHTML = "";
+
+    }
+
+  }
+
+
+  function check(number, correctAnswer) {
+
+    const input =
+      document.getElementById("q" + number);
+
+    const result =
+      document.getElementById("r" + number);
+
+
+    if (answered[number]) {
+      return;
+    }
+
+
+    if (input.value === "") {
+
+      result.innerHTML =
+        "⚠️ Алдымен жауапты енгіз!";
+
+      result.style.color = "orange";
+
+      return;
+
+    }
+
+
+    const answer = Number(input.value);
+
+
+    if (Math.abs(answer - correctAnswer) < 0.0000001) {
+
+      result.innerHTML =
+        "✅ Дұрыс!";
+
+      result.style.color = "green";
+
+      score++;
+
+      answered[number] = true;
+
+      input.disabled = true;
+
+    }
+
+    else {
+
+      result.innerHTML =
+        "❌ Қате. Қайта байқап көр.";
+
+      result.style.color = "red";
+
+    }
+
+
+    updateScore();
+
+  }
+
+
+  /* =========================
+     СТАНДАРТ ТҮРДІ ТЕКСЕРУ
+  ========================= */
+
+  function checkStandard(number, correctA, correctN) {
+
+    if (answered[number]) {
+      return;
+    }
+
+
+    const inputA =
+      document.getElementById("q" + number + "a");
+
+    const inputN =
+      document.getElementById("q" + number + "n");
+
+    const result =
+      document.getElementById("r" + number);
+
+
+    if (
+      inputA.value === "" ||
+      inputN.value === ""
+    ) {
+
+      result.innerHTML =
+        "⚠️ Мәнді бөлік пен дәреже көрсеткішін толық енгіз!";
+
+      result.style.color = "orange";
+
+      return;
+
+    }
+
+
+    const a = Number(inputA.value);
+    const n = Number(inputN.value);
+
+
+    if (
+      Math.abs(a - correctA) < 0.0000001 &&
+      n === correctN
+    ) {
+
+      result.innerHTML =
+        "✅ Дұрыс!";
+
+      result.style.color = "green";
+
+      score++;
+
+      answered[number] = true;
+
+      inputA.disabled = true;
+      inputN.disabled = true;
+
+    }
+
+    else {
+
+      result.innerHTML =
+        "❌ Қате. Қайта байқап көр.";
+
+      result.style.color = "red";
+
+    }
+
+
+    updateScore();
+
+  }
+
+
+  /* =========================
+     БӨЛШЕК ЖАУАПТЫ ТЕКСЕРУ
+  ========================= */
+
+  function checkFraction(number, correctNumerator, correctDenominator) {
+
+    if (answered[number]) {
+      return;
+    }
+
+
+    const numerator =
+      document.getElementById("q" + number + "n");
+
+    const denominator =
+      document.getElementById("q" + number + "d");
+
+    const result =
+      document.getElementById("r" + number);
+
+
+    if (
+      numerator.value === "" ||
+      denominator.value === ""
+    ) {
+
+      result.innerHTML =
+        "⚠️ Алымы мен бөлімін толық енгіз!";
+
+      result.style.color = "orange";
+
+      return;
+
+    }
+
+
+    const n = Number(numerator.value);
+    const d = Number(denominator.value);
+
+
+    if (d === 0) {
+
+      result.innerHTML =
+        "⚠️ Бөлім нөлге тең болмауы керек!";
+
+      result.style.color = "orange";
+
+      return;
+
+    }
+
+
+    if (
+      n * correctDenominator ===
+      d * correctNumerator
+    ) {
+
+      result.innerHTML =
+        "✅ Дұрыс!";
+
+      result.style.color = "green";
+
+      score++;
+
+      answered[number] = true;
+
+      numerator.disabled = true;
+      denominator.disabled = true;
+
+    }
+
+    else {
+
+      result.innerHTML =
+        "❌ Қате. Қайта байқап көр.";
+
+      result.style.color = "red";
+
+    }
+
+
+    updateScore();
+
+  }
+
+
+  /* =========================
+     ТЕСТ НҰСҚАЛАРЫН КӨРСЕТУ
+  ========================= */
+
+  function showVariants() {
+
+    document.getElementById(
+      "variantArea"
+    ).style.display = "block";
+
+  }
+
+
+  /* =========================
+     3 ТЕСТ НҰСҚАСЫ
+  ========================= */
+
+  const tests = {
+
+
+    /* =====================
+       1-НҰСҚА
+    ===================== */
+
+    1: [
+
+      {
+        q: "1. 4 500 000 санының стандарт түрін көрсет.",
+        options: [
+          "4,5 · 10<sup>6</sup>",
+          "45 · 10<sup>5</sup>",
+          "4,5 · 10<sup>5</sup>"
+        ],
+        correct: 0
+      },
+
+      {
+        q: "2. 0,000072 санының стандарт түрі қайсы?",
+        options: [
+          "7,2 · 10<sup>−4</sup>",
+          "7,2 · 10<sup>−5</sup>",
+          "72 · 10<sup>−6</sup>"
+        ],
+        correct: 1
+      },
+
+      {
+        q: "3. 6,4 · 10<sup>9</sup> санының реті нешеге тең?",
+        options: [
+          "6,4",
+          "9",
+          "10"
+        ],
+        correct: 1
+      },
+
+      {
+        q: "4. 3,7 · 10<sup>−8</sup> санының мәнді бөлігі қандай?",
+        options: [
+          "−8",
+          "10",
+          "3,7"
+        ],
+        correct: 2
+      },
+
+      {
+        q: "5. (2 · 10<sup>4</sup>) · (3 · 10<sup>2</sup>) нәтижесін тап.",
+        options: [
+          "6 · 10<sup>6</sup>",
+          "6 · 10<sup>8</sup>",
+          "5 · 10<sup>6</sup>"
+        ],
+        correct: 0
+      },
+
+      {
+        q: "6. (8 · 10<sup>7</sup>) : (2 · 10<sup>3</sup>) нәтижесін тап.",
+        options: [
+          "4 · 10<sup>4</sup>",
+          "4 · 10<sup>10</sup>",
+          "6 · 10<sup>4</sup>"
+        ],
+        correct: 0
+      },
+
+      {
+        q: "7. 930 000 саны стандарт түрде қалай жазылады?",
+        options: [
+          "9,3 · 10<sup>5</sup>",
+          "9,3 · 10<sup>4</sup>",
+          "93 · 10<sup>5</sup>"
+        ],
+        correct: 0
+      },
+
+      {
+        q: "8. 0,0000065 санының реті нешеге тең?",
+        options: [
+          "−5",
+          "−6",
+          "6"
+        ],
+        correct: 1
+      },
+
+      {
+        q: "9. Қай сан стандарт түрде дұрыс жазылған?",
+        options: [
+          "23 · 10<sup>4</sup>",
+          "0,8 · 10<sup>6</sup>",
+          "2,3 · 10<sup>5</sup>"
+        ],
+        correct: 2
+      },
+
+      {
+        q: "10. 7,1 · 10<sup>4</sup> кәдімгі түрде неге тең?",
+        options: [
+          "7 100",
+          "71 000",
+          "710 000"
+        ],
+        correct: 1
+      }
+
+    ],
+
+
+    /* =====================
+       2-НҰСҚА
+    ===================== */
+
+    2: [
+
+      {
+        q: "1. 8 200 000 санының стандарт түрін көрсет.",
+        options: [
+          "8,2 · 10<sup>6</sup>",
+          "8,2 · 10<sup>7</sup>",
+          "82 · 10<sup>6</sup>"
+        ],
+        correct: 0
+      },
+
+      {
+        q: "2. 0,0000034 санының стандарт түрі қайсы?",
+        options: [
+          "3,4 · 10<sup>−5</sup>",
+          "3,4 · 10<sup>−6</sup>",
+          "34 · 10<sup>−6</sup>"
+        ],
+        correct: 1
+      },
+
+      {
+        q: "3. 2,9 · 10<sup>−7</sup> санының реті нешеге тең?",
+        options: [
+          "−7",
+          "7",
+          "2,9"
+        ],
+        correct: 0
+      },
+
+      {
+        q: "4. 5,6 · 10<sup>11</sup> санының мәнді бөлігі қандай?",
+        options: [
+          "11",
+          "5,6",
+          "10"
+        ],
+        correct: 1
+      },
+
+      {
+        q: "5. (4 · 10<sup>3</sup>) · (2 · 10<sup>5</sup>) нәтижесін тап.",
+        options: [
+          "8 · 10<sup>8</sup>",
+          "8 · 10<sup>15</sup>",
+          "6 · 10<sup>8</sup>"
+        ],
+        correct: 0
+      },
+
+      {
+        q: "6. (9 · 10<sup>6</sup>) : (3 · 10<sup>2</sup>) нәтижесі қандай?",
+        options: [
+          "3 · 10<sup>4</sup>",
+          "3 · 10<sup>8</sup>",
+          "6 · 10<sup>4</sup>"
+        ],
+        correct: 0
+      },
+
+      {
+        q: "7. 64 000 000 саны стандарт түрде қалай жазылады?",
+        options: [
+          "6,4 · 10<sup>6</sup>",
+          "6,4 · 10<sup>7</sup>",
+          "64 · 10<sup>7</sup>"
+        ],
+        correct: 1
+      },
+
+      {
+        q: "8. 0,00052 санының реті нешеге тең?",
+        options: [
+          "−3",
+          "−4",
+          "4"
+        ],
+        correct: 1
+      },
+
+      {
+        q: "9. Қай жазылу стандарт түр болып табылады?",
+        options: [
+          "7,5 · 10<sup>−4</sup>",
+          "75 · 10<sup>−5</sup>",
+          "0,75 · 10<sup>−3</sup>"
+        ],
+        correct: 0
+      },
+
+      {
+        q: "10. 3,2 · 10<sup>5</sup> кәдімгі түрде неге тең?",
+        options: [
+          "32 000",
+          "320 000",
+          "3 200 000"
+        ],
+        correct: 1
+      }
+
+    ],
+
+
+    /* =====================
+       3-НҰСҚА
+    ===================== */
+
+    3: [
+
+      {
+        q: "1. 71 000 000 санының стандарт түрін көрсет.",
+        options: [
+          "7,1 · 10<sup>6</sup>",
+          "7,1 · 10<sup>7</sup>",
+          "71 · 10<sup>6</sup>"
+        ],
+        correct: 1
+      },
+
+      {
+        q: "2. 0,00000029 санының стандарт түрі қайсы?",
+        options: [
+          "2,9 · 10<sup>−6</sup>",
+          "2,9 · 10<sup>−7</sup>",
+          "29 · 10<sup>−8</sup>"
+        ],
+        correct: 1
+      },
+
+      {
+        q: "3. 8,1 · 10<sup>5</sup> санының реті нешеге тең?",
+        options: [
+          "8,1",
+          "5",
+          "10"
+        ],
+        correct: 1
+      },
+
+      {
+        q: "4. 1,25 · 10<sup>−9</sup> санының мәнді бөлігі қандай?",
+        options: [
+          "1,25",
+          "−9",
+          "9"
+        ],
+        correct: 0
+      },
+
+      {
+        q: "5. (2,5 · 10<sup>4</sup>) · (2 · 10<sup>3</sup>) нәтижесін тап.",
+        options: [
+          "5 · 10<sup>7</sup>",
+          "5 · 10<sup>12</sup>",
+          "4,5 · 10<sup>7</sup>"
+        ],
+        correct: 0
+      },
+
+      {
+        q: "6. (7,2 · 10<sup>8</sup>) : (2,4 · 10<sup>2</sup>) нәтижесін тап.",
+        options: [
+          "3 · 10<sup>6</sup>",
+          "3 · 10<sup>10</sup>",
+          "4,8 · 10<sup>6</sup>"
+        ],
+        correct: 0
+      },
+
+      {
+        q: "7. 580 000 саны стандарт түрде қалай жазылады?",
+        options: [
+          "5,8 · 10<sup>5</sup>",
+          "5,8 · 10<sup>4</sup>",
+          "58 · 10<sup>5</sup>"
+        ],
+        correct: 0
+      },
+
+      {
+        q: "8. 0,0000000046 санының реті нешеге тең?",
+        options: [
+          "−8",
+          "−9",
+          "9"
+        ],
+        correct: 1
+      },
+
+      {
+        q: "9. Стандарт түрде мәнді бөлік қандай шартты қанағаттандырады?",
+        options: [
+          "0 ≤ a < 1",
+          "1 ≤ a < 10",
+          "a ≥ 10"
+        ],
+        correct: 1
+      },
+
+      {
+        q: "10. 4,05 · 10<sup>3</sup> кәдімгі түрде неге тең?",
+        options: [
+          "405",
+          "4 050",
+          "40 500"
+        ],
+        correct: 1
+      }
+
+    ]
+
+  };
+
+
+  let currentVariant = 1;
+  let correctAnswers = {};
+
+
+  /* =========================
+     ТЕСТТІ БАСТАУ
+  ========================= */
+
+  function startTest(variant) {
+
+    currentVariant = variant;
+
+    const testSection =
+      document.getElementById("testSection");
+
+    const container =
+      document.getElementById("testQuestions");
+
+
+    container.innerHTML = "";
+
+    correctAnswers = {};
+
+
+    document.getElementById(
+      "testTitle"
+    ).innerHTML =
+      "✅ Санның стандарт түрі — " +
+      variant +
+      "-нұсқа";
+
+
+    tests[variant].forEach(
+      function(question, index) {
+
+        const number = index + 1;
+
+        correctAnswers["t" + number] =
+          question.correct;
+
+
+        let html = `
+
+          <div class="test-question">
+
+            <h3>
+              ${question.q}
+            </h3>
+
+        `;
+
+
+        question.options.forEach(
+          function(option, optionIndex) {
+
+            const letter =
+              String.fromCharCode(
+                65 + optionIndex
+              );
+
+
+            html += `
+
+              <label class="option">
+
+                <input
+                  type="radio"
+                  name="t${number}"
+                  value="${optionIndex}"
+                >
+
+                ${letter}) ${option}
+
+              </label>
+
+            `;
+
+          }
+        );
+
+
+        html += `
+
+          </div>
+
+        `;
+
+
+        container.innerHTML += html;
+
+      }
+    );
+
+
+    testSection.style.display = "block";
+
+
+    document.getElementById(
+      "testResult"
+    ).style.display = "none";
+
+
+    document.getElementById(
+      "retryButton"
+    ).style.display = "none";
+
+
+    const button =
+      document.querySelector(
+        ".test-check"
+      );
+
+
+    button.disabled = false;
+    button.style.opacity = "1";
+
+
+    testSection.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =========================
+     ТЕСТТІ АЯҚТАУ
+  ========================= */
+
+  function finishTest() {
+
+    let testScore = 0;
+    let answeredCount = 0;
+
+
+    for (let i = 1; i <= 10; i++) {
+
+      const questionName =
+        "t" + i;
+
+
+      const selected =
+        document.querySelector(
+          'input[name="' +
+          questionName +
+          '"]:checked'
+        );
+
+
+      if (selected) {
+
+        answeredCount++;
+
+
+        if (
+          Number(selected.value) ===
+          correctAnswers[questionName]
+        ) {
+
+          testScore++;
+
+        }
+
+      }
+
+    }
+
+
+    const result =
+      document.getElementById(
+        "testResult"
+      );
+
+
+    if (answeredCount < 10) {
+
+      result.style.display =
+        "block";
+
+
+      result.innerHTML =
+        "⚠️ Барлық сұраққа жауап бер!<br><br>" +
+        "Жауап берілгені: " +
+        answeredCount +
+        " / 10";
+
+      return;
+
+    }
+
+
+    const percent =
+      testScore * 10;
+
+
+    result.style.display =
+      "block";
+
+
+    if (testScore === 10) {
+
+      result.innerHTML =
+        "🏆 КЕРЕМЕТ!<br><br>" +
+        "Нәтижең: 10 / 10<br>" +
+        "100% — Өте жоғары нәтиже!";
+
+    }
+
+    else if (testScore >= 8) {
+
+      result.innerHTML =
+        "🌟 ӨТЕ ЖАҚСЫ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тақырыпты жақсы меңгердің!";
+
+    }
+
+    else if (testScore >= 5) {
+
+      result.innerHTML =
+        "👍 ЖАҚСЫ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Тағы біраз жаттығу қажет.";
+
+    }
+
+    else {
+
+      result.innerHTML =
+        "📚 ҚАЙТА ҚАРАП ШЫҚ!<br><br>" +
+        "Нәтижең: " +
+        testScore +
+        " / 10<br>" +
+        percent +
+        "% — Сабақ материалын қайталап көр.";
+
+    }
+
+
+    document.getElementById(
+      "retryButton"
+    ).style.display = "block";
+
+
+    /* ДҰРЫС / ҚАТЕ ЖАУАПТАР */
+
+    for (let i = 1; i <= 10; i++) {
+
+      const questionName =
+        "t" + i;
+
+
+      const selected =
+        document.querySelector(
+          'input[name="' +
+          questionName +
+          '"]:checked'
+        );
+
+
+      const options =
+        document.querySelectorAll(
+          'input[name="' +
+          questionName +
+          '"]'
+        );
+
+
+      options.forEach(
+        function(option) {
+
+          const label =
+            option.parentElement;
+
+
+          if (
+            Number(option.value) ===
+            correctAnswers[questionName]
+          ) {
+
+            label.classList.add(
+              "correct"
+            );
+
+          }
+
+
+          if (
+            selected &&
+            option.value ===
+            selected.value &&
+            Number(option.value) !==
+            correctAnswers[questionName]
+          ) {
+
+            label.classList.add(
+              "wrong"
+            );
+
+          }
+
+
+          option.disabled = true;
+
+        }
+      );
+
+    }
+
+
+    document.querySelector(
+      ".test-check"
+    ).disabled = true;
+
+
+    document.querySelector(
+      ".test-check"
+    ).style.opacity = "0.5";
+
+  }
+
+
+  /* =========================
+     ҚАЙТА ТАПСЫРУ
+  ========================= */
+
+  function retryTest() {
+
+    for (let i = 1; i <= 10; i++) {
+
+      const options =
+        document.querySelectorAll(
+          'input[name="t' +
+          i +
+          '"]'
+        );
+
+
+      options.forEach(
+        function(option) {
+
+          option.checked = false;
+
+          option.disabled = false;
+
+
+          option.parentElement
+            .classList.remove(
+              "correct"
+            );
+
+
+          option.parentElement
+            .classList.remove(
+              "wrong"
+            );
+
+        }
+      );
+
+    }
+
+
+    document.getElementById(
+      "testResult"
+    ).style.display = "none";
+
+
+    document.getElementById(
+      "retryButton"
+    ).style.display = "none";
+
+
+    const button =
+      document.querySelector(
+        ".test-check"
+      );
+
+
+    button.disabled = false;
+    button.style.opacity = "1";
+
+
+    document.getElementById(
+      "testSection"
+    ).scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+</script>
+
+<script type="module" src="/auth-guard.js"></script>
+
+</body>
+</html>
